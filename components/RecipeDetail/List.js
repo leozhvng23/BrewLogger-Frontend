@@ -13,14 +13,14 @@ export default List;
 const styles = StyleSheet.create({
   listItem: {
     borderRadius: 6,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
     marginVertical: 4,
     marginHorizontal: 12,
-    backgroundColor: '#e2b497',
+    backgroundColor: '#e0e0e0',
   },
   itemText: {
-    color: '#351401',
-    textAlign: 'center',
+    textAlign: "left",
+    fontSize: 15
   },
 });

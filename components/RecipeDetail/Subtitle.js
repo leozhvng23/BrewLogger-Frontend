@@ -12,16 +12,17 @@ export default Subtitle;
 
 const styles = StyleSheet.create({
   subtitle: {
-    color: '#e2b497',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '500',
     textAlign: 'center',
+    color: "#7c7c7c"
   },
   subtitleContainer: {
-    padding: 6,
+    paddingBottom: 12,
     marginHorizontal: 12,
-    marginVertical: 4,
-    borderBottomColor: '#e2b497',
-    borderBottomWidth: 2,
+    marginTop: 5,
+    marginBottom: 10,
+    borderBottomColor: '#e6e6e6',
+    borderBottomWidth: 1.5,
   },
 });

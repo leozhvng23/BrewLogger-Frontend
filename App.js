@@ -27,7 +27,7 @@ export default function App() {
 						headerBlurEffect: true,
 						headerTitleStyle: {},
 						headerTintColor: "black",
-						contentStyle: { backgroundColor: "#f0ddc4" },
+						contentStyle: { backgroundColor: "rgb(255,255,255)" },
 					}}
 				>
 					<Stack.Screen
