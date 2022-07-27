@@ -1,6 +1,6 @@
 import { Pressable, View, Text, StyleSheet, Platform } from "react-native";
 
-const BeanTile = ({ name, imageUrl }) => {
+const BeanTile = ({ name, imageUrl, onPress }) => {
 
 	return (
 		<View style={styles.gridItem}>
@@ -9,6 +9,7 @@ const BeanTile = ({ name, imageUrl }) => {
 					styles.button,
 					pressed ? styles.buttonPressed : null,
 				]}
+				onPress={onPress}
 			>
 				<View style={[styles.innerContainer, { backgroundColor: "rgb(243,234,180)" }]}>
 					<Text style={styles.name}>{name}</Text>

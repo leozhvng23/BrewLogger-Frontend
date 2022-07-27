@@ -3,11 +3,19 @@ import BeanTile from "../components/BeanTile";
 
 import { BEANS } from "../data/dummy";
 
-const renderBeanItem = (bean) => {
-	return <BeanTile name={bean.item.name} imageUrl={bean.item.imageUrl}/>;
-}
-
-const BeansScreen = () => {
+const BeansScreen = ({ navigation }) => {
+	const renderBeanItem = (bean) => {
+		const pressHandler = () => {
+			navigation.navigate("RecipesOverview");
+		};
+		return (
+			<BeanTile
+				name={bean.item.name}
+				imageUrl={bean.item.imageUrl}
+				onPress={pressHandler}
+			/>
+		);
+	};
 	return (
 		<FlatList
 			data={BEANS}
@@ -16,6 +24,6 @@ const BeansScreen = () => {
 			numColumns={2}
 		/>
 	);
-}
+};
 
 export default BeansScreen;
