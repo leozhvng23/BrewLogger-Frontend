@@ -6,7 +6,9 @@ import { BEANS } from "../data/dummy";
 const BeansScreen = ({ navigation }) => {
 	const renderBeanItem = (bean) => {
 		const pressHandler = () => {
-			navigation.navigate("RecipesOverview");
+			navigation.navigate("RecipesOverview", {
+                beanId: bean.item.id,
+            });
 		};
 		return (
 			<BeanTile
