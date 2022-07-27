@@ -1,46 +1,51 @@
 import Bean from "../models/bean";
 import Recipe from "../models/recipe";
 
-this.id = id;
-this.beanId = beanId;
-this.name = name;
-this.imageUrl = imageUrl;
-this.brewer = brewer;
-this.brewType = brewType;
-this.ratio = ratio;
-this.description = description;
-this.duration = duration;
-this.steps = steps;
-
 export const BEANS = [
-	new Bean("b1", "Guatemala El Socorro Gesha Coe", "Oynx", "Guatemala", "Washed", 2, [
-		"Jasmine",
-		"Raw sugar",
-		"Milk tea",
-		"Pineapple",
-	]),
+	new Bean(
+		"b1",
+		"Guatemala El Socorro Gesha Coe",
+		"https://cdn.shopify.com/s/files/1/1707/3261/products/ColombiaTioConejoGesha_c5562c47-3e0f-40a2-94fe-066a6cfe6785_1200x.png?v=1629213154",
+		"Oynx",
+		"Guatemala",
+		"Washed",
+		2,
+		["Jasmine", "Raw sugar", "Milk tea", "Pineapple"]
+	),
 	new Bean(
 		"b2",
 		"Colombia Double Fermented Gesha",
+		"https://cdn.shopify.com/s/files/1/1995/6387/products/pair_cupworks_62_doublefermentedgesha_2890x.jpg?v=1645465497",
 		"Pair Cupworks",
 		"Colombia",
 		"Washed",
 		3,
 		["Strawberry", "Vanilla"]
 	),
-	new Bean("b3", "Colombia Rubiela Velazquez", "Sey", "Colombia", "Washed", 2, [
-		"Dark Fruit",
-		"Berries",
-		"Red Wine",
-	]),
-	new Bean("b4", "Wild Forest", "Devoción", "Fermented", "Colombia", 2, [
-		"Wild Berries",
-		"Cherry",
-		"Caramel",
-	]),
+	new Bean(
+		"b3",
+		"Colombia Rubiela Velazquez",
+		"https://cdn.shopify.com/s/files/1/0002/6352/0281/products/Rubiela_2560x.png?v=1645664310",
+		"Sey",
+		"Colombia",
+		"Washed",
+		2,
+		["Dark Fruit", "Berries", "Red Wine"]
+	),
+	new Bean(
+		"b4",
+		"Wild Forest",
+		"https://cdn.shopify.com/s/files/1/0734/9587/products/WILDFORESTUSProductShotBags_800x.png?v=1612898836",
+		"Devoción",
+		"Fermented",
+		"Colombia",
+		2,
+		["Wild Berries", "Cherry", "Caramel"]
+	),
 	new Bean(
 		"b5",
 		"Honduras Fredy Sabillon",
+		"https://cdn.shopify.com/s/files/1/2988/2574/products/fredyhoney_cardonline_1_22_3x-100_1800x1800.jpg?v=1641409331",
 		"Black & White",
 		"Honduras",
 		"Aerobic Honey",
@@ -50,6 +55,7 @@ export const BEANS = [
 	new Bean(
 		"b6",
 		"Colombia Ivan Molano",
+		"https://cdn.shopify.com/s/files/1/0002/6352/0281/products/pulgas_2560x.png?v=1582103690",
 		"Sey",
 		"Colombia",
 		"Red Fruit Fermentation",
@@ -59,6 +65,7 @@ export const BEANS = [
 	new Bean(
 		"b7",
 		"Costa Rica Las Lajas SL28 Narual",
+		"https://cdn.shopify.com/s/files/1/1707/3261/products/CostaRicaLasLajasSL28Natural.png?v=1644960155",
 		"Oynx",
 		"Costa Rica",
 		"Washed",
@@ -68,22 +75,33 @@ export const BEANS = [
 	new Bean(
 		"b8",
 		"Carbonic Maceration Processed",
+		"https://cdn.shopify.com/s/files/1/1995/6387/products/pair_cupworks_XX_carbonic_ethiopia4_2890x.jpg?v=1641190685",
 		"Pair Cupworks",
 		"Ethiopia",
 		"Washed",
 		8,
 		["Black Tea", "Honey"]
 	),
-	new Bean("b9", "Colombia Juan Jimenez", "Oynx", "Colombia", "Fermented", 6, [
-		"Pinot",
-		"Honey",
-		"Blueberry",
-	]),
-	new Bean("b10", "La Mandarina", "Devoción", "Colombia", "Washed", 7, [
-		"Stonefruit",
-		"Panela",
-		"Vanilla",
-	]),
+	new Bean(
+		"b9",
+		"Colombia Juan Jimenez",
+		"https://cdn.shopify.com/s/files/1/1707/3261/products/ColombiaJuanJimenez_9bd65849-8c7c-4e30-aed2-f2c35caf8664.png?v=1639071756",
+		"Oynx",
+		"Colombia",
+		"Fermented",
+		6,
+		["Pinot", "Honey", "Blueberry"]
+	),
+	new Bean(
+		"b10",
+		"La Mandarina",
+		"https://cdn.shopify.com/s/files/1/0734/9587/products/LamandarinaproductshotINGLES_800x.png?v=1646006112",
+		"Devoción",
+		"Colombia",
+		"Washed",
+		7,
+		["Stonefruit", "Panela", "Vanilla"]
+	),
 ];
 
 export const RECIPES = [
