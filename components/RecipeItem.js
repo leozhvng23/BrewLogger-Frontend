@@ -33,9 +33,9 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		elevation: 4,
 		shadowColor: "black",
-		shadowOpacity: 0.25,
-		shadowOffset: { width: 0, height: 2 },
-		shadowRadius: 3,
+		shadowOpacity: 0.2,
+		shadowOffset: { width: 0, height: 0.5 },
+		shadowRadius: 4,
 	},
 
 	buttonPressed: {
@@ -56,13 +56,13 @@ const styles = StyleSheet.create({
 		margin: 8,
 	},
 	details: {
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "center",
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
 		padding: 8,
-	},
-	detailItem: {
+	  },
+	  detailItem: {
 		marginHorizontal: 4,
 		fontSize: 12,
-	},
+	  },
 });
