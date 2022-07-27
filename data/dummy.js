@@ -107,7 +107,7 @@ export const BEANS = [
 export const RECIPES = [
 	new Recipe(
 		"r1",
-		"8",
+		"b8",
 		"Ethiopian Delight",
 		"https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/640px-A_small_cup_of_coffee.JPG",
 		"La Marzocco Linea Mini",
@@ -122,7 +122,7 @@ export const RECIPES = [
 	),
 	new Recipe(
 		"r2",
-		"4",
+		"b4",
 		"Sunday cold brew with Devoción's Wild Forest",
 		"https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
 		"V60",
@@ -139,7 +139,7 @@ export const RECIPES = [
 	),
 	new Recipe(
 		"r3",
-		"5",
+		"b5",
 		"Honduras Breeze",
 		"https://www.homestratosphere.com/wp-content/uploads/2018/07/types-of-coffee-glasses-072618.jpg",
 		"French Press",
@@ -156,7 +156,7 @@ export const RECIPES = [
 	),
 	new Recipe(
 		"r4",
-		"7",
+		"b7",
 		"Tropical Weather Espresso Tonic",
 		"https://assets3.thrillist.com/v1/image/3052612/414x310/crop;webp=auto;jpeg_quality=60;progressive.jpg",
 		"Flair 58",
@@ -173,7 +173,7 @@ export const RECIPES = [
 	),
 	new Recipe(
 		"r5",
-		"9",
+		"b9",
 		"Not Your Average Diner Coffee",
 		"https://static.wixstatic.com/media/9b370b_0450d430f91d49b688f563ea12e1c5a6~mv2.jpg/v1/fit/w_940%2Ch_726%2Cal_c%2Cq_80/file.jpg",
 		"AeroPress",
@@ -191,7 +191,7 @@ export const RECIPES = [
 	),
 	new Recipe(
 		"r6",
-		"7",
+		"b7",
 		"Sweet Sweet Dream",
 		"https://bonteacafe.com/media/bontea/media/2021/05/14/types-of-coffee-3.jpg",
 		"La Marzocco Linea Mini",
@@ -209,7 +209,7 @@ export const RECIPES = [
 	),
 	new Recipe(
 		"r7",
-		"3",
+		"b3",
 		"Sour Patch Kids",
 		"https://s23209.pcdn.co/wp-content/uploads/2015/07/Perfect-Iced-CoffeeIMG_0074.jpg",
 		"Flair 58",
@@ -227,7 +227,7 @@ export const RECIPES = [
 	),
 	new Recipe(
 		"r8",
-		"3",
+		"b3",
 		"March Madness",
 		"https://nationaltoday.com/wp-content/uploads/2020/09/coffee-day2-300x300.jpg",
 		"V60",
@@ -245,7 +245,7 @@ export const RECIPES = [
 	),
 	new Recipe(
 		"r9",
-		"5",
+		"b5",
 		"Who stole my apple?",
 		"https://www.eatthis.com/wp-content/uploads/sites/4/2021/02/coffee-1.jpg",
 		"AeroPress",
@@ -263,7 +263,7 @@ export const RECIPES = [
 	),
 	new Recipe(
 		"r10",
-		"7",
+		"b7",
 		"Late night slow brew",
 		"https://64.media.tumblr.com/cfef1d5f40d257b98d2f5d74bdd41220/c65c9fc1e700efe3-48/s1280x1920/e21de677331560197c4bd6b86e7ac81a7477d505.jpg",
 		"V60",
