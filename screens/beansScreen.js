@@ -1,17 +1,17 @@
 import { FlatList } from "react-native";
-import BeanGridTile from "../components/BeanGridTile";
+import BeanTile from "../components/BeanTile";
 
 import { BEANS } from "../data/dummy";
 
 function renderBeanItem(bean) {
-	return <BeanGridTile />;
+	return <BeanTile name={bean.item.name} imageUrl={bean.item.imageUrl}/>;
 }
 
 function BeansScreen() {
 	return (
 		<FlatList
 			data={BEANS}
-			keyExtractor={(bean) => bean.id}
+			keyExtractor={(item) => item.id}
 			renderItem={renderBeanItem}
 			numColumns={2}
 		/>
