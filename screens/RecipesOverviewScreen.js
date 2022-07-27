@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { useHeaderHeight } from '@react-navigation/elements';
 
@@ -15,7 +15,6 @@ const RecipesOverviewScreen = ({ route, navigation }) => {
 
 	const displayedRecipes = RECIPES.filter((recipe) => recipe.beanId === bid);
 
-
 	useLayoutEffect(() => {
 		const beanName = BEANS.find((bean) => bean.id === bid).name;
 		navigation.setOptions({ title: beanName });
@@ -25,6 +24,7 @@ const RecipesOverviewScreen = ({ route, navigation }) => {
 		const recipe = data.item;
 
 		const recipeProps = {
+			id: recipe.id,
 			name: recipe.name,
 			imageUrl: recipe.imageUrl,
 			brewer: recipe.brewer,
