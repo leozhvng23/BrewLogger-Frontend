@@ -65,7 +65,7 @@ export const BEANS = [
 	new Bean(
 		"b7",
 		"Costa Rica Las Lajas SL28 Narual",
-		"https://cdn.shopify.com/s/files/1/1707/3261/products/CostaRicaLasLajasSL28Natural.png?v=1644960155",
+		"https://cdn.shopify.com/s/files/1/0036/4756/9984/products/ScreenShot2022-03-23at12.20.15PM_1200x.png?v=1648052476",
 		"Oynx",
 		"Costa Rica",
 		"Washed",

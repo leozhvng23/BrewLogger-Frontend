@@ -1,24 +1,38 @@
-import { Pressable, View, Text, StyleSheet, Platform } from "react-native";
+import {
+	Pressable,
+	View,
+	Text,
+	StyleSheet,
+	Platform,
+	ImageBackground,
+} from "react-native";
 
 const BeanTile = ({ name, imageUrl, onPress }) => {
-
 	return (
 		<View style={styles.gridItem}>
 			<Pressable
-				android_ripple={{ color: '#ccc' }}
+				android_ripple={{ color: "#ccc" }}
 				style={({ pressed }) => [
 					styles.button,
 					pressed ? styles.buttonPressed : null,
 				]}
 				onPress={onPress}
 			>
-				<View style={[styles.innerContainer, { backgroundColor: "rgb(243,234,180)" }]}>
-					<Text style={styles.name}>{name}</Text>
-				</View>
+				<ImageBackground
+					source={{ uri: imageUrl }}
+					resizeMode="center"
+					style={styles.image}
+				>
+					<View style={styles.titleContainer}>
+						<Text style={styles.title} numberOfLines={2}>
+							{name}
+						</Text>
+					</View>
+				</ImageBackground>
 			</Pressable>
 		</View>
 	);
-}
+};
 
 export default BeanTile;
 
@@ -31,10 +45,11 @@ const styles = StyleSheet.create({
 		elevation: 4,
 		backgroundColor: "white",
 		shadowColor: "black",
-		shadowOpacity: 0.25,
-		shadowOffset: { width: 0, height: 2 },
-		shadowRadius: 8,
+		shadowOpacity: 0.2,
+		shadowOffset: { width: 0, height: 0.5 },
+		shadowRadius: 4,
 		overflow: Platform.OS === "android" ? "hidden" : "visible",
+		justifyContent: "center",
 	},
 	button: {
 		flex: 1,
@@ -42,15 +57,29 @@ const styles = StyleSheet.create({
 	buttonPressed: {
 		opacity: 0.5,
 	},
-	innerContainer: {
+	image: {
 		flex: 1,
-		padding: 16,
+		justifyContent: "center",
+		overflow: "hidden",
 		borderRadius: 8,
+	},
+	titleContainer:{
+		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
+		backgroundColor: "rgba(255,255,255, 0.8)",
+		paddingHorizontal: "5%",
+		borderRadius: "8%",
+		marginTop: "60%",
+		shadowColor: "black",
+		shadowOpacity: 0.2,
+		shadowOffset: { width: 0, height: 0.5 },
+		shadowRadius:6,
 	},
 	title: {
-		fontWeight: "bold",
-		fontSize: 18,
+		fontWeight: "600",
+		fontSize: 14,
+		lineHeight: 18,
+		textAlign: "center",
 	},
 });
