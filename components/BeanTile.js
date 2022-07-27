@@ -5,6 +5,7 @@ const BeanTile = ({ name, imageUrl, onPress }) => {
 	return (
 		<View style={styles.gridItem}>
 			<Pressable
+				android_ripple={{ color: '#ccc' }}
 				style={({ pressed }) => [
 					styles.button,
 					pressed ? styles.buttonPressed : null,

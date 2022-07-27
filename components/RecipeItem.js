@@ -1,9 +1,12 @@
 import { View, Pressable, Text, Image, StyleSheet, Platform } from "react-native";
 
-const RecipeItem = ({name, imageUrl, brewer, brewType, duration}) => {
+const RecipeItem = ({ name, imageUrl, brewer, brewType, duration }) => {
 	return (
 		<View style={styles.recipeItem}>
-			<Pressable style={({ pressed }) => (pressed ? styles.buttonPressed : null)}>
+			<Pressable
+				android_ripple={{ color: "#ccc" }}
+				style={({ pressed }) => (pressed ? styles.buttonPressed : null)}
+			>
 				<View style={styles.innerContainer}>
 					<View>
 						<Image source={{ uri: imageUrl }} style={styles.image} />
