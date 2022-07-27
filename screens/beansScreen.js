@@ -3,11 +3,11 @@ import BeanTile from "../components/BeanTile";
 
 import { BEANS } from "../data/dummy";
 
-function renderBeanItem(bean) {
+const renderBeanItem = (bean) => {
 	return <BeanTile name={bean.item.name} imageUrl={bean.item.imageUrl}/>;
 }
 
-function BeansScreen() {
+const BeansScreen = () => {
 	return (
 		<FlatList
 			data={BEANS}
