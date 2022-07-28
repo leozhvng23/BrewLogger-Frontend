@@ -11,8 +11,8 @@ import { Ionicons } from "@expo/vector-icons";
 import BeansScreen from "./screens/BeansScreen";
 import RecipesOverviewScreen from "./screens/RecipesOverviewScreen";
 import RecipeDetailScreen from "./screens/RecipeDetailScreen";
-
 import FavoritesScreen from "./screens/FavoritesScreen";
+import FavoritesContextProvider from './store/context/favorites-context';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
