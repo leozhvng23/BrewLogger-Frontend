@@ -1,8 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 
 import BeansScreen from "./screens/BeansScreen";
 import RecipesOverviewScreen from "./screens/RecipesOverviewScreen";
@@ -11,8 +10,6 @@ import RecipeDetailScreen from "./screens/RecipeDetailScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
-
 	return (
 		<View style={styles.rootContainer}>
 			<StatusBar style="auto" />
@@ -39,7 +36,13 @@ export default function App() {
 						name="RecipesOverview"
 						component={RecipesOverviewScreen}
 					/>
-					<Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} options={{title: "Recipe Detail"}}/>
+					<Stack.Screen
+						name="RecipeDetail"
+						component={RecipeDetailScreen}
+						options={{
+							title: "Recipe Detail",
+						}}
+					/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		</View>
