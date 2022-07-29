@@ -1,58 +1,24 @@
 import { useLayoutEffect } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
-import { useHeaderHeight } from '@react-navigation/elements';
+import { StyleSheet } from "react-native";
 
-import RecipeItem from "../components/RecipeItem";
+import RecipeList from "../components/RecipesList/RecipeList";
 import { RECIPES, BEANS } from "../data/dummy";
 
-
-
 const RecipesOverviewScreen = ({ route, navigation }) => {
-
-	const headerHeight = useHeaderHeight();
-
 	const bid = route.params.beanId;
 
-	const displayedRecipes = RECIPES.filter((recipe) => recipe.beanId === bid);
+	const displayedRecipes = RECIPES.filter((recipeItem) => {
+		return recipeItem.beanId === bid;
+	});
 
 	useLayoutEffect(() => {
 		const beanName = BEANS.find((bean) => bean.id === bid).name;
 		navigation.setOptions({ title: beanName });
 	}, [bid, navigation]);
 
-	const renderRecipe = (data) => {
-		const recipe = data.item;
-
-		const recipeProps = {
-			id: recipe.id,
-			name: recipe.name,
-			imageUrl: recipe.imageUrl,
-			brewer: recipe.brewer,
-			brewType: recipe.brewType,
-			duration: recipe.duration,
-		};
-
-		return <RecipeItem {...recipeProps} />;
-	};
-
-	return (
-		<View style={[styles.container]}>
-			<FlatList
-				data={displayedRecipes}
-				keyExtractor={(item) => item.id}
-				renderItem={renderRecipe}
-				scrollsToTop
-				contentContainerStyle={{ paddingTop: headerHeight, paddingBottom: 50 }} 
-			/>
-		</View>
-	);
+	return <RecipeList items={displayedRecipes} />;
 };
 
 export default RecipesOverviewScreen;
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 16
-	},
-});
+const styles = StyleSheet.create({});
