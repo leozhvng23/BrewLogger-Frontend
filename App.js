@@ -4,15 +4,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import "react-native-gesture-handler";
+import { Provider } from "react-redux";
+import { store } from "./store/redux/store";
 import { Ionicons } from "@expo/vector-icons";
 
 import BeansScreen from "./screens/BeansScreen";
 import RecipesOverviewScreen from "./screens/RecipesOverviewScreen";
 import RecipeDetailScreen from "./screens/RecipeDetailScreen";
 import FavoritesScreen from "./screens/FavoritesScreen";
+import AllRecipesOverviewScreen from "./screens/AllRecipesOverviewScreen";
 // import FavoritesContextProvider from "./store/context/favorites-context";
-import { Provider } from "react-redux";
-import { store } from "./store/redux/store";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -21,10 +22,24 @@ const DrawerNavigator = () => {
 	return (
 		<Drawer.Navigator screenOptions={styles.drawer}>
 			<Drawer.Screen
+				name="All Recipes"
+				component={AllRecipesOverviewScreen}
+				options={{
+					drawerIcon: ({ color, size }) => (
+						<Ionicons
+							name="logo-buffer"
+							color={color}
+							size={size}
+							style={{ marginRight: -25 }}
+						/>
+					),
+				}}
+			/>
+			<Drawer.Screen
 				name="Beans"
 				component={BeansScreen}
 				options={{
-					title: "All Beans",
+					title: "By Beans",
 					drawerIcon: ({ color, size }) => (
 						<Ionicons
 							name="list"
@@ -112,13 +127,13 @@ const styles = StyleSheet.create({
 		headerTitleStyle: {},
 		headerTintColor: "black",
 		overlayColor: "transparent",
-		drawerStyle: { width: 150 },
+		drawerStyle: { width: 160 },
 		drawerActiveBackgroundColor: "transparent",
 		drawerActiveTintColor: "black",
 		drawerInactiveTintColor: "rgba(0,0,0,0.3)",
 		drawerLabelStyle: {
 			fontSize: 15,
-			textAlign: "center",
+			textAlign: "left",
 			fontWeight: "700",
 		},
 		drawerItemStyle: {

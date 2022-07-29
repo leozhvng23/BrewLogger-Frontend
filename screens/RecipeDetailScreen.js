@@ -1,5 +1,5 @@
 import { useLayoutEffect, useContext } from "react";
-import { View, Text, Image, StyleSheet, ScrollView, Button } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -29,9 +29,9 @@ function RecipeDetailScreen({ route, navigation }) {
 
 	const changeFavoriteStatusHandler = () => {
 		if (recipeIsFavorite) {
-            dispatch(removeFavorite({id: rid}));
+			dispatch(removeFavorite({ id: rid }));
 		} else {
-            dispatch(addFavorite({id: rid}));
+			dispatch(addFavorite({ id: rid }));
 		}
 	};
 
