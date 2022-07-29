@@ -1,17 +1,39 @@
-import { Text, StyleSheet, View } from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
+import { useContext } from 'react';
+
+import RecipeList from '../components/RecipesList/RecipeList';
+import { FavoritesContext } from '../store/context/favorites-context';
+import { RECIPES } from '../data/dummy';
 
 function FavoritesScreen() {
-	return (
-		<View style={styles.container}>
-			<Text> My favorites! </Text>
-		</View>
-	);
+  const favoriteRecipesCtx = useContext(FavoritesContext);
+
+  const favoriteRecipes = RECIPES.filter((recipe) =>
+    favoriteRecipesCtx.ids.includes(recipe.id)
+  );
+
+  if (favoriteRecipes.length === 0) {
+    return (
+      <View style={styles.rootContainer}>
+        <Text style={styles.text}>You have no favorite recipes yet.</Text>
+      </View>
+    );
+  }
+
+  return <RecipeList items={favoriteRecipes} />;
 }
 
 export default FavoritesScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    }
-})
+  rootContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: "rgba(0,0,0,0.3)"
+  },
+});

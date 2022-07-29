@@ -1,20 +1,38 @@
+import { useLayoutEffect, useContext } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, Button } from "react-native";
-import { useLayoutEffect } from "react";
 import { useHeaderHeight } from "@react-navigation/elements";
+import { useDispatch, useSelector } from "react-redux";
 
 import List from "../components/RecipeDetail/List";
 import Subtitle from "../components/RecipeDetail/Subtitle";
 import RecipeDetails from "../components/RecipeDetails";
-import { RECIPES } from "../data/dummy";
 import IconButton from "../components/IconButton";
+import { RECIPES } from "../data/dummy";
+import { addFavorite, removeFavorite } from "../store/redux/favorites";
+
+// import { FavoritesContext } from "../store/context/favorites-context";
 
 function RecipeDetailScreen({ route, navigation }) {
 	const headerHeight = useHeaderHeight();
 
 	const rid = route.params.rid;
 
-	const headerButtonPressHandler = () => {
-		console.log("pressed!");
+	// const favoriteRecipesCtx = useContext(FavoritesContext);
+
+	const favoriteRecipeIds = useSelector((state) => state.favoriteRecipes.ids);
+
+	const dispatch = useDispatch();
+
+	const selectedRecipe = RECIPES.find((recipe) => recipe.id === rid);
+
+	const recipeIsFavorite = favoriteRecipeIds.includes(rid);
+
+	const changeFavoriteStatusHandler = () => {
+		if (recipeIsFavorite) {
+            dispatch(removeFavorite({id: rid}));
+		} else {
+            dispatch(addFavorite({id: rid}));
+		}
 	};
 
 	useLayoutEffect(() => {
@@ -22,16 +40,14 @@ function RecipeDetailScreen({ route, navigation }) {
 			headerRight: () => {
 				return (
 					<IconButton
-						icon="ios-star-outline"
+						icon={recipeIsFavorite ? "ios-star" : "ios-star-outline"}
 						color="black"
-						onPress={headerButtonPressHandler}
+						onPress={changeFavoriteStatusHandler}
 					/>
 				);
 			},
 		});
-	}, [navigation, headerButtonPressHandler]);
-
-	const selectedRecipe = RECIPES.find((recipe) => recipe.id === rid);
+	}, [navigation, changeFavoriteStatusHandler]);
 
 	return (
 		<ScrollView

@@ -1,8 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import {
-	NavigationContainer,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import "react-native-gesture-handler";
@@ -12,7 +10,9 @@ import BeansScreen from "./screens/BeansScreen";
 import RecipesOverviewScreen from "./screens/RecipesOverviewScreen";
 import RecipeDetailScreen from "./screens/RecipeDetailScreen";
 import FavoritesScreen from "./screens/FavoritesScreen";
-import FavoritesContextProvider from './store/context/favorites-context';
+// import FavoritesContextProvider from "./store/context/favorites-context";
+import { Provider } from "react-redux";
+import { store } from "./store/redux/store";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -57,40 +57,44 @@ export default function App() {
 	return (
 		<View style={styles.rootContainer}>
 			<StatusBar style="auto" />
-			<NavigationContainer>
-				<Stack.Navigator
-					screenOptions={{
-						headerTransparent: true,
-						headerStyle: {
-							backgroundColor: "transparent",
-						},
-						headerBlurEffect: true,
-						headerTitleStyle: {},
-						headerTintColor: "black",
-						contentStyle: { backgroundColor: "rgb(255,255,255)" },
-					}}
-				>
-					<Stack.Screen
-						name="Drawer"
-						component={DrawerNavigator}
-						options={{
-							title: "All Beans",
-							headerShown: false
+			{/* <FavoritesContextProvider> */}
+			<Provider store={store}>
+				<NavigationContainer>
+					<Stack.Navigator
+						screenOptions={{
+							headerTransparent: true,
+							headerStyle: {
+								backgroundColor: "transparent",
+							},
+							headerBlurEffect: true,
+							headerTitleStyle: {},
+							headerTintColor: "black",
+							contentStyle: { backgroundColor: "rgb(255,255,255)" },
 						}}
-					/>
-					<Stack.Screen
-						name="RecipesOverview"
-						component={RecipesOverviewScreen}
-					/>
-					<Stack.Screen
-						name="RecipeDetail"
-						component={RecipeDetailScreen}
-						options={{
-							title: "Recipe Detail",
-						}}
-					/>
-				</Stack.Navigator>
-			</NavigationContainer>
+					>
+						<Stack.Screen
+							name="Drawer"
+							component={DrawerNavigator}
+							options={{
+								title: "All Beans",
+								headerShown: false,
+							}}
+						/>
+						<Stack.Screen
+							name="RecipesOverview"
+							component={RecipesOverviewScreen}
+						/>
+						<Stack.Screen
+							name="RecipeDetail"
+							component={RecipeDetailScreen}
+							options={{
+								title: "Recipe Detail",
+							}}
+						/>
+					</Stack.Navigator>
+				</NavigationContainer>
+			</Provider>
+			{/* </FavoritesContextProvider> */}
 		</View>
 	);
 }
@@ -124,6 +128,6 @@ const styles = StyleSheet.create({
 		drawerContentContainerStyle: {
 			height: "90%",
 			justifyContent: "center",
-		}
+		},
 	},
 });
