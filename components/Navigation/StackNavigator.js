@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
@@ -20,6 +20,7 @@ const StackNavigator = ({ navigationList }) => {
 			{navigationList.map((item) => {
 				return (
 					<Stack.Screen
+                        key={item.name}
 						name={item.name}
 						component={item.component}
 						options={{
@@ -29,23 +30,6 @@ const StackNavigator = ({ navigationList }) => {
 					/>
 				);
 			})}
-
-			{/* <Stack.Screen
-				name="Drawer"
-				component={DrawerNavigator}
-				options={{
-					title: "All Beans",
-					headerShown: false,
-				}}
-			/>
-			<Stack.Screen name="RecipesOverview" component={RecipesOverviewScreen} />
-			<Stack.Screen
-				name="RecipeDetail"
-				component={RecipeDetailScreen}
-				options={{
-					title: "Recipe Detail",
-				}}
-			/> */}
 		</Stack.Navigator>
 	);
 };

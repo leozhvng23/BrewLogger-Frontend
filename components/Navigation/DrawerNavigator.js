@@ -9,32 +9,34 @@ import "react-native-gesture-handler";
 
 import { Ionicons } from "@expo/vector-icons";
 
-const DrawerNavigator = ({navigationList, drawerScreenOptions}) => {
-	const DrawerContent = (props) => {
-		return (
-			<DrawerContentScrollView {...props}>
-				<DrawerItemList {...props} />
-				{navigationList.map((item) => {
-					return (
-						<DrawerItem
-							label={item.name}
-							navigation={item.component}
-						/>
-					);
-				})}
-			</DrawerContentScrollView>
-		);
-	};
+const DrawerNavigator = ({navigationList, drawerScreenOptions, backBehavior}) => {
+	// const DrawerContent = (props) => {
+	// 	return (
+	// 		<DrawerContentScrollView {...props}>
+	// 			<DrawerItemList {...props} />
+	// 			{navigationList.map((item) => {
+	// 				return (
+	// 					<DrawerItem
+	// 						label={item.name}
+	// 						navigation={item.component}
+	// 					/>
+	// 				);
+	// 			})}
+	// 		</DrawerContentScrollView>
+	// 	);
+	// };
 	const Drawer = createDrawerNavigator();
 
 	return (
 		<Drawer.Navigator
 			// drawerContent={(props) => <DrawerContent {...props} />}
 			screenOptions={drawerScreenOptions}
+			backBehavior="initialRoute"
 		>
 			{navigationList.map((item) => {
 				return (
 					<Drawer.Screen
+					key={item.name}
 						name={item.name}
 						component={item.component}
 						options={{
@@ -47,40 +49,11 @@ const DrawerNavigator = ({navigationList, drawerScreenOptions}) => {
 									style={{ marginRight: -25 }}
 								/>
 							),
-							headerShown: item.headerShown
+							headerShown: item.headerShown || false,
 						}}
 					/>
 				);
 			})}
-			{/* <Drawer.Screen
-				name="Beans"
-				component={BeansScreen}
-				options={{
-					title: "By Beans",
-					drawerIcon: ({ color, size }) => (
-						<Ionicons
-							name="list"
-							color={color}
-							size={size}
-							style={{ marginRight: -25 }}
-						/>
-					),
-				}}
-			/>
-			<Drawer.Screen
-				name="Favorites"
-				component={FavoritesScreen}
-				options={{
-					drawerIcon: ({ color, size }) => (
-						<Ionicons
-							name="star"
-							color={color}
-							size={size}
-							style={{ marginRight: -25 }}
-						/>
-					),
-				}}
-			/> */}
 		</Drawer.Navigator>
 	);
 };

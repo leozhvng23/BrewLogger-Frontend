@@ -1,14 +1,29 @@
+import { useLayoutEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
-import BeanTile from "../components/BeanTile";
 import { useHeaderHeight } from "@react-navigation/elements";
+import { useNavigation, DrawerActions } from "@react-navigation/native";
 
 import { BEANS } from "../data/dummy";
-
-import { useNavigation } from "@react-navigation/native";
+import BeanTile from "../components/BeanTile";
+import IconButton from "../components/UIElements/IconButton";
 
 const BeansScreen = () => {
 	const headerHeight = useHeaderHeight();
-	const navigation = useNavigation()
+	const navigation = useNavigation();
+
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			headerLeft: () => {
+				return (
+					<IconButton
+						icon="filter"
+						color="black"
+						onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+					/>
+				);
+			},
+		});
+	}, [navigation]);
 
 	const renderBeanItem = (bean) => {
 		const pressHandler = () => {
@@ -25,15 +40,18 @@ const BeansScreen = () => {
 		);
 	};
 	return (
-
-			<FlatList
-				data={BEANS}
-				keyExtractor={(item) => item.id}
-				renderItem={renderBeanItem}
-				numColumns={2}
-				scrollsToTop
-				contentContainerStyle={{ paddingTop: headerHeight, paddingBottom: 50, paddingHorizontal: "3%" }}
-			/>
+		<FlatList
+			data={BEANS}
+			keyExtractor={(item) => item.id}
+			renderItem={renderBeanItem}
+			numColumns={2}
+			scrollsToTop
+			contentContainerStyle={{
+				paddingTop: headerHeight,
+				paddingBottom: 50,
+				paddingHorizontal: "3%",
+			}}
+		/>
 	);
 };
 

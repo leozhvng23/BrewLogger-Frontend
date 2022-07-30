@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text} from "react-native";
 
 import RecipeList from "../components/RecipesList/RecipeList";
 import { RECIPES, BEANS } from "../data/dummy";
@@ -16,9 +16,27 @@ const RecipesOverviewScreen = ({ route, navigation }) => {
 		navigation.setOptions({ title: beanName });
 	}, [bid, navigation]);
 
-	return <RecipeList items={displayedRecipes} />;
+	return displayedRecipes.length === 0 ? (
+		<View style={styles.rootContainer}>
+			<Text style={styles.text}>You have no recipes yet.</Text>
+		</View>
+	) : (
+		<RecipeList items={displayedRecipes} />
+	);
 };
 
 export default RecipesOverviewScreen;
 
-const styles = StyleSheet.create({});
+
+const styles = StyleSheet.create({
+	rootContainer: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	text: {
+		fontSize: 16,
+		fontWeight: "500",
+		color: "rgba(0,0,0,0.3)",
+	},
+});

@@ -52,7 +52,7 @@ const RecipesNavigator = () => {
 
 	const FavoriteRecipesStackNavigator = () => (
 		<StackNavigator navigationList={favoriteRecipesStack} />
-    );
+	);
 
 	const drawerList = [
 		{
@@ -86,11 +86,7 @@ export default RecipesNavigator;
 
 const styles = StyleSheet.create({
 	drawer: {
-		headerShown: false,
 		headerTransparent: true,
-		headerBackgroundContainerStyle: {
-			backgroundColor: "transparent",
-		},
 		headerTitleStyle: {},
 		headerTintColor: "black",
 		overlayColor: "transparent",
@@ -111,5 +107,6 @@ const styles = StyleSheet.create({
 			height: "90%",
 			justifyContent: "center",
 		},
+        swipeEnabled: false
 	},
 });
