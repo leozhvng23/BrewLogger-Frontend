@@ -4,8 +4,11 @@ import { useHeaderHeight } from "@react-navigation/elements";
 
 import { BEANS } from "../data/dummy";
 
-const BeansScreen = ({ navigation }) => {
+import { useNavigation } from "@react-navigation/native";
+
+const BeansScreen = () => {
 	const headerHeight = useHeaderHeight();
+	const navigation = useNavigation()
 
 	const renderBeanItem = (bean) => {
 		const pressHandler = () => {
@@ -29,7 +32,7 @@ const BeansScreen = ({ navigation }) => {
 				renderItem={renderBeanItem}
 				numColumns={2}
 				scrollsToTop
-				contentContainerStyle={{ paddingTop: headerHeight, paddingBottom: 50 }}
+				contentContainerStyle={{ paddingTop: headerHeight, paddingBottom: 50, paddingHorizontal: "3%" }}
 			/>
 	);
 };

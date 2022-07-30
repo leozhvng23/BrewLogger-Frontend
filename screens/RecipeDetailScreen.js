@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import List from "../components/RecipeDetail/List";
 import Subtitle from "../components/RecipeDetail/Subtitle";
 import RecipeDetails from "../components/RecipeDetails";
-import IconButton from "../components/IconButton";
+import IconButton from "../components/UIElements/IconButton";
 import { RECIPES } from "../data/dummy";
 import { addFavorite, removeFavorite } from "../store/redux/favorites";
 

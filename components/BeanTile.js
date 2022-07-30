@@ -20,7 +20,7 @@ const BeanTile = ({ name, imageUrl, onPress }) => {
 			>
 				<ImageBackground
 					source={{ uri: imageUrl }}
-					resizeMode="center"
+					resizeMode="cover"
 					style={styles.image}
 				>
 					<View style={styles.titleContainer}>
@@ -39,7 +39,7 @@ export default BeanTile;
 const styles = StyleSheet.create({
 	gridItem: {
 		flex: 1,
-		margin: 16,
+		margin: "2.5%",
 		height: 150,
 		borderRadius: 8,
 		elevation: 4,

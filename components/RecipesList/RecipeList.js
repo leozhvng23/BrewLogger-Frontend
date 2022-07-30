@@ -29,7 +29,7 @@ const RecipeList = ({items}) => {
 				keyExtractor={(item) => item.id}
 				renderItem={renderRecipe}
 				scrollsToTop
-				contentContainerStyle={{ paddingTop: headerHeight, paddingBottom: 50 }}
+				contentContainerStyle={{ paddingTop: headerHeight, paddingBottom: 50, paddingHorizontal: "3%"}}
 			/>
 		</View>
 	);
@@ -40,6 +40,5 @@ export default RecipeList;
 const styles = StyleSheet.create({
     container: {
 		flex: 1,
-		padding: 16
 	},
 });
