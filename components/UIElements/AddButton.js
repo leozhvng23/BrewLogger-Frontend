@@ -8,6 +8,7 @@ const AddButton = ({ onAddData }) => {
     const pressButtonHandler = () => {
         setIconName("add-circle");
         onAddData();
+        setTimeout(() => setIconName("add-circle-outline"), 500);
     }
 
 	return (
