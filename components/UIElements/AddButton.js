@@ -1,20 +1,14 @@
-import { useState } from "react";
-import { Pressable, StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet } from "react-native";
+import ModalButton from "./ModalButton";
 
-const AddButton = ({ onAddData }) => {
-	const [iconName, setIconName] = useState("add-circle-outline");
-
-    const pressButtonHandler = () => {
-        setIconName("add-circle");
-        onAddData();
-        setTimeout(() => setIconName("add-circle-outline"), 500);
-    }
-
+const AddButton = ({ onAddData, color }) => {
 	return (
-		<Pressable onPress={pressButtonHandler}>
-			<Ionicons name={iconName} size={24} color="black" />
-		</Pressable>
+		<ModalButton
+			onPress={onAddData}
+			initialIcon="add-circle-outline"
+			pressedIcon="add-circle"
+            color={color}
+		/>
 	);
 };
 

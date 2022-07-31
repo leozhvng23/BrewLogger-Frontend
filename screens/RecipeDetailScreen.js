@@ -7,6 +7,7 @@ import List from "../components/RecipeDetail/List";
 import Subtitle from "../components/RecipeDetail/Subtitle";
 import RecipeDetails from "../components/RecipeDetails";
 import IconButton from "../components/UIElements/IconButton";
+import ShareEditDelete from "../components/UIElements/ShareEditDelete";
 import { RECIPES } from "../data/dummy";
 import { addFavorite, removeFavorite } from "../store/redux/favorites";
 
@@ -33,6 +34,18 @@ function RecipeDetailScreen({ route, navigation }) {
 		} else {
 			dispatch(addFavorite({ id: rid }));
 		}
+	};
+
+	const onDeleteData = () => {
+		console.log("deleted data!");
+	};
+
+	const onEditData = () => {
+		navigation.navigate("ManageRecipe", { rid: rid });
+	};
+
+	const onShareData = () => {
+		console.log("share data");
 	};
 
 	useLayoutEffect(() => {
@@ -72,6 +85,13 @@ function RecipeDetailScreen({ route, navigation }) {
 						<List data={selectedRecipe.steps} />
 					</View>
 				</View>
+				<View style={styles.buttonsBar}>
+					<ShareEditDelete
+						onDeleteData={onDeleteData}
+						onShareData={onShareData}
+						onEditData={onEditData}
+					/>
+				</View>
 			</View>
 		</ScrollView>
 	);
@@ -97,6 +117,7 @@ const styles = StyleSheet.create({
 	contentContainer: {
 		alignItems: "center",
 		paddingHorizontal: "3%",
+		marginBottom: 12,
 	},
 	description: {
 		marginVertical: "5%",
@@ -112,4 +133,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	listContainer: {},
+	buttonsBar: {
+		marginTop: "10%",
+	},
 });
