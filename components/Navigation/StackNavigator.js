@@ -26,6 +26,7 @@ const StackNavigator = ({ navigationList }) => {
 						options={{
 							title: item.title,
 							headerShown: item.headerShown,
+                            presentation: item.presentation
 						}}
 					/>
 				);

@@ -12,7 +12,7 @@ const AllRecipesOverviewScreen = () => {
 	const navigation = useNavigation();
 
 	const addRecipeHandler = () => {
-		console.log("added!")
+		navigation.navigate("ManageRecipe")
 	}
 
 	useLayoutEffect(() => {

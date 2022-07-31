@@ -8,6 +8,7 @@ import BeansScreen from "../../screens/BeansScreen";
 import FavoritesScreen from "../../screens/FavoritesScreen";
 import RecipesOverviewScreen from "../../screens/RecipesOverviewScreen";
 import RecipeDetailScreen from "../../screens/RecipeDetailScreen";
+import ManageRecipeScreen from "../../screens/ManageRecipeScreen";
 
 const RecipesNavigator = () => {
 	const recipeDetailStack = [
@@ -16,6 +17,11 @@ const RecipesNavigator = () => {
 			component: RecipeDetailScreen,
 			title: "Recipe Detail",
 		},
+        {
+            name: "ManageRecipe",
+            component: ManageRecipeScreen,
+            presentation: "modal" 
+        }
 	];
 
 	const recipesByBeansStack = [
