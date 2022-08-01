@@ -1,5 +1,5 @@
 import { useLayoutEffect, useContext } from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView, Alert } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -37,7 +37,27 @@ function RecipeDetailScreen({ route, navigation }) {
 	};
 
 	const onDeleteData = () => {
-		console.log("deleted data!");
+		console.log("deleting data");
+		console.log("deleted");
+	};
+
+	const deleteDataHandler = () => {
+		Alert.alert(
+			"Delete recipe?",
+			`\"${selectedRecipe.name}\" will be permanently deleted.`,
+			[
+				{
+					text: "Cancel",
+					onPress: () => console.log("canceled delete recipe action"),
+					style: "cancel",
+				},
+				{
+					text: "Delete",
+					style: "destructive",
+					onPress: onDeleteData,
+				},
+			]
+		);
 	};
 
 	const onEditData = () => {
@@ -87,7 +107,7 @@ function RecipeDetailScreen({ route, navigation }) {
 				</View>
 				<View style={styles.buttonsBar}>
 					<ShareEditDelete
-						onDeleteData={onDeleteData}
+						onDeleteData={deleteDataHandler}
 						onShareData={onShareData}
 						onEditData={onEditData}
 					/>
