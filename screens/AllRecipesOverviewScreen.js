@@ -7,26 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 import IconButton from "../components/UIElements/IconButton";
 import AddButton from "../components/UIElements/AddButton";
 import RecipeList from "../components/RecipesList/RecipeList";
+import LoadingOverlay from "../components/UIElements/LoadingOverlay";
 import { getRecipesByUserId } from "../util/http";
 import { setRecipes } from "../store/redux/recipes";
 
 const AllRecipesOverviewScreen = () => {
-
-	const uid = useSelector((state) => state.user.uid);
-
 	const navigation = useNavigation();
-	const dispatch = useDispatch();
 
 	const addRecipeHandler = () => {
 		navigation.navigate("ManageRecipe");
 	};
-	useEffect(() => {
-		const fetchRecipes = async () => {
-			const recipes = await getRecipesByUserId(uid);
-			dispatch(setRecipes({recipes: recipes}));
-		};
-		fetchRecipes();
-	}, []);
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -43,7 +33,31 @@ const AllRecipesOverviewScreen = () => {
 		});
 	}, [navigation]);
 
-	const recipes = useSelector((state) => state.recipes.recipes)
+	const [isFetching, setIsFetching] = useState(true);
+
+	const uid = useSelector((state) => state.user.uid);
+
+	const dispatch = useDispatch();
+
+
+	useEffect(() => {
+		const fetchRecipes = async () => {
+			setIsFetching(true);
+			const recipes = await getRecipesByUserId(uid);
+			// setIsFetching(false);
+			setTimeout(() => {
+				setIsFetching(false)
+			}, 2000);
+			dispatch(setRecipes({ recipes: recipes }));
+		};
+		fetchRecipes();
+	}, []);
+
+	const recipes = useSelector((state) => state.recipes.recipes);
+
+	if (isFetching) {
+		return <LoadingOverlay />;
+	}
 
 	return <RecipeList items={recipes} />;
 };
