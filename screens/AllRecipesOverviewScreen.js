@@ -4,11 +4,11 @@ import { StyleSheet } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 
-import IconButton from "../components/UIElements/IconButton";
-import AddButton from "../components/UIElements/AddButton";
+import IconButton from "../components/UIElements/Buttons/IconButton";
+import AddButton from "../components/UIElements/Buttons/AddButton";
 import RecipeList from "../components/RecipesList/RecipeList";
-import LoadingOverlay from "../components/UIElements/LoadingOverlay";
-import ErrorOverlay from "../components/UIElements/ErrorOverlay";
+import LoadingOverlay from "../components/UIElements/Overlays/LoadingOverlay";
+import ErrorOverlay from "../components/UIElements/Overlays/ErrorOverlay";
 import { getRecipesByUserId } from "../util/http";
 import { setRecipes } from "../store/redux/recipes";
 
@@ -59,7 +59,7 @@ const AllRecipesOverviewScreen = () => {
 		return <LoadingOverlay />;
 	}
 	// const errorHandler = () => setError(null);
-	
+
 	if (error && !isFetching) {
 		// return <ErrorOverlay message={error} onConfirm={errorHandler} />;
 		return <ErrorOverlay message={error} />;

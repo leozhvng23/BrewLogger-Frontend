@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import AttributeItem from "./RecipeDetail/AttributeItem";
-import { formatBrewTime } from "../util/time";
+import AttributeItem from "./AttributeItem";
+import { formatBrewTime } from "../../util/time";
 
 // type = {selectedRecipe.type}
 // 					yield = {selectedRecipe.yield}

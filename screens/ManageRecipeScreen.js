@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { Text } from 'react-native';
 
 function ManageRecipeScreen({ route, navigation }) {
-  const editedRecipeId = route.params?.rid;
+  const editedRecipeId = route.params?.id;
   const isEditing = !!editedRecipeId;
 
   useLayoutEffect(() => {

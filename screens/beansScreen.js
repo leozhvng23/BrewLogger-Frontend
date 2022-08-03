@@ -5,7 +5,7 @@ import { useNavigation, DrawerActions } from "@react-navigation/native";
 
 import { BEANS } from "../data/dummy";
 import BeanTile from "../components/BeanTile";
-import IconButton from "../components/UIElements/IconButton";
+import IconButton from "../components/UIElements/Buttons/IconButton";
 
 const BeansScreen = () => {
 	const headerHeight = useHeaderHeight();

@@ -1,7 +1,7 @@
 import { View, Pressable, Text, Image, StyleSheet, Platform, ImageBackground } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import RecipeDetails from "../RecipeDetails";
+import RecipeDetails from "../RecipeDetail/RecipeDetails";
 
 const RecipeItem = ({ id, name, photo_url, brewer, type, brew_time }) => {
 	const navigation = useNavigation();

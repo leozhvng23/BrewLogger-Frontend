@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 // import { useContext } from 'react';
 
-import IconButton from "../components/UIElements/IconButton";
+import IconButton from "../components/UIElements/Buttons/IconButton";
 import RecipeList from "../components/RecipesList/RecipeList";
 // import { FavoritesContext } from '../store/context/favorites-context';
 import { RECIPES } from "../data/dummy";

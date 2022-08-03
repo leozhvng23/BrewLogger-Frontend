@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 // import List from "../components/RecipeGuide/List";
 // import Subtitle from "../components/RecipeGuide/Subtitle";
-import RecipeDetailsFull from "../components/RecipeDetailsFull";
-import IconButton from "../components/UIElements/IconButton";
-import ShareEditDelete from "../components/UIElements/ShareEditDelete";
-import LoadingOverlay from "../components/UIElements/LoadingOverlay";
-import ErrorOverlay from "../components/UIElements/ErrorOverlay";
+import RecipeDetailsFull from "../components/RecipeDetail/RecipeDetailsFull";
+import IconButton from "../components/UIElements/Buttons/IconButton";
+import ShareEditDelete from "../components/UIElements/Buttons/ShareEditDelete";
+import LoadingOverlay from "../components/UIElements/Overlays/LoadingOverlay";
+import ErrorOverlay from "../components/UIElements/Overlays/ErrorOverlay";
 import { addFavorite, removeFavorite } from "../store/redux/favorites";
 import { getRecipeById } from "../util/http";
 import { setRecipeDetail } from "../store/redux/recipes";
@@ -99,7 +99,7 @@ function RecipeDetailScreen({ route, navigation }) {
 	};
 
 	const onEditData = () => {
-		navigation.navigate("ManageRecipe", { rid: rid });
+		navigation.navigate("ManageRecipe", { id: id });
 	};
 
 	const onShareData = () => {
