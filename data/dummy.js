@@ -280,3 +280,18 @@ export const RECIPES = [
 		]
 	),
 ];
+
+
+
+// "Dial in your La Marzocco Linea Mini and Niche Zero grinder for a classic 30s pull."
+// "Bloom with 40 grams of water for 30 seconds, then pour 205F degree water in a circular motion till 180 grams. Add in 70 grams of ice, stir, and enjoy!"
+// "Bloom with 30 grams of water for 45 seconds, then pour 210F degree water in a circular motion aggresively till 180 grams to agitate the coffee bed. Pour slowly till 250 grams and finish at 2 min 45 sec."
+// "Dial in your La Marzocco Linea Mini and Niche Zero for a classic 30s pull and 36 grams yield. Add 150 grams of orange juice and top it off with a tablespoon of heavy cream"
+// "Preheat your Clever Dripper with hot water. Add 500 grams of water, then add your ground coffee. Aggressively stir with spoon until all ground coffee has settled on the bottom and formed a flat bed. Place over serving caraf at 3 minutes and 30 seconds. Coffee extraction should finish around 5 minutes."
+// "Pre-infuse at 3 bars of pressure for 10 seconds, then ramp up pressure to 9 bars. At 20 grams, slowly back off pressure and aim to finish at 6 bars of pressure around the 50 second mark. Serve immediately while hot."
+// "On your Flair 58, pre-infuse the coffee puck at 3 bars of pressure for around 6 seconds, then pull the shot at 9 bars and aim to finish at 36 grams under 20 seconds."
+// "Bloom with 20 grams of water for 45 seconds, then pour 210F degree water in a circular motion aggresively till 180 grams to agitate the coffee bed. Pour slowly till 250 grams at 2 min 45 sec, and then pour aggresively again till 350 grams at 3 min 15 sec. Serve and enjoy!"
+// "Bloom with 30 grams of water for 45 seconds, then pour 210F degree water in a circular motion aggresively till 180 grams to agitate the coffee bed. Pour slowly till 200grams and finish at the 4 minute mark."
+// "Dial in your La Marzocco Linea Mini and Niche Zero grinder for a classic 30s pull and finish at 50 grams. Add 100 grams of hot water."
+// "Preheat your Clever Dripper with hot water. Add 500 grams of water, then add your ground coffee. Aggressively stir with spoon until all ground coffee has settled on the bottom and formed a flat bed. Place over serving carafe at 3 minutes and 30 seconds. Coffee extraction should finish around 5 minutes."
+// "hello"
