@@ -6,7 +6,7 @@ const RECIPES_API = "/api/recipes";
 
 
 export async function getRecipesByUserId(uid) {
-	const recipes = [];
+	const recipes = {};
 	console.log(BACKEND_URL + RECIPES_API + "/user/" + uid);
 	const response = await axios.get(BACKEND_URL + RECIPES_API + "/user/" + uid);
 
@@ -19,8 +19,16 @@ export async function getRecipesByUserId(uid) {
 			brew_time: response.data[key].brew_time,
 			brewer: response.data[key].brewer,
 		};
-		recipes.push(recipeObj);
+		recipes[response.data[key].id] = (recipeObj);
 	}
     console.log(recipes);
 	return recipes;
+}
+
+export async function getRecipeById(id) {
+    console.log(BACKEND_URL + RECIPES_API + "/" + id); 
+    const response = await axios.get(BACKEND_URL + RECIPES_API + "/" + id); 
+    console.log(response.data)
+    const recipe = response.data;
+    return recipe;
 }

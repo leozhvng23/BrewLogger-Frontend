@@ -7,7 +7,7 @@ const RecipeItem = ({ id, name, photo_url, brewer, type, brew_time }) => {
 	const navigation = useNavigation();
 
 	const selectRecipeHandler = () => {
-		navigation.navigate("RecipeDetail", { rid: id });
+		navigation.navigate("RecipeDetail", { id: id });
 	};
 
 	// id: recipe.id,

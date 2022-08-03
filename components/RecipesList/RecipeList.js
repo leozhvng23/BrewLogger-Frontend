@@ -25,7 +25,7 @@ const RecipeList = ({items}) => {
 	return (
 		<View style={[styles.container]}>
 			<FlatList
-				data={items}
+				data={Object.values(items)}
 				keyExtractor={(item) => item.id}
 				renderItem={renderRecipe}
 				scrollsToTop

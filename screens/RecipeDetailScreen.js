@@ -1,40 +1,78 @@
-import { useLayoutEffect, useContext } from "react";
+import { useLayoutEffect, useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, Alert } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { useDispatch, useSelector } from "react-redux";
 
-import List from "../components/RecipeDetail/List";
-import Subtitle from "../components/RecipeDetail/Subtitle";
-import RecipeDetails from "../components/RecipeDetails";
+// import List from "../components/RecipeGuide/List";
+// import Subtitle from "../components/RecipeGuide/Subtitle";
+import RecipeDetailsFull from "../components/RecipeDetailsFull";
 import IconButton from "../components/UIElements/IconButton";
 import ShareEditDelete from "../components/UIElements/ShareEditDelete";
-import { RECIPES } from "../data/dummy";
+import LoadingOverlay from "../components/UIElements/LoadingOverlay";
+import ErrorOverlay from "../components/UIElements/ErrorOverlay";
 import { addFavorite, removeFavorite } from "../store/redux/favorites";
-
-// import { FavoritesContext } from "../store/context/favorites-context";
+import { getRecipeById } from "../util/http";
+import { setRecipeDetail } from "../store/redux/recipes";
 
 function RecipeDetailScreen({ route, navigation }) {
-	const headerHeight = useHeaderHeight();
-
-	const rid = route.params.rid;
-
-	// const favoriteRecipesCtx = useContext(FavoritesContext);
-
+	const [isFetching, setIsFetching] = useState(true);
+	const [error, setError] = useState();
+	const id = route.params.id;
 	const favoriteRecipeIds = useSelector((state) => state.favoriteRecipes.ids);
-
+	const recipeIsFavorite = favoriteRecipeIds.includes(id);
+	const fetchedRecipeIds = useSelector((state) => state.recipes.fetchedIds);
+	const recipeIsFetched = fetchedRecipeIds.includes(id);
 	const dispatch = useDispatch();
-
-	const selectedRecipe = RECIPES.find((recipe) => recipe.id === rid);
-
-	const recipeIsFavorite = favoriteRecipeIds.includes(rid);
+	const headerHeight = useHeaderHeight();
 
 	const changeFavoriteStatusHandler = () => {
 		if (recipeIsFavorite) {
-			dispatch(removeFavorite({ id: rid }));
+			dispatch(removeFavorite({ id: id }));
 		} else {
-			dispatch(addFavorite({ id: rid }));
+			dispatch(addFavorite({ id: id }));
 		}
 	};
+
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			headerRight: () => {
+				return (
+					<IconButton
+						icon={recipeIsFavorite ? "ios-star" : "ios-star-outline"}
+						color="black"
+						onPress={changeFavoriteStatusHandler}
+					/>
+				);
+			},
+		});
+	}, [navigation, changeFavoriteStatusHandler]);
+
+	useEffect(() => {
+		const fetchRecipe = async () => {
+			setIsFetching(true);
+			try {
+				const recipeDetail = await getRecipeById(id);
+				dispatch(setRecipeDetail({ id: id, recipeDetail: recipeDetail }));
+			} catch (err) {
+				setError("Could not fetch recipe detail.");
+			}
+			setIsFetching(false);
+			// setTimeout(() => setIsFetching(false), 2000);
+		};
+		recipeIsFetched ? setIsFetching(false) : fetchRecipe();
+	}, []);
+
+	const selectedRecipe = useSelector((state) => state.recipes.recipes[id]);
+
+	if (isFetching) {
+		return <LoadingOverlay />;
+	}
+	// const errorHandler = () => setError(null);
+
+	if (error && !isFetching) {
+		// return <ErrorOverlay message={error} onConfirm={errorHandler} />;
+		return <ErrorOverlay message={error} />;
+	}
 
 	const onDeleteData = () => {
 		console.log("deleting data");
@@ -68,43 +106,34 @@ function RecipeDetailScreen({ route, navigation }) {
 		console.log("share data");
 	};
 
-	useLayoutEffect(() => {
-		navigation.setOptions({
-			headerRight: () => {
-				return (
-					<IconButton
-						icon={recipeIsFavorite ? "ios-star" : "ios-star-outline"}
-						color="black"
-						onPress={changeFavoriteStatusHandler}
-					/>
-				);
-			},
-		});
-	}, [navigation, changeFavoriteStatusHandler]);
-
 	return (
 		<ScrollView
 			contentContainerStyle={[styles.rootContainer, { paddingTop: headerHeight }]}
 		>
-			<Image style={styles.image} source={{ uri: selectedRecipe.imageUrl }} />
+			<Image style={styles.image} source={{ uri: selectedRecipe.photo_url }} />
 			<View style={styles.contentContainer}>
 				<Text style={styles.title}>{selectedRecipe.name}</Text>
-				<RecipeDetails
-					duration={selectedRecipe.duration}
+				<RecipeDetailsFull
+					type={selectedRecipe.type}
+					yields={selectedRecipe.yield}
+					brew_time={selectedRecipe.brew_time}
+					bean_name={selectedRecipe.bean_name}
+					bid={selectedRecipe.bid}
+					created_on={selectedRecipe.created_on}
 					brewer={selectedRecipe.brewer}
-					brewType={selectedRecipe.brewType}
-					ratio={selectedRecipe.ratio}
-					textStyle={styles.detailText}
+					grinder={selectedRecipe.grinder}
+					brewer_eid={selectedRecipe.brewer_eid}
+					grinder_eid={selectedRecipe.grinder_eid}
 				/>
 
 				<Text style={styles.description}>{selectedRecipe.description}</Text>
 
-				<View style={styles.listOuterContainer}>
+				{/* <View style={styles.listOuterContainer}>
 					<View style={styles.listContainer}>
 						<Subtitle>Steps</Subtitle>
-						<List data={selectedRecipe.steps} />
+						<List data={selectedRecipe.gruide} />
 					</View>
-				</View>
+				</View> */}
 				<View style={styles.buttonsBar}>
 					<ShareEditDelete
 						onDeleteData={deleteDataHandler}
