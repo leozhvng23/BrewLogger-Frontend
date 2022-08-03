@@ -1,4 +1,4 @@
-import { View, Pressable, Text, Image, StyleSheet, Platform } from "react-native";
+import { View, Pressable, Text, Image, StyleSheet, Platform, ImageBackground } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import RecipeDetails from "../RecipeDetails";
@@ -24,17 +24,16 @@ const RecipeItem = ({ id, name, photo_url, brewer, type, brew_time }) => {
 				style={({ pressed }) => (pressed ? styles.buttonPressed : null)}
 				onPress={selectRecipeHandler}
 			>
-				<View style={styles.innerContainer}>
-					<View>
-						<Image source={{ uri: photo_url }} style={styles.image} />
+				<ImageBackground
+					source={{ uri: photo_url }}
+					resizeMode="cover"
+					style={styles.image}
+				>
+					<View style={styles.innerContainer}>
 						<Text style={styles.title}>{name}</Text>
+						<RecipeDetails brew_time={brew_time} brewer={brewer} type={type} />
 					</View>
-					<RecipeDetails
-						brew_time={brew_time}
-						brewer={brewer}
-						type={type}
-					/>
-				</View>
+				</ImageBackground>
 			</Pressable>
 		</View>
 	);
@@ -58,28 +57,29 @@ const styles = StyleSheet.create({
 	buttonPressed: {
 		opacity: 0.5,
 	},
-	innerContainer: {
+	image: {
+		flex: 1,
 		borderRadius: 8,
 		overflow: "hidden",
+		height: 200
 	},
-	image: {
-		width: "100%",
-		height: 200,
+	innerContainer: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "rgba(255,255,255, 0.9)",
+		paddingHorizontal: "5%",
+		borderRadius: 8,
+		marginTop: 135,
+		shadowColor: "black",
+		shadowOpacity: 0.2,
+		shadowOffset: { width: 0, height: 0.5 },
+		shadowRadius:6,
 	},
 	title: {
 		fontWeight: "bold",
 		textAlign: "center",
 		fontSize: 18,
-		margin: 8,
-	},
-	details: {
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "center",
-		padding: 8,
-	},
-	detailItem: {
-		marginHorizontal: 4,
-		fontSize: 12,
+		marginTop: 8,
 	},
 });
