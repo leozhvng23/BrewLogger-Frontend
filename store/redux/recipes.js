@@ -4,7 +4,10 @@ const recipeSlice = createSlice({
 	name: "recipes",
 	initialState: { 
         recipes: [],
-        fetchedIds: []
+        fetchedIds: [], // recipes with all data
+        myIds: [], // my created recipes
+        sharedWithMeIds: [], // shared with me recipes
+        likedIds: [] // liked recipes
      },
 	reducers: {
 		setRecipes: (state, action) => {
@@ -13,7 +16,7 @@ const recipeSlice = createSlice({
         setRecipeDetail: (state, action) => {
             state.recipes[action.payload.id] = action.payload.recipeDetail;
             state.fetchedIds.push(action.payload.id)
-        }
+        },
 	},
 });
 
