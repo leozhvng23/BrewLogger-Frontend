@@ -13,10 +13,10 @@ const RecipeList = ({items}) => {
 		const recipeProps = {
 			id: recipe.id,
 			name: recipe.name,
-			imageUrl: recipe.imageUrl,
-			brewer: recipe.brewer,
-			brewType: recipe.brewType,
-			duration: recipe.duration,
+			photo_url: recipe.photo_url,
+			type: recipe.type,
+			brew_time: recipe.brew_time,
+			brewer: recipe.brewer
 		};
 
 		return <RecipeItem {...recipeProps} />;
