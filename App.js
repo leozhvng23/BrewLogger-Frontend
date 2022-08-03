@@ -7,10 +7,7 @@ import { store } from "./store/redux/store";
 
 import RecipesNavigator from "./components/Navigation/RecipesNavigator";
 
-
 // import FavoritesContextProvider from "./store/context/favorites-context";
-
-
 
 export default function App() {
 	return (
@@ -19,7 +16,7 @@ export default function App() {
 			{/* <FavoritesContextProvider> */}
 			<Provider store={store}>
 				<NavigationContainer>
-					<RecipesNavigator/>
+					<RecipesNavigator />
 				</NavigationContainer>
 			</Provider>
 			{/* </FavoritesContextProvider> */}
@@ -30,5 +27,5 @@ export default function App() {
 const styles = StyleSheet.create({
 	rootContainer: {
 		flex: 1,
-	}
+	},
 });
