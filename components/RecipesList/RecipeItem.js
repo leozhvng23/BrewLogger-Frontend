@@ -3,12 +3,19 @@ import { useNavigation } from "@react-navigation/native";
 
 import RecipeDetails from "../RecipeDetails";
 
-const RecipeItem = ({ id, name, imageUrl, brewer, brewType, duration }) => {
+const RecipeItem = ({ id, name, photo_url, brewer, type, brew_time }) => {
 	const navigation = useNavigation();
 
 	const selectRecipeHandler = () => {
 		navigation.navigate("RecipeDetail", { rid: id });
 	};
+
+	// id: recipe.id,
+	// name: recipe.name,
+	// photo_url: recipe.photo_url,
+	// type: recipe.type,
+	// brew_time: recipe.brew_time,
+	// brewer: recipe.brewer
 
 	return (
 		<View style={styles.recipeItem}>
@@ -19,13 +26,13 @@ const RecipeItem = ({ id, name, imageUrl, brewer, brewType, duration }) => {
 			>
 				<View style={styles.innerContainer}>
 					<View>
-						<Image source={{ uri: imageUrl }} style={styles.image} />
+						<Image source={{ uri: photo_url }} style={styles.image} />
 						<Text style={styles.title}>{name}</Text>
 					</View>
 					<RecipeDetails
-						duration={duration}
+						brew_time={brew_time}
 						brewer={brewer}
-						brewType={brewType}
+						type={type}
 					/>
 				</View>
 			</Pressable>
