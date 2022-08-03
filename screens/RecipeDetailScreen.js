@@ -3,13 +3,13 @@ import { View, Text, Image, StyleSheet, ScrollView, Alert } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { useDispatch, useSelector } from "react-redux";
 
-// import List from "../components/RecipeGuide/List";
-// import Subtitle from "../components/RecipeGuide/Subtitle";
 import RecipeDetailsFull from "../components/RecipeDetail/RecipeDetailsFull";
 import IconButton from "../components/UIElements/Buttons/IconButton";
 import ShareEditDelete from "../components/UIElements/Buttons/ShareEditDelete";
 import LoadingOverlay from "../components/UIElements/Overlays/LoadingOverlay";
 import ErrorOverlay from "../components/UIElements/Overlays/ErrorOverlay";
+import RecipeGuide from "../components/RecipeGuide/RecipeGuide";
+
 import { addFavorite, removeFavorite } from "../store/redux/favorites";
 import { getRecipeById } from "../util/http";
 import { setRecipeDetail } from "../store/redux/recipes";
@@ -125,15 +125,8 @@ function RecipeDetailScreen({ route, navigation }) {
 					brewer_eid={selectedRecipe.brewer_eid}
 					grinder_eid={selectedRecipe.grinder_eid}
 				/>
-
 				<Text style={styles.description}>{selectedRecipe.description}</Text>
-
-				{/* <View style={styles.listOuterContainer}>
-					<View style={styles.listContainer}>
-						<Subtitle>Steps</Subtitle>
-						<List data={selectedRecipe.gruide} />
-					</View>
-				</View> */}
+				<RecipeGuide guide={selectedRecipe.guide} style={styles.guide}/>
 				<View style={styles.buttonsBar}>
 					<ShareEditDelete
 						onDeleteData={deleteDataHandler}
@@ -173,16 +166,10 @@ const styles = StyleSheet.create({
 		paddingHorizontal: "5%",
 		fontSize: 16,
 	},
-	detailText: {
-		fontSize: 16,
-		color: "#7c7c7c",
-		fontWeight: "500",
-	},
-	listOuterContainer: {
-		alignItems: "center",
-	},
-	listContainer: {},
 	buttonsBar: {
 		marginTop: "10%",
 	},
+	guide:{
+		marginTop: 10
+	}
 });
