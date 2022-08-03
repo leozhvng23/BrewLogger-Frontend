@@ -12,13 +12,13 @@ export default AttributeItem;
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: "rgba(0,0,0,0.2)",
-        paddingHorizontal: 5,
-        paddingVertical: 6,
-        margin: 2,
-        borderRadius: 4
+		backgroundColor: "rgba(0,0,0,0.1)",
+        paddingHorizontal: 15,
+        paddingVertical: 8,
+        borderRadius: 20
 	},
 	text: {
 		fontSize: 14,
+        fontWeight: "500"
 	},
 });
