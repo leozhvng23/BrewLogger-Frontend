@@ -14,7 +14,6 @@ import { setRecipes } from "../store/redux/recipes";
 
 const AllRecipesOverviewScreen = () => {
 	const navigation = useNavigation();
-
 	const addRecipeHandler = () => {
 		navigation.navigate("ManageRecipe");
 	};
@@ -36,9 +35,7 @@ const AllRecipesOverviewScreen = () => {
 
 	const [isFetching, setIsFetching] = useState(true);
 	const [error, setError] = useState();
-
 	const uid = useSelector((state) => state.user.uid);
-
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -51,9 +48,7 @@ const AllRecipesOverviewScreen = () => {
 				setError("Could not fetch recipes.");
 			}
 			setIsFetching(false);
-			// setTimeout(() => {
-			// 	setIsFetching(false);
-			// }, 2000);
+			// setTimeout(() => setIsFetching(false), 2000);
 		};
 		fetchRecipes();
 	}, []);
@@ -63,9 +58,8 @@ const AllRecipesOverviewScreen = () => {
 	if (isFetching) {
 		return <LoadingOverlay />;
 	}
-
 	// const errorHandler = () => setError(null);
-
+	
 	if (error && !isFetching) {
 		// return <ErrorOverlay message={error} onConfirm={errorHandler} />;
 		return <ErrorOverlay message={error} />;
