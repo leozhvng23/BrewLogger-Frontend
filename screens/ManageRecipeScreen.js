@@ -1,5 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { Text } from 'react-native';
+import RecipeForm from '../components/RecipeForm';
 
 function ManageRecipeScreen({ route, navigation }) {
   const editedRecipeId = route.params?.id;
@@ -11,7 +12,9 @@ function ManageRecipeScreen({ route, navigation }) {
     });
   }, [navigation, isEditing]);
 
-  return <Text>Manage Recipe</Text>;
+  return (
+    <RecipeForm/> 
+  );
 }
 
 export default ManageRecipeScreen;
