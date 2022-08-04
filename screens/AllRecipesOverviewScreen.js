@@ -42,8 +42,8 @@ const AllRecipesOverviewScreen = () => {
 		const fetchRecipes = async () => {
 			setIsFetching(true);
 			try {
-				const recipes = await getRecipesByUserId(uid);
-				dispatch(setRecipes({ recipes: recipes }));
+				const [recipes, ids] = await getRecipesByUserId(uid);
+				dispatch(setRecipes({ recipes: recipes, ids: ids }));
 			} catch (err) {
 				setError("Could not fetch recipes.");
 			}

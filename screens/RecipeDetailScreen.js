@@ -15,13 +15,13 @@ import { getRecipeById } from "../util/http";
 import { setRecipeDetail } from "../store/redux/recipes";
 
 function RecipeDetailScreen({ route, navigation }) {
-	const [isFetching, setIsFetching] = useState(true);
-	const [error, setError] = useState();
+	// const [isFetching, setIsFetching] = useState(true);
+	// const [error, setError] = useState();
 	const id = route.params.id;
 	const favoriteRecipeIds = useSelector((state) => state.favoriteRecipes.ids);
 	const recipeIsFavorite = favoriteRecipeIds.includes(id);
 	const fetchedRecipeIds = useSelector((state) => state.recipes.fetchedIds);
-	const recipeIsFetched = fetchedRecipeIds.includes(id);
+	// const recipeIsFetched = fetchedRecipeIds.includes(id);
 	const dispatch = useDispatch();
 	const headerHeight = useHeaderHeight();
 
@@ -47,32 +47,32 @@ function RecipeDetailScreen({ route, navigation }) {
 		});
 	}, [navigation, changeFavoriteStatusHandler]);
 
-	useEffect(() => {
-		const fetchRecipe = async () => {
-			setIsFetching(true);
-			try {
-				const recipeDetail = await getRecipeById(id);
-				dispatch(setRecipeDetail({ id: id, recipeDetail: recipeDetail }));
-			} catch (err) {
-				setError("Could not fetch recipe detail.");
-			}
-			setIsFetching(false);
-			// setTimeout(() => setIsFetching(false), 2000);
-		};
-		recipeIsFetched ? setIsFetching(false) : fetchRecipe();
-	}, []);
+	// useEffect(() => {
+	// 	const fetchRecipe = async () => {
+	// 		setIsFetching(true);
+	// 		try {
+	// 			const recipeDetail = await getRecipeById(id);
+	// 			dispatch(setRecipeDetail({ id: id, recipeDetail: recipeDetail }));
+	// 		} catch (err) {
+	// 			setError("Could not fetch recipe detail.");
+	// 		}
+	// 		setIsFetching(false);
+	// 		// setTimeout(() => setIsFetching(false), 2000);
+	// 	};
+	// 	recipeIsFetched ? setIsFetching(false) : fetchRecipe();
+	// }, []);
 
 	const selectedRecipe = useSelector((state) => state.recipes.recipes[id]);
 
-	if (isFetching) {
-		return <LoadingOverlay />;
-	}
-	// const errorHandler = () => setError(null);
+	// if (isFetching) {
+	// 	return <LoadingOverlay />;
+	// }
+	// // const errorHandler = () => setError(null);
 
-	if (error && !isFetching) {
-		// return <ErrorOverlay message={error} onConfirm={errorHandler} />;
-		return <ErrorOverlay message={error} />;
-	}
+	// if (error && !isFetching) {
+	// 	// return <ErrorOverlay message={error} onConfirm={errorHandler} />;
+	// 	return <ErrorOverlay message={error} />;
+	// }
 
 	const onDeleteData = () => {
 		console.log("deleting data");
