@@ -9,6 +9,7 @@ import FavoritesScreen from "../../screens/FavoritesScreen";
 import RecipesOverviewScreen from "../../screens/RecipesOverviewScreen";
 import RecipeDetailScreen from "../../screens/RecipeDetailScreen";
 import ManageRecipeScreen from "../../screens/ManageRecipeScreen";
+import BackButton from "../UIElements/Buttons/BackButton";
 
 const RecipesNavigator = () => {
 	const recipeDetailStack = [
@@ -20,7 +21,9 @@ const RecipesNavigator = () => {
         {
             name: "ManageRecipe",
             component: ManageRecipeScreen,
-            presentation: "modal" 
+            presentation: "modal",
+			gestureEnabled: "false",
+			// headerLeft: () => <BackButton/>
         }
 	];
 

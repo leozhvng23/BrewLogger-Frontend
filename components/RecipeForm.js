@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
 	StyleSheet,
 	Text,
@@ -6,6 +6,7 @@ import {
 	ScrollView,
 	Pressable,
 	SafeAreaView,
+	Alert,
 } from "react-native";
 
 import Input from "./UIElements/Form/input";
@@ -28,21 +29,65 @@ import Input from "./UIElements/Form/input";
 // setting_brewer,
 // setting_grinder,
 
-const pressTimeHandler = () => {
-	console.log("select time");
-};
-
-const RecipeForm = (submitButtonLabel, onCancel, onSubmit) => {
+const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 	const [inputValues, setInputValues] = useState({
 		name: "",
 		description: "",
 		brew_time: "",
 		yield: "",
 		type: "",
+		bid: "",
 		bean_amount: "",
+		eid_brewer: "",
 		setting_brewer: "",
+		eid_grinder: "",
 		setting_grinder: "",
+		guide: "",
 	});
+
+	const hasUnsavedChanges =
+		Boolean(inputValues.name) ||
+		Boolean(inputValues.description) ||
+		Boolean(inputValues.brew_time) ||
+		Boolean(inputValues.yield) ||
+		Boolean(inputValues.type) ||
+		Boolean(inputValues.bid) ||
+		Boolean(inputValues.bean_amount) ||
+		Boolean(inputValues.eid_brewer) ||
+		Boolean(inputValues.setting_brewer) ||
+		Boolean(inputValues.eid_grinder) ||
+		Boolean(inputValues.setting_grinder) ||
+		Boolean(inputValues.guide.length);
+
+	useEffect(
+		() =>
+			navigation.addListener("beforeRemove", (e) => {
+				if (!hasUnsavedChanges) {
+					// If we don't have unsaved changes, then we don't need to do anything
+					return;
+				}
+
+				// Prevent default behavior of leaving the screen
+				e.preventDefault();
+
+				// Prompt the user before leaving the screen
+				Alert.alert(
+					"Discard changes?",
+					"You have unsaved changes. Are you sure to discard?",
+					[
+						{ text: "Don't leave", style: "cancel", onPress: () => {} },
+						{
+							text: "Discard",
+							style: "destructive",
+							// If the user confirmed, then we dispatch the action we blocked earlier
+							// This will continue the action that had triggered the removal of the screen
+							onPress: () => navigation.dispatch(e.data.action),
+						},
+					]
+				);
+			}),
+		[navigation, hasUnsavedChanges]
+	);
 
 	const inputChangedHandler = (inputIdentifier, enteredValue) => {
 		setInputValues((curInputValues) => {
@@ -77,16 +122,14 @@ const RecipeForm = (submitButtonLabel, onCancel, onSubmit) => {
 						/>
 						<View style={styles.inputsRow}>
 							<View style={styles.rowInput}>
-								<Pressable onPress={pressTimeHandler}>
-									<Input
-										styles={styles.rowInput}
-										label="Brew Time"
-										textInputConfig={{
-											keyboardType: "number-pad",
-											placeholder: "DD:HH:MM",
-										}}
-									/>
-								</Pressable>
+								<Input
+									styles={styles.rowInput}
+									label="Brew Time"
+									textInputConfig={{
+										keyboardType: "numbers-and-punctuation",
+										placeholder: "DD:HH:MM",
+									}}
+								/>
 							</View>
 							<View style={styles.rowInput}>
 								<Input

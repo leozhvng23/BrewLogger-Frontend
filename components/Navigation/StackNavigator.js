@@ -26,7 +26,9 @@ const StackNavigator = ({ navigationList }) => {
 						options={{
 							title: item.title,
 							headerShown: item.headerShown,
-                            presentation: item.presentation
+                            presentation: item.presentation,
+							gestureEnabled: item.gestureEnabled,
+							headerLeft: item.headerLeft
 						}}
 					/>
 				);
