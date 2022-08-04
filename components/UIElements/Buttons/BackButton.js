@@ -4,9 +4,11 @@ import { useNavigation } from "@react-navigation/native";
 
 const BackButton = () => {
 	const navigation = useNavigation();
+	const backHandler = () => navigation.goBack();
+
 	return (
-		<Pressable style={styles.container} onPress={() => navigation.goBack(null)}>
-			<IconButton icon="chevron-back" color="black" />
+		<Pressable style={styles.container} onPress={backHandler}>
+			<IconButton icon="chevron-back" color="black" onPress={backHandler} />
 			<Text style={styles.text}>Back</Text>
 		</Pressable>
 	);
