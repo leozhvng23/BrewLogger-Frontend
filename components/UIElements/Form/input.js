@@ -12,9 +12,6 @@ function Input({ label, style, editable, textInputConfig, onPressIn }) {
 			<Text style={styles.label}>{label}</Text>
 			<TextInput
 				style={inputStyles}
-				contextMenuHidden={true}
-                editable={editable}
-                onPressIn={onPressIn}
 				{...textInputConfig}
 			/>
 		</View>

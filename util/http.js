@@ -70,7 +70,7 @@ export async function getAllBeansNames() {
 
 export async function getAllBrewersNames() {
     const brewers = {};
-    console.log(BACKEND_URL + BEANS_API);
+    console.log(BACKEND_URL + EQUIPMENTS_API + "/brewers");
 	const response = await axios.get(BACKEND_URL + EQUIPMENTS_API + "/brewers");
     
     for (const key in response.data) {
@@ -87,7 +87,7 @@ export async function getAllBrewersNames() {
 
 export async function getAllGrindersNames() {
     const grinders = {}
-    console.log(BACKEND_URL + BEANS_API);
+    console.log(BACKEND_URL + + EQUIPMENTS_API + "/grinders");
 	const response = await axios.get(BACKEND_URL + EQUIPMENTS_API + "/grinders");
   
     for (const key in response.data) {

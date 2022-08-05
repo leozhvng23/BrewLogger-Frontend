@@ -17,8 +17,9 @@ import { getAllBrewersNames, getAllBeansNames, getAllGrindersNames } from "../ut
 import { setBrewersNames, setGrindersNames } from '../store/redux/equipments'
 import {} from '../store/redux/equipments'
 import { setBeansNames } from "../store/redux/beans";
+import { sub } from "react-native-reanimated";
 
-const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
+const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit }) => {
     // const [error, setError] = useState();
     const dispatch = useDispatch();
 
@@ -73,7 +74,15 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 		color: "rgba(0,0,0,0.2)",
     })
 
-	let searchData;
+    const submitHandler = () => {
+        console.log(inputValues)
+        const submitValue = {
+            name: inputValues.name,
+            description: inputValues.description
+        }
+		onSubmit(submitValue);
+	};
+
 	const [inputValues, setInputValues] = useState({
 		name: "",
 		description: "",
@@ -116,16 +125,17 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 
 				// Prompt the user before leaving the screen
 				Alert.alert(
-					"Discard changes?",
-					"You have unsaved changes. Are you sure to discard?",
+					"Save changes?",
+					"Do you want to save this recipe?",
 					[
-						{ text: "Don't leave", style: "cancel", onPress: () => {} },
+                        {text: "Cancel", style:"default", onPress:() => {}},
+						{ text: "Discard Changes", style: "destructive", onPress: () => navigation.dispatch(e.data.action) },
 						{
-							text: "Discard",
-							style: "destructive",
+							text: "Save Recipe",
+							style: "cancel",
 							// If the user confirmed, then we dispatch the action we blocked earlier
 							// This will continue the action that had triggered the removal of the screen
-							onPress: () => navigation.dispatch(e.data.action),
+							onPress: submitHandler,
 						},
 					]
 				);
@@ -133,18 +143,16 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 		[navigation, hasUnsavedChanges]
 	);
 
-	const inputChangedHandler = (inputIdentifier, enteredValue) => {
-		setInputValues((curInputValues) => {
-			return {
-				...curInputValues,
-				[inputIdentifier]: enteredValue,
-			};
-		});
-	};
+	// const inputChangedHandler = (inputIdentifier, enteredValue) => {
+	// 	setInputValues((curInputValues) => {
+	// 		return {
+	// 			...curInputValues,
+	// 			[inputIdentifier]: enteredValue,
+	// 		};
+	// 	});
+	// };
 
-	const submitHandler = () => {
-		onSubmit(inputValues);
-	};
+
 
 	const submitBeanValueHandler = (id, name) => {
         setBeanPlaceholder({text: name, color: "black"});
@@ -217,7 +225,7 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 							label="Recipe Name"
 							textInputConfig={{
 								maxLength: 30,
-								onChangeText: inputChangedHandler.bind(this, "name"),
+								onChangeText: (e) => setInputValues({...inputValues, "name": e.target.value}),
 								value: inputValues.name,
 							}}
 						/>
@@ -225,10 +233,7 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 							label="Description"
 							textInputConfig={{
 								multiline: true,
-								onChangeText: inputChangedHandler.bind(
-									this,
-									"description"
-								),
+								onChangeText:(e) => setInputValues({...inputValues, "description": e.target.value}), 
 								value: inputValues.description,
 							}}
 						/>
@@ -239,10 +244,7 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 								textInputConfig={{
 									keyboardType: "numbers-and-punctuation",
 									placeholder: "DD:HH:MM",
-									onChangeText: inputChangedHandler.bind(
-										this,
-										"brew_time"
-									),
+									onChangeText: (e) => setInputValues({...inputValues, "brew_time": e.target.value}),
 									value: inputValues.brew_time,
 								}}
 							/>
@@ -253,7 +255,7 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 								textInputConfig={{
 									keyboardType: "number-pad",
 									placeholder: "(grams)",
-									onChangeText: inputChangedHandler.bind(this, "yield"),
+									onChangeText: (e) => setInputValues({...inputValues, "yield": e.target.value}),
 									value: inputValues.yield,
 								}}
 							/>
@@ -272,10 +274,7 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 								textInputConfig={{
 									keyboardType: "number-pad",
 									placeholder: "(grams)",
-									onChangeText: inputChangedHandler.bind(
-										this,
-										"bean_amount"
-									),
+									onChangeText: (e) => setInputValues({...inputValues, "bean_amount": e.target.value}),	
 									value: inputValues.bean_amount,
 								}}
 							/>
@@ -290,10 +289,7 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 							label="Brewer Setting"
 							textInputConfig={{
 								multiline: true,
-								onChangeText: inputChangedHandler.bind(
-									this,
-									"setting_brewer"
-								),
+								onChangeText: (e) => setInputValues({...inputValues, "setting_brewer": e.target.value}),
 								value: inputValues.setting_brewer,
 							}}
 						/>
@@ -308,10 +304,7 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 							label="Grinder Setting"
 							textInputConfig={{
 								multiline: true,
-								onChangeText: inputChangedHandler.bind(
-									this,
-									"setting_grinder"
-								),
+								onChangeText: (value) => setInputValues({...inputValues, "setting_grinder": value}),
 								value: inputValues.setting_grinder,
 							}}
 						/>

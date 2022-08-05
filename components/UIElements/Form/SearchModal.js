@@ -14,8 +14,6 @@ import ModalOverlay from "../Overlays/ModalOverlay";
 const SearchModal = ({ visible, data, setModalVisible, onSubmit }) => {
 	const [searchPhrase, setSearchPhrase] = useState("");
 	const searchResults = Object.values(data);
-    console.log(searchResults);
-
 
 	return (
 		<ModalOverlay
