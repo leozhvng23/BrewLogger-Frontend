@@ -2,14 +2,11 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import IconButton from "./IconButton";
 import { useNavigation } from "@react-navigation/native";
 
-const BackButton = () => {
-	const navigation = useNavigation();
-	const backHandler = () => navigation.goBack();
-
+const BackButton = ({onPress, hideIcon, hideText}) => {
 	return (
-		<Pressable style={styles.container} onPress={backHandler}>
-			<IconButton icon="chevron-back" color="black" onPress={backHandler} />
-			<Text style={styles.text}>Back</Text>
+		<Pressable style={styles.container} onPress={onPress}> 
+			{!hideIcon && <IconButton icon="chevron-back" color="black" onPress={onPress} />}
+			{!hideText && <Text style={styles.text}>Back</Text>}
 		</Pressable>
 	);
 };

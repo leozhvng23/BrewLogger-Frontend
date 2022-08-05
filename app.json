@@ -1,5 +1,6 @@
 {
   "expo": {
+    "owner": "leozhvng23",
     "name": "brew-logger",
     "slug": "brew-logger",
     "version": "1.0.0",
@@ -18,7 +19,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.leozhvng23.brew-logger"
     },
     "android": {
       "adaptiveIcon": {

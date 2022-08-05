@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const recipeSlice = createSlice({
 	name: "recipes",
 	initialState: { 
-        recipes: [],
+        recipes: {},
         // fetchedIds: [], // recipes with all data
         myIds: [], // my created recipes
         sharedWithMeIds: [], // shared with me recipes

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-function Input({ label, style, textInputConfig }) {
+function Input({ label, style, editable, textInputConfig, onPressIn }) {
 	const inputStyles = [styles.input];
 
 	if (textInputConfig && textInputConfig.multiline) {
@@ -10,7 +10,13 @@ function Input({ label, style, textInputConfig }) {
 	return (
 		<View style={[styles.inputContainer, style]}>
 			<Text style={styles.label}>{label}</Text>
-			<TextInput style={inputStyles} {...textInputConfig} />
+			<TextInput
+				style={inputStyles}
+				contextMenuHidden={true}
+                editable={editable}
+                onPressIn={onPressIn}
+				{...textInputConfig}
+			/>
 		</View>
 	);
 }
@@ -19,24 +25,24 @@ export default Input;
 
 const styles = StyleSheet.create({
 	inputContainer: {
-		marginHorizontal: 4,
-		marginVertical: 8,
+		marginHorizontal: 6,
+		marginVertical: 12,
 	},
 	label: {
 		fontSize: 16,
-		color: "black",
-		marginBottom: 6,
-        marginLeft: 3,
-        fontWeight: "500"
-
+		color: "rgba(0,0,0,0.5)",
+		marginBottom: 8,
+		marginLeft: 3,
+		fontWeight: "500",
 	},
 	input: {
 		backgroundColor: "rgba(0,0,0,0.1)",
 		color: "black",
 		paddingVertical: 8,
-        paddingHorizontal: 8,
+		paddingHorizontal: 8,
 		borderRadius: 6,
-		fontSize: 15,
+		fontSize: 16,
+        fontWeight: "500"
 	},
 	inputMultiline: {
 		minHeight: 100,

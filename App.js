@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
 import { Provider } from "react-redux";

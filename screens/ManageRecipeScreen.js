@@ -7,14 +7,18 @@ function ManageRecipeScreen({ route, navigation }) {
 	const editedRecipeId = route.params?.id;
 	const isEditing = !!editedRecipeId;
 
+	const backHandler = () => {
+		navigation.goBack();
+	};
+
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: isEditing ? "Edit Recipe" : "Add Recipe",
-			headerLeft: () => <BackButton />,
+			headerLeft: () => <BackButton onPress={backHandler} />,
 		});
-	}, [navigation, isEditing]);	
+	}, [navigation, isEditing]);
 
-	return <RecipeForm navigation={navigation}/>;
+	return <RecipeForm navigation={navigation} />;
 }
 
 export default ManageRecipeScreen;
