@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import {
 	StyleSheet,
 	Text,
@@ -13,50 +13,13 @@ import {
 import Input from "./UIElements/Form/Input";
 import InputSelect from "./UIElements/Form/InputSelect";
 import SearchModal from "./UIElements/Form/SearchModal";
-import { getAllBrewersNames, getAllBeansNames, getAllGrindersNames } from "../util/http";
-import { setBrewersNames, setGrindersNames } from '../store/redux/equipments'
-import {} from '../store/redux/equipments'
-import { setBeansNames } from "../store/redux/beans";
-import { sub } from "react-native-reanimated";
 
-const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit }) => {
+
+const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit, data }) => {
     // const [error, setError] = useState();
-    const dispatch = useDispatch();
-
-	useEffect(() => {
-		const fetchBrewers = async () => {
-			try {
-				const brewers = await getAllBrewersNames();
-				dispatch(setBrewersNames({ brewers: brewers}));
-			} catch (err) {
-				// setError("Could not fetch brewers.");
-			}
-			// setTimeout(() => setIsFetching(false), 2000);
-		};
-        const fetchGrinders = async () => {
-            try {
-                const grinders = await getAllGrindersNames();
-                dispatch(setGrindersNames({grinders: grinders}))
-            } catch (err) {
-                // setError("Could not fetch grinders.")
-            }
-        }
-        const fetchBeans = async () => {
-            try {
-                const beans = await getAllBeansNames();
-                dispatch(setBeansNames({beans: beans}));
-            } catch (err) {
-                // setError("Could not fetch beans.")
-            }
-        }
-		fetchBrewers();
-        fetchGrinders();
-        fetchBeans();
-	}, []);
-
-    const beans = useSelector((state) => state.beans.beans);
-	const brewers = useSelector((state) => state.equipments.brewers);
-    const grinders = useSelector((state) => state.equipments.grinders);
+	const beans = data.beans
+	const brewers = data.brewers
+	const grinders = data.grinders
 
 	const [beansModalVisible, setBeansModalVisible] = useState(false);
 	const [brewersModalVisible, setBrewersModalVisible] = useState(false);
