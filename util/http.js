@@ -57,8 +57,8 @@ export async function getAllBeansNames() {
 	for (const key in response.data) {
 		const beanObj = {
 			id: response.data[key].bid,
-			bid: response.data[key].bid,
 			name: response.data[key].name,
+            detail: response.data[key].roaster_name,
 			roaster_name: response.data[key].roaster_name,
 			rid: response.data[key].rid,
 		};
@@ -93,9 +93,8 @@ export async function getAllGrindersNames() {
     for (const key in response.data) {
 		const grinderObj = {
 			id: response.data[key].eid,
-			eid: response.data[key].eid,
 			name: response.data[key].name,
-		    brand: response.data[key].brand,
+		    detail: response.data[key].brand,
 		};
 		grinders[response.data[key].eid] = grinderObj;
 	}

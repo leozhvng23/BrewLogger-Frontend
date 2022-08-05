@@ -46,7 +46,5 @@ const styles = StyleSheet.create({
 		alignItems: "center",
         borderRadius: 30,
         padding: 15,
-        overflow: "hidden"
-        
 	},
 });

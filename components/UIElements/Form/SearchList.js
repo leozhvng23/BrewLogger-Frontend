@@ -3,18 +3,15 @@ import { StyleSheet, Text, View, FlatList, SafeAreaView, Pressable } from "react
 
 // definition of the Item, which will be rendered in the FlatList
 const Item = ({ id, name, detail, onPress }) => (
-    <View style={styles.item}>
-	<Pressable
-		onPress={() => onPress(id, name)}
-		style={({ pressed }) => pressed && styles.pressed}
-
-	>
-        
-		<Text style={styles.title}>{name}</Text>
-		<Text style={styles.detail}>by {detail}</Text>
-        
-	</Pressable>
-    </View>
+	<View style={styles.item}>
+		<Pressable
+			onPress={() => onPress(id, name)}
+			style={({ pressed }) => pressed && styles.pressed}
+		>
+			<Text style={styles.title}>{name}</Text>
+			<Text style={styles.detail}>by {detail}</Text>
+		</Pressable>
+	</View>
 );
 
 // the filter
@@ -65,14 +62,12 @@ const SearchList = ({ searchPhrase, data, onSubmitValue }) => {
 
 	return (
 		<View style={styles.list__container}>
-			<View>
-				<FlatList
-					data={data}
-					renderItem={renderItem}
-					keyExtractor={(item) => item.id}
-					contentContainerStyle={{ height: "97%",paddingBottom: 50, paddingHorizontal: 15 }}
-				/>
-			</View>
+			<FlatList
+				data={data}
+				renderItem={renderItem}
+				keyExtractor={(item) => item.id}
+				contentContainerStyle={{ paddingHorizontal: 15 }}
+			/>
 		</View>
 	);
 };
@@ -83,14 +78,15 @@ const styles = StyleSheet.create({
 	list__container: {
 		marginTop: 10,
 		width: "105%",
-		
+        paddingBottom: 50,
+        height: "100%" 
 	},
 	list: {
 		height: "100%",
 	},
 	item: {
 		marginHorizontal: 10,
-        marginVertical: 5,
+		marginVertical: 5,
 		borderBottomWidth: 1,
 		borderBottomColor: "lightgrey",
 	},
@@ -98,16 +94,16 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: "bold",
 		marginBottom: 3,
-        textAlign: "center",
+		textAlign: "center",
 	},
-    detail: {
-        fontSize: 14,
-        fontWeight: "400",
-        textAlign: "center",
-        fontStyle: "italic",
-        marginBottom: 8,
-        color: "rgba(0,0,0,0.6)" 
-    },
+	detail: {
+		fontSize: 14,
+		fontWeight: "400",
+		textAlign: "center",
+		fontStyle: "italic",
+		marginBottom: 8,
+		color: "rgba(0,0,0,0.6)",
+	},
 	pressed: {
 		opacity: 0.3,
 	},

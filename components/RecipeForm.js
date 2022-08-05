@@ -16,9 +16,10 @@ import SearchModal from "./UIElements/Form/SearchModal";
 import { getAllBrewersNames, getAllBeansNames, getAllGrindersNames } from "../util/http";
 import { setBrewersNames, setGrindersNames } from '../store/redux/equipments'
 import {} from '../store/redux/equipments'
+import { setBeansNames } from "../store/redux/beans";
 
 const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
-
+    // const [error, setError] = useState();
     const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -27,15 +28,34 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 				const brewers = await getAllBrewersNames();
 				dispatch(setBrewersNames({ brewers: brewers}));
 			} catch (err) {
-				setError("Could not fetch brewers.");
+				// setError("Could not fetch brewers.");
 			}
 			// setTimeout(() => setIsFetching(false), 2000);
 		};
+        const fetchGrinders = async () => {
+            try {
+                const grinders = await getAllGrindersNames();
+                dispatch(setGrindersNames({grinders: grinders}))
+            } catch (err) {
+                // setError("Could not fetch grinders.")
+            }
+        }
+        const fetchBeans = async () => {
+            try {
+                const beans = await getAllBeansNames();
+                dispatch(setBeansNames({beans: beans}));
+            } catch (err) {
+                // setError("Could not fetch beans.")
+            }
+        }
 		fetchBrewers();
+        fetchGrinders();
+        fetchBeans();
 	}, []);
 
+    const beans = useSelector((state) => state.beans.beans);
 	const brewers = useSelector((state) => state.equipments.brewers);
-
+    const grinders = useSelector((state) => state.equipments.grinders);
 
 	const [beansModalVisible, setBeansModalVisible] = useState(false);
 	const [brewersModalVisible, setBrewersModalVisible] = useState(false);
@@ -52,41 +72,6 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
         text: "select coffee grinder",
 		color: "rgba(0,0,0,0.2)",
     })
-
-	const beans = {};
-	// const brewers = {
-	// 	1: {
-	// 		id: 1,
-	// 		name: "La Marzocco Linea Mini",
-	// 		detail: "La Marzocco",
-	// 	},
-	// 	7: {
-	// 		id: 7,
-	// 		name: "Clever Dripper",
-	// 		detail: "Clever Coffee",
-	// 	},
-	// 	4: {
-	// 		id: 4,
-	// 		name: "Hario V60 Plastic",
-	// 		detail: "Hario",
-	// 	},
-	// 	5: {
-	// 		id: 5,
-	// 		name: "Stagg X",
-	// 		detail: "Fellow",
-	// 	},
-	// 	6: {
-	// 		id: 6,
-	// 		name: "Kalita Wave",
-	// 		detail: "Kalita",
-	// 	},
-	// 	9: {
-	// 		id: 9,
-	// 		name: "Flair 58",
-	// 		detail: "Flair Espresso",
-	// 	},
-	// };
-	const grinders = {};
 
 	let searchData;
 	const [inputValues, setInputValues] = useState({
