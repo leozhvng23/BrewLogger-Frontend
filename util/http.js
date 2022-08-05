@@ -76,9 +76,8 @@ export async function getAllBrewersNames() {
     for (const key in response.data) {
 		const brewerObj = {
 			id: response.data[key].eid,
-			eid: response.data[key].eid,
 			name: response.data[key].name,
-		    brand: response.data[key].brand,
+		    detail: response.data[key].brand,
 		};
 		brewers[response.data[key].eid] = brewerObj;
 	}

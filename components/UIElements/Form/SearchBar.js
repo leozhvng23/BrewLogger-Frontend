@@ -20,9 +20,10 @@ const SearchBar = ({ searchPhrase, setSearchPhrase }) => {
 					placeholder="Search"
 					value={searchPhrase}
 					onChangeText={setSearchPhrase}
-                    autoFocus
-                    blurOnSubmit={false}
+                    // autoFocus
+                    // // blurOnSubmit={false}
                     clearButtonMode="while-editing"
+                    returnKeyType="done"
 				/>
 			</View>
 		</View>
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
 	},
 	input: {
         flex: 1,
-		fontSize: 20,
+		fontSize: 18,
 		marginLeft: 10,
 	},
 });

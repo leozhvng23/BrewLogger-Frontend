@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const equipmentSlice = createSlice({
-	name: "beans",
+	name: "equipments",
 	initialState: {
 		brewers: {},
 		grinders: {},

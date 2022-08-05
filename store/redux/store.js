@@ -3,6 +3,7 @@ import favoritesReducer from './favorites';
 import recipesReducer from './recipes';
 import userReducer from './user'
 import beansReducer from './beans'
+import equipmentsReducer from './equipments'
 
 
 export const store = configureStore({
@@ -10,7 +11,8 @@ export const store = configureStore({
         favoriteRecipes: favoritesReducer,
         recipes: recipesReducer,
         user: userReducer,
-        beans: beansReducer
+        beans: beansReducer,
+        equipments: equipmentsReducer
     },
 });
 

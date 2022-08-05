@@ -11,10 +11,12 @@ import SearchBar from "./SearchBar";
 import SearchList from "./SearchList";
 import ModalOverlay from "../Overlays/ModalOverlay";
 
-const SearchModal = ({ visible, data, setModalVisible, onDismiss }) => {
+const SearchModal = ({ visible, data, setModalVisible, onSubmit }) => {
 	const [searchPhrase, setSearchPhrase] = useState("");
 	const searchResults = Object.values(data);
     console.log(searchResults);
+
+
 	return (
 		<ModalOverlay
 			visible={visible}
@@ -28,7 +30,7 @@ const SearchModal = ({ visible, data, setModalVisible, onDismiss }) => {
 			<SearchList
 				searchPhrase={searchPhrase}
 				data={searchResults}
-                onDismiss={() => setModalVisible(false)}
+                onSubmitValue={onSubmit}
 			/>
 		</ModalOverlay>
 	);
@@ -40,8 +42,7 @@ const styles = StyleSheet.create({
 	modal: {
 		backgroundColor: "white",
 		width: "80%",
-		height: "40%",
-        marginTop: "-60%",
+		height: "55%",
 		alignItems: "center",
         borderRadius: 30,
         padding: 15,

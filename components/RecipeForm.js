@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	StyleSheet,
 	Text,
@@ -10,46 +11,81 @@ import {
 } from "react-native";
 
 import Input from "./UIElements/Form/Input";
+import InputSelect from "./UIElements/Form/InputSelect";
 import SearchModal from "./UIElements/Form/SearchModal";
+import { getAllBrewersNames, getAllBeansNames, getAllGrindersNames } from "../util/http";
+import { setBrewersNames, setGrindersNames } from '../store/redux/equipments'
+import {} from '../store/redux/equipments'
 
 const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
+
+    const dispatch = useDispatch();
+
+	useEffect(() => {
+		const fetchBrewers = async () => {
+			try {
+				const brewers = await getAllBrewersNames();
+				dispatch(setBrewersNames({ brewers: brewers}));
+			} catch (err) {
+				setError("Could not fetch brewers.");
+			}
+			// setTimeout(() => setIsFetching(false), 2000);
+		};
+		fetchBrewers();
+	}, []);
+
+	const brewers = useSelector((state) => state.equipments.brewers);
+
+
 	const [beansModalVisible, setBeansModalVisible] = useState(false);
 	const [brewersModalVisible, setBrewersModalVisible] = useState(false);
 	const [grindersModalVisible, setGrindersModalVisible] = useState(false);
+	const [beanPlaceholder, setBeanPlaceholder] = useState({
+		text: "select coffee bean",
+		color: "rgba(0,0,0,0.2)",
+	});
+	const [brewerPlaceholder, setBrewerPlaceholder] = useState({
+		text: "select coffee brewer",
+		color: "rgba(0,0,0,0.2)",
+	});
+	const [grinderPlaceholder, setGrinderPlaceholder] = useState({
+        text: "select coffee grinder",
+		color: "rgba(0,0,0,0.2)",
+    })
 
 	const beans = {};
-	const brewers = {
-		1: {
-			id: 1,
-			name: "La Marzocco Linea Mini",
-			detail: "La Marzocco",
-		},
-		7: {
-			id: 7,
-			name: "Clever Dripper",
-			detail: "Clever Coffee",
-		},
-		4: {
-			id: 4,
-			name: "Hario V60 Plastic",
-			detail: "Hario",
-		},
-		5: {
-			id: 5,
-			name: "Stagg X",
-			detail: "Fellow",
-		},
-		6: {
-			id: 6,
-			name: "Kalita Wave",
-			detail: "Kalita",
-		},
-		9: {
-			id: 9,
-			name: "Flair 58",
-			detail: "Flair Espresso",
-		},
-	};
+	// const brewers = {
+	// 	1: {
+	// 		id: 1,
+	// 		name: "La Marzocco Linea Mini",
+	// 		detail: "La Marzocco",
+	// 	},
+	// 	7: {
+	// 		id: 7,
+	// 		name: "Clever Dripper",
+	// 		detail: "Clever Coffee",
+	// 	},
+	// 	4: {
+	// 		id: 4,
+	// 		name: "Hario V60 Plastic",
+	// 		detail: "Hario",
+	// 	},
+	// 	5: {
+	// 		id: 5,
+	// 		name: "Stagg X",
+	// 		detail: "Fellow",
+	// 	},
+	// 	6: {
+	// 		id: 6,
+	// 		name: "Kalita Wave",
+	// 		detail: "Kalita",
+	// 	},
+	// 	9: {
+	// 		id: 9,
+	// 		name: "Flair 58",
+	// 		detail: "Flair Espresso",
+	// 	},
+	// };
 	const grinders = {};
 
 	let searchData;
@@ -59,14 +95,11 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 		brew_time: "",
 		yield: "",
 		type: "",
-		bean: "",
 		bid: "",
 		bean_amount: "",
-		brewer: "",
 		eid_brewer: "",
 		setting_brewer: "",
 		eid_grinder: "",
-		grinder: "",
 		setting_grinder: "",
 		guide: "",
 	});
@@ -128,6 +161,38 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 		onSubmit(inputValues);
 	};
 
+	const submitBeanValueHandler = (id, name) => {
+        setBeanPlaceholder({text: name, color: "black"});
+		setInputValues((curInputValues) => {
+			return {
+				...curInputValues,
+				["bid"]: id,
+			};
+		});
+		console.log(inputValues);
+		setBeansModalVisible(false);
+	};
+	const submitBrewerValueHandler = (id, name) => {
+		setBrewerPlaceholder({text: name, color: "black"});
+		setInputValues((curInputValues) => {
+			return {
+				...curInputValues,
+				["eid_brewer"]: id,
+			};
+		});
+		setBrewersModalVisible(false);
+	};
+	const submitGrinderValueHandler = (id, name) => {
+		setGrinderPlaceholder({text: name, color: "black"});
+		setInputValues((curInputValues) => {
+			return {
+				...curInputValues,
+				["eid_grinder"]: id,
+			};
+		});
+		setGrindersModalVisible(false);
+	};
+
 	const pressBeanHandler = () => {
 		setBeansModalVisible(true);
 	};
@@ -145,16 +210,19 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 					data={beans}
 					visible={beansModalVisible}
 					setModalVisible={setBeansModalVisible}
+					onSubmit={submitBeanValueHandler}
 				/>
 				<SearchModal
 					data={brewers}
 					visible={brewersModalVisible}
 					setModalVisible={setBrewersModalVisible}
+					onSubmit={submitBrewerValueHandler}
 				/>
 				<SearchModal
 					data={grinders}
 					visible={grindersModalVisible}
 					setModalVisible={setGrindersModalVisible}
+					onSubmit={submitGrinderValueHandler}
 				/>
 			</View>
 			<ScrollView>
@@ -206,12 +274,12 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 							/>
 						</View>
 						<View style={styles.inputsRow}>
-							<Input
+							<InputSelect
 								style={{ flex: 2 }}
 								label="Coffee Bean"
-								editable={false}
-								onPressIn={pressBeanHandler}
-								textInputConfig={{ placeholder: "select bean" }}
+								onPress={pressBeanHandler}
+								placeholder={beanPlaceholder.text}
+                                color={beanPlaceholder.color}
 							/>
 							<Input
 								style={styles.rowInput}
@@ -227,13 +295,11 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 								}}
 							/>
 						</View>
-						<Input
+						<InputSelect
 							label="Coffee Brewer"
-							editable={false}
-							onPressIn={pressBrewerHandler}
-							textInputConfig={{
-								placeholder: "select coffee brewer or espresso machine",
-							}}
+							onPress={pressBrewerHandler}
+							placeholder={brewerPlaceholder.text}
+                            color={brewerPlaceholder.color}
 						/>
 						<Input
 							label="Brewer Setting"
@@ -246,11 +312,11 @@ const RecipeForm = ({ submitButtonLabel, onCancel, onSubmit, navigation }) => {
 								value: inputValues.setting_brewer,
 							}}
 						/>
-						<Input
+						<InputSelect
 							label="Coffee Grinder"
-							editable={false}
-							onPressIn={pressGrinderHandler}
-							textInputConfig={{ placeholder: "select coffee grinder" }}
+							onPress={pressGrinderHandler}
+							placeholder={grinderPlaceholder.text}
+                            color={grinderPlaceholder.color}
 						/>
 
 						<Input

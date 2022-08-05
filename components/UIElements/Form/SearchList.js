@@ -2,22 +2,32 @@ import React from "react";
 import { StyleSheet, Text, View, FlatList, SafeAreaView, Pressable } from "react-native";
 
 // definition of the Item, which will be rendered in the FlatList
-const Item = ({ name, detail }) => (
-	<View style={styles.item}>
+const Item = ({ id, name, detail, onPress }) => (
+    <View style={styles.item}>
+	<Pressable
+		onPress={() => onPress(id, name)}
+		style={({ pressed }) => pressed && styles.pressed}
+
+	>
+        
 		<Text style={styles.title}>{name}</Text>
-		<Text style={styles.details}>{detail}</Text>
-	</View>
+		<Text style={styles.detail}>by {detail}</Text>
+        
+	</Pressable>
+    </View>
 );
 
 // the filter
-const SearchList = ({ searchPhrase, data }) => {
+const SearchList = ({ searchPhrase, data, onSubmitValue }) => {
 	const renderItem = ({ item }) => {
 		// when no input, show all
 		if (searchPhrase === "") {
 			return (
 				<Item
+					id={item.id}
 					name={item.name}
 					detail={item.detail}
+					onPress={onSubmitValue}
 				/>
 			);
 		}
@@ -29,8 +39,10 @@ const SearchList = ({ searchPhrase, data }) => {
 		) {
 			return (
 				<Item
+					id={item.id}
 					name={item.name}
 					detail={item.detail}
+					onPress={onSubmitValue}
 				/>
 			);
 		}
@@ -42,8 +54,10 @@ const SearchList = ({ searchPhrase, data }) => {
 		) {
 			return (
 				<Item
+					id={item.id}
 					name={item.name}
 					detail={item.detail}
+					onPress={onSubmitValue}
 				/>
 			);
 		}
@@ -56,8 +70,7 @@ const SearchList = ({ searchPhrase, data }) => {
 					data={data}
 					renderItem={renderItem}
 					keyExtractor={(item) => item.id}
-                    contentContainerStyle={{ paddingBottom: 50, paddingHorizontal: 15}}
-                    
+					contentContainerStyle={{ height: "97%",paddingBottom: 50, paddingHorizontal: 15 }}
 				/>
 			</View>
 		</View>
@@ -70,20 +83,32 @@ const styles = StyleSheet.create({
 	list__container: {
 		marginTop: 10,
 		width: "105%",
-		height: "82%",
+		
 	},
 	list: {
 		height: "100%",
 	},
 	item: {
-		marginHorizontal: 5,
-		borderBottomWidth: 2,
+		marginHorizontal: 10,
+        marginVertical: 5,
+		borderBottomWidth: 1,
 		borderBottomColor: "lightgrey",
 	},
 	title: {
-		fontSize: 20,
+		fontSize: 16,
 		fontWeight: "bold",
-		marginBottom: 5,
-		fontStyle: "italic",
+		marginBottom: 3,
+        textAlign: "center",
+	},
+    detail: {
+        fontSize: 14,
+        fontWeight: "400",
+        textAlign: "center",
+        fontStyle: "italic",
+        marginBottom: 8,
+        color: "rgba(0,0,0,0.6)" 
+    },
+	pressed: {
+		opacity: 0.3,
 	},
 });
