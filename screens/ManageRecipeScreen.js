@@ -75,16 +75,6 @@ function ManageRecipeScreen({ route, navigation }) {
 		navigation.setOptions({
 			title: isEditing ? "Edit Recipe" : "Add Recipe",
 			headerLeft: () => <BackButton onPress={backHandler} />,
-			headerRight: () => (
-				<TextButton
-					onPress={backHandler}
-					color="#008cffff"
-					size={18}
-					fontWeight="600"
-					style={{ marginRight: 5 }}
-					label="Done"
-				/>
-			),
 		});
 	}, [navigation, isEditing]);
 
