@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import RecipeDetails from "../RecipeDetail/RecipeDetails";
 
 const RecipeItem = ({ id, name, photo_url, brewer, type, brew_time }) => {
-	const navigation = useNavigation();
+	const navigation = useNavigation().getParent("recipesStack");
 
 	const selectRecipeHandler = () => {
 		navigation.navigate("RecipeDetail", { id: id });

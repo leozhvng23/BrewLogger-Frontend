@@ -52,15 +52,15 @@ const RecipesNavigator = () => {
 	];
 
 	const RecipesByBeansStackNavigator = () => (
-		<StackNavigator navigationList={recipesByBeansStack} />
+		<StackNavigator navigationList={recipesByBeansStack} id="recipesStack" />
 	);
 
 	const AllRecipesStackNavigator = () => (
-		<StackNavigator navigationList={allRecipesStack} />
+		<StackNavigator navigationList={allRecipesStack} id="recipesStack"/>
 	);
 
 	const FavoriteRecipesStackNavigator = () => (
-		<StackNavigator navigationList={favoriteRecipesStack} />
+		<StackNavigator navigationList={favoriteRecipesStack} id="recipesStack"/>
 	);
 
 	const drawerList = [

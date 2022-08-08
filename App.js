@@ -5,7 +5,9 @@ import "react-native-gesture-handler";
 import { Provider } from "react-redux";
 import { store } from "./store/redux/store";
 
-import RecipesNavigator from "./components/Navigation/RecipesNavigator";
+import MainNavigator from "./components/Navigation/MainNavigator";
+
+// import RecipesNavigator from "./components/Navigation/RecipesNavigator";
 
 // import FavoritesContextProvider from "./store/context/favorites-context";
 
@@ -16,7 +18,7 @@ export default function App() {
 			{/* <FavoritesContextProvider> */}
 			<Provider store={store}>
 				<NavigationContainer>
-					<RecipesNavigator />
+					<MainNavigator />
 				</NavigationContainer>
 			</Provider>
 			{/* </FavoritesContextProvider> */}

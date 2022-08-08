@@ -32,6 +32,7 @@ const DrawerNavigator = ({navigationList, drawerScreenOptions, backBehavior}) =>
 			// drawerContent={(props) => <DrawerContent {...props} />}
 			screenOptions={drawerScreenOptions}
 			backBehavior="initialRoute"
+			id="recipeDrawer"
 		>
 			{navigationList.map((item) => {
 				return (

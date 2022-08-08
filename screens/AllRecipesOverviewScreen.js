@@ -15,17 +15,21 @@ import { setRecipes } from "../store/redux/recipes";
 const AllRecipesOverviewScreen = () => {
 	const navigation = useNavigation();
 	const addRecipeHandler = () => {
-		navigation.navigate("ManageRecipe");
+		navigation.getParent("recipesStack").navigate("ManageRecipe");
 	};
 
 	useLayoutEffect(() => {
-		navigation.setOptions({
+		navigation.getParent("recipesStack").setOptions({
 			headerLeft: () => {
 				return (
 					<IconButton
 						icon="filter"
 						color="black"
-						onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+						onPress={() =>
+							navigation
+								.getParent("recipeDrawer")
+								.dispatch(DrawerActions.toggleDrawer())
+						}
 					/>
 				);
 			},

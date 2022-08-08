@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
 
-const StackNavigator = ({ navigationList }) => {
+const StackNavigator = ({ navigationList, id }) => {
 	return (
 		<Stack.Navigator
 			screenOptions={{
@@ -16,19 +16,20 @@ const StackNavigator = ({ navigationList }) => {
 				headerTintColor: "black",
 				contentStyle: { backgroundColor: "rgb(255,255,255)" },
 			}}
+			id={id}
 		>
 			{navigationList.map((item) => {
 				return (
 					<Stack.Screen
-                        key={item.name}
+						key={item.name}
 						name={item.name}
 						component={item.component}
 						options={{
 							title: item.title,
 							headerShown: item.headerShown,
-                            presentation: item.presentation,
+							presentation: item.presentation,
 							gestureEnabled: item.gestureEnabled,
-							headerLeft: item.headerLeft
+							headerLeft: item.headerLeft,
 						}}
 					/>
 				);

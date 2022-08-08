@@ -9,14 +9,17 @@ import ShareEditDelete from "../components/UIElements/Buttons/ShareEditDelete";
 import LoadingOverlay from "../components/UIElements/Overlays/LoadingOverlay";
 import ErrorOverlay from "../components/UIElements/Overlays/ErrorOverlay";
 import RecipeGuide from "../components/RecipeGuide/RecipeGuide";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { addFavorite, removeFavorite } from "../store/redux/favorites";
 import { getRecipeById } from "../util/http";
 import { setRecipeDetail } from "../store/redux/recipes";
 
-function RecipeDetailScreen({ route, navigation }) {
+function RecipeDetailScreen() {
 	// const [isFetching, setIsFetching] = useState(true);
 	// const [error, setError] = useState();
+	const navigation = useNavigation().getParent("recipesStack");
+	const route = useRoute();
 	const id = route.params.id;
 	const favoriteRecipeIds = useSelector((state) => state.favoriteRecipes.ids);
 	const recipeIsFavorite = favoriteRecipeIds.includes(id);

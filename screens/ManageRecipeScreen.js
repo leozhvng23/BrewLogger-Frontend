@@ -7,8 +7,11 @@ import TextButton from "../components/UIElements/Buttons/TextButton";
 import { getAllBrewersNames, getAllBeansNames, getAllGrindersNames } from "../util/http";
 import { setBrewersNames, setGrindersNames } from "../store/redux/equipments";
 import { setBeansNames } from "../store/redux/beans";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-function ManageRecipeScreen({ route, navigation }) {
+function ManageRecipeScreen() {
+	const navigation = useNavigation().getParent("recipesStack");
+	const route = useRoute();
 	const editedRecipeId = route.params?.id;
 	const isEditing = !!editedRecipeId;
 
