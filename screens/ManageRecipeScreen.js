@@ -5,7 +5,7 @@ import RecipeForm from "../components/RecipeForm";
 import BackButton from "../components/UIElements/Buttons/BackButton";
 import TextButton from "../components/UIElements/Buttons/TextButton";
 import { getAllBrewersNames, getAllBeansNames, getAllGrindersNames } from "../util/http";
-import { setBrewersNames, setGrindersNames } from '../store/redux/equipments'
+import { setBrewersNames, setGrindersNames } from "../store/redux/equipments";
 import { setBeansNames } from "../store/redux/beans";
 
 function ManageRecipeScreen({ route, navigation }) {
@@ -18,57 +18,64 @@ function ManageRecipeScreen({ route, navigation }) {
 		const fetchBrewers = async () => {
 			try {
 				const brewers = await getAllBrewersNames();
-				dispatch(setBrewersNames({ brewers: brewers}));
+				dispatch(setBrewersNames({ brewers: brewers }));
 			} catch (err) {
 				// setError("Could not fetch brewers.");
 			}
 			// setTimeout(() => setIsFetching(false), 2000);
 		};
-        const fetchGrinders = async () => {
-            try {
-                const grinders = await getAllGrindersNames();
-                dispatch(setGrindersNames({grinders: grinders}))
-            } catch (err) {
-                // setError("Could not fetch grinders.")
-            }
-        }
-        const fetchBeans = async () => {
-            try {
-                const beans = await getAllBeansNames();
-                dispatch(setBeansNames({beans: beans}));
-            } catch (err) {
-                // setError("Could not fetch beans.")
-            }
-        }
+		const fetchGrinders = async () => {
+			try {
+				const grinders = await getAllGrindersNames();
+				dispatch(setGrindersNames({ grinders: grinders }));
+			} catch (err) {
+				// setError("Could not fetch grinders.")
+			}
+		};
+		const fetchBeans = async () => {
+			try {
+				const beans = await getAllBeansNames();
+				dispatch(setBeansNames({ beans: beans }));
+			} catch (err) {
+				// setError("Could not fetch beans.")
+			}
+		};
 		fetchBrewers();
-        fetchGrinders();
-        fetchBeans();
+		fetchGrinders();
+		fetchBeans();
 	}, []);
 
-    const beans = useSelector((state) => state.beans.beans);
+	const beans = useSelector((state) => state.beans.beans);
 	const brewers = useSelector((state) => state.equipments.brewers);
-    const grinders = useSelector((state) => state.equipments.grinders);
-	const data = {"beans": beans, "brewers": brewers, "grinders": grinders};
+	const grinders = useSelector((state) => state.equipments.grinders);
+	const data = { beans: beans, brewers: brewers, grinders: grinders };
+
+	const initialValues = {
+		name: "",
+		description: "",
+		brew_time: "",
+		yield: "",
+		type: "",
+		bid: "",
+		bean_amount: "",
+		eid_brewer: "",
+		setting_brewer: "",
+		eid_grinder: "",
+		setting_grinder: "",
+		guide: "",
+	};
 
 	const submitHandler = (inputValues) => {
 		console.log(inputValues);
+		navigation.goBack();
 	};
 
 	// const doneHandler = () => {
-	// 	Alert.alert("Save changes?", "Are you sure to save this recipe?", [
-	// 		{ text: "Go back", style: "cancel", onPress: () => {} },
-	// 		{
-	// 			text: "Yes",
-	// 			style: "default",
-	// 			// If the user confirmed, then we dispatch the action we blocked earlier
-	// 			// This will continue the action that had triggered the removal of the screen
-	// 			onPress: submitHandler,
-	// 		},
-	// 	]);
+	//
 	// };
 
 	const backHandler = () => {
-    navigation.goBack();
+		navigation.goBack();
 	};
 
 	useLayoutEffect(() => {
@@ -78,7 +85,14 @@ function ManageRecipeScreen({ route, navigation }) {
 		});
 	}, [navigation, isEditing]);
 
-	return <RecipeForm navigation={navigation} onSubmit={submitHandler} data={data}/>;
+	return (
+		<RecipeForm
+			navigation={navigation}
+			onSubmit={submitHandler}
+			data={data}
+			initialValues={initialValues}
+		/>
+	);
 }
 
 export default ManageRecipeScreen;

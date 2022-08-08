@@ -39,29 +39,29 @@ const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit, data }) => {
 	});
 
 	const submitHandler = () => {
-		console.log(inputValues);
-		const guideArr = inputValues.guide
-		const submitValue = {
-			...inputValues,
-			["guide"]: guideArr.split("\n")	
+		const submitInput = () => {
+			const guideArr = inputValues.guide;
+			const submitValue = {
+				...inputValues,
+				["guide"]: guideArr.split("\n"),
+			};
+			setInputValues(initialValues);
+			onSubmit(submitValue);
 		};
-		onSubmit(submitValue);
+
+		Alert.alert("Save changes?", "Are you sure to save this recipe?", [
+			{ text: "Cancel", style: "cancel", onPress: () => {} },
+			{
+				text: "Yes",
+				style: "default",
+				// If the user confirmed, then we dispatch the action we blocked earlier
+				// This will continue the action that had triggered the removal of the screen
+				onPress: submitInput,
+			},
+		]);
 	};
 
-	const [inputValues, setInputValues] = useState({
-		name: "",
-		description: "",
-		brew_time: "",
-		yield: "",
-		type: "",
-		bid: "",
-		bean_amount: "",
-		eid_brewer: "",
-		setting_brewer: "",
-		eid_grinder: "",
-		setting_grinder: "",
-		guide: "",
-	});
+	const [inputValues, setInputValues] = useState(initialValues);
 
 	const hasUnsavedChanges =
 		Boolean(inputValues.name) ||
@@ -282,24 +282,18 @@ const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit, data }) => {
 						<Input
 							label="Brew Type"
 							textInputConfig={{
-								onChangeText: inputChangedHandler.bind(
-									this,
-									"type"
-								),
+								onChangeText: inputChangedHandler.bind(this, "type"),
 								value: inputValues.type,
-								placeholder:"Pour Over / Espresso"
+								placeholder: "Pour Over / Espresso",
 							}}
 						/>
 						<Input
 							label="Brew Guide"
 							textInputConfig={{
 								multiline: true,
-								onChangeText: inputChangedHandler.bind(
-									this,
-									"guide"
-								),
+								onChangeText: inputChangedHandler.bind(this, "guide"),
 								value: inputValues.guide,
-								placeholder:"(step 1)\n(step 2)\n(step 3)\n     ...   "
+								placeholder: "(step 1)\n(step 2)\n(step 3)\n     ...   ",
 							}}
 						/>
 					</View>
@@ -348,6 +342,6 @@ const styles = StyleSheet.create({
 		marginRight: 5,
 		backgroundColor: "blue",
 		width: 120,
-		padding:40
+		padding: 40,
 	},
 });
