@@ -18,7 +18,7 @@ import { setRecipeDetail } from "../store/redux/recipes";
 function RecipeDetailScreen() {
 	// const [isFetching, setIsFetching] = useState(true);
 	// const [error, setError] = useState();
-	const navigation = useNavigation().getParent("recipesStack");
+	const navigation = useNavigation();
 	const route = useRoute();
 	const id = route.params.id;
 	const favoriteRecipeIds = useSelector((state) => state.favoriteRecipes.ids);
@@ -146,7 +146,7 @@ export default RecipeDetailScreen;
 
 const styles = StyleSheet.create({
 	rootContainer: {
-		paddingBottom: 50,
+		paddingBottom: 100,
 	},
 	image: {
 		width: "100%",

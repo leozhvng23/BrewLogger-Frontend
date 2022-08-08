@@ -11,8 +11,11 @@ import LoadingOverlay from "../components/UIElements/Overlays/LoadingOverlay";
 import ErrorOverlay from "../components/UIElements/Overlays/ErrorOverlay";
 import { getRecipesByUserId } from "../util/http";
 import { setRecipes } from "../store/redux/recipes";
+import { useHeaderHeight } from '@react-navigation/elements';
 
 const AllRecipesOverviewScreen = () => {
+
+	const headerHeight = useHeaderHeight();
 	const navigation = useNavigation();
 	const addRecipeHandler = () => {
 		navigation.getParent("recipesStack").navigate("ManageRecipe");
@@ -69,9 +72,14 @@ const AllRecipesOverviewScreen = () => {
 		return <ErrorOverlay message={error} />;
 	}
 
-	return <RecipeList items={recipes} />;
+	return <RecipeList items={recipes} style={[styles.recipeList, {paddingTop: headerHeight}]}/>;
 };
 
 export default AllRecipesOverviewScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	recipeList: {
+		paddingBottom: 100,
+		paddingHorizontal: "3%",
+	},
+});

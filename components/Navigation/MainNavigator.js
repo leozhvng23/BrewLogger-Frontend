@@ -33,7 +33,7 @@ const MainNavigator = () => {
 				tabBarInactiveTintColor: "rgba(0,0,0,0.6)",
 				headerShown: false,
 				tabBarShowLabel: false,
-                tabBarBackground: () => <BlurView intensity={80} tint="light" style={{padding: 50}}/>,
+                tabBarBackground: () => <BlurView intensity={60} tint="light" style={{padding: 50}}/>,
                 tabBarStyle: {position: "absolute"}
 			})}
 		>

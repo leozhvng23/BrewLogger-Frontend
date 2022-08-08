@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import RecipeDetails from "../RecipeDetail/RecipeDetails";
 
 const RecipeItem = ({ id, name, photo_url, brewer, type, brew_time }) => {
-	const navigation = useNavigation().getParent("recipesStack");
+	const navigation = useNavigation();
 
 	const selectRecipeHandler = () => {
 		navigation.navigate("RecipeDetail", { id: id });
@@ -44,10 +44,10 @@ export default RecipeItem;
 const styles = StyleSheet.create({
 	recipeItem: {
 		margin: 16,
+		minWidth: 300,
 		borderRadius: 8,
 		overflow: Platform.OS === "android" ? "hidden" : "visible",
 		backgroundColor: "white",
-		elevation: 4,
 		shadowColor: "black",
 		shadowOpacity: 0.2,
 		shadowOffset: { width: 0, height: 0.5 },
@@ -58,17 +58,14 @@ const styles = StyleSheet.create({
 		opacity: 0.5,
 	},
 	image: {
-		flex: 1,
 		borderRadius: 8,
 		overflow: "hidden",
-		height: 200
 	},
 	innerContainer: {
-		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
 		backgroundColor: "rgba(255,255,255, 0.9)",
-		paddingHorizontal: "5%",
+		paddingHorizontal: 3,
 		borderRadius: 8,
 		marginTop: 135,
 		shadowColor: "black",
@@ -77,7 +74,7 @@ const styles = StyleSheet.create({
 		shadowRadius:6,
 	},
 	title: {
-		fontWeight: "bold",
+		fontWeight: "600",
 		textAlign: "center",
 		fontSize: 18,
 		marginTop: 8,

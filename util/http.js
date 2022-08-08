@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = "http://192.168.1.142:5001";
+const BACKEND_URL = "http://192.168.1.142:5500";
 const USERS_API = "/api/users";
 const RECIPES_API = "/api/recipes";
 const EQUIPMENTS_API = "/api/equipments";

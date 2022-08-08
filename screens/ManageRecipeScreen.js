@@ -10,7 +10,7 @@ import { setBeansNames } from "../store/redux/beans";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 function ManageRecipeScreen() {
-	const navigation = useNavigation().getParent("recipesStack");
+	const navigation = useNavigation();
 	const route = useRoute();
 	const editedRecipeId = route.params?.id;
 	const isEditing = !!editedRecipeId;
