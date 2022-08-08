@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +15,7 @@ const StackNavigator = ({ navigationList, id }) => {
 				headerBlurEffect: true,
 				headerTitleStyle: {},
 				headerTintColor: "black",
-				contentStyle: { backgroundColor: "rgb(255,255,255)" },
+				contentStyle: { backgroundColor: "rgb(255,255,255)"},
 			}}
 			id={id}
 		>

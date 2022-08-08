@@ -1,11 +1,12 @@
 import { Text, View, StyleSheet } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator, useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
 import "react-native-gesture-handler";
 import {RecipesNavigator} from "./RecipesNavigator";
 import { HomeNavigator } from "./HomeNavigator";
 import { ProfileNavigator } from "./ProfileNavigator";
+import {BlurView} from 'expo-blur'
 
 const Tab = createBottomTabNavigator();
 
@@ -32,6 +33,8 @@ const MainNavigator = () => {
 				tabBarInactiveTintColor: "rgba(0,0,0,0.6)",
 				headerShown: false,
 				tabBarShowLabel: false,
+                tabBarBackground: () => <BlurView intensity={80} tint="light" style={{padding: 50}}/>,
+                tabBarStyle: {position: "absolute"}
 			})}
 		>
 			<Tab.Screen name="HomeNav" component={HomeNavigator} />

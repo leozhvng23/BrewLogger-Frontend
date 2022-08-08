@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 
 import StackNavigator from "./StackNavigator";
-import ProfileScreen from "../../screens/HomeScreen";
+import ProfileScreen from "../../screens/ProfileScreen";
 
 
 const profileStack = [
