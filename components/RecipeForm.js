@@ -40,9 +40,10 @@ const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit, data }) => {
 
 	const submitHandler = () => {
 		console.log(inputValues);
+		const guideArr = inputValues.guide
 		const submitValue = {
-			name: inputValues.name,
-			description: inputValues.description,
+			...inputValues,
+			["guide"]: guideArr.split("\n")	
 		};
 		onSubmit(submitValue);
 	};
@@ -276,6 +277,29 @@ const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit, data }) => {
 									"setting_grinder"
 								),
 								value: inputValues.setting_grinder,
+							}}
+						/>
+						<Input
+							label="Brew Type"
+							textInputConfig={{
+								onChangeText: inputChangedHandler.bind(
+									this,
+									"type"
+								),
+								value: inputValues.type,
+								placeholder:"Pour Over / Espresso"
+							}}
+						/>
+						<Input
+							label="Brew Guide"
+							textInputConfig={{
+								multiline: true,
+								onChangeText: inputChangedHandler.bind(
+									this,
+									"guide"
+								),
+								value: inputValues.guide,
+								placeholder:"(step 1)\n(step 2)\n(step 3)\n     ...   "
 							}}
 						/>
 					</View>
