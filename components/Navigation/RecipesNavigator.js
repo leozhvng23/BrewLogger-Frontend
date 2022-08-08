@@ -9,89 +9,88 @@ import FavoritesScreen from "../../screens/FavoritesScreen";
 import RecipesOverviewScreen from "../../screens/RecipesOverviewScreen";
 import RecipeDetailScreen from "../../screens/RecipeDetailScreen";
 import ManageRecipeScreen from "../../screens/ManageRecipeScreen";
-import BackButton from "../UIElements/Buttons/BackButton";
 
-const RecipesNavigator = () => {
-	const recipeDetailStack = [
-		{
-			name: "RecipeDetail",
-			component: RecipeDetailScreen,
-			title: "Recipe Detail",
-		},
-        {
-            name: "ManageRecipe",
-            component: ManageRecipeScreen,
-            presentation: "modal",
-			gestureEnabled: "false",
-			// headerLeft: () => <BackButton/>
-        }
-	];
+const recipeDetailStack = [
+	{
+		name: "RecipeDetail",
+		component: RecipeDetailScreen,
+		title: "Recipe Detail",
+	},
+	{
+		name: "ManageRecipe",
+		component: ManageRecipeScreen,
+		presentation: "modal",
+		gestureEnabled: "false",
+		// headerLeft: () => <BackButton/>
+	},
+];
 
-	const recipesByBeansStack = [
-		{ name: "All Beans", component: BeansScreen, title: "All Beans" },
-		{ name: "RecipesOverview", component: RecipesOverviewScreen },
-		...recipeDetailStack,
-	];
+const recipesByBeansStack = [
+	{ name: "All Beans", component: BeansScreen, title: "All Beans" },
+	{ name: "RecipesOverview", component: RecipesOverviewScreen },
+	...recipeDetailStack,
+];
 
-	const allRecipesStack = [
-		{
-			name: "All Recipes",
-			component: AllRecipesOverviewScreen,
-			title: "All Recipes",
-		},
-		...recipeDetailStack,
-	];
+const allRecipesStack = [
+	{
+		name: "All Recipes",
+		component: AllRecipesOverviewScreen,
+		title: "All Recipes",
+	},
+	...recipeDetailStack,
+];
 
-	const favoriteRecipesStack = [
-		{
-			name: "Favorite Recipes",
-			component: FavoritesScreen,
-			title: "Favorite Recipes",
-		},
-		...recipeDetailStack,
-	];
+const favoriteRecipesStack = [
+	{
+		name: "Favorite Recipes",
+		component: FavoritesScreen,
+		title: "Favorite Recipes",
+	},
+	...recipeDetailStack,
+];
 
-	const RecipesByBeansStackNavigator = () => (
-		<StackNavigator navigationList={recipesByBeansStack} id="recipesStack" />
-	);
+const RecipesByBeansStackNavigator = () => (
+	<StackNavigator navigationList={recipesByBeansStack} id="recipesStack" />
+);
 
-	const AllRecipesStackNavigator = () => (
-		<StackNavigator navigationList={allRecipesStack} id="recipesStack"/>
-	);
+const AllRecipesStackNavigator = () => (
+	<StackNavigator navigationList={allRecipesStack} id="recipesStack" />
+);
 
-	const FavoriteRecipesStackNavigator = () => (
-		<StackNavigator navigationList={favoriteRecipesStack} id="recipesStack"/>
-	);
+const FavoriteRecipesStackNavigator = () => (
+	<StackNavigator navigationList={favoriteRecipesStack} id="recipesStack" />
+);
 
-	const drawerList = [
-		{
-			name: "Recipes",
-			component: AllRecipesStackNavigator,
-			title: "All Recipes",
-			iconName: "logo-buffer",
-		},
-		{
-			name: "RecipesByBeans",
-			component: RecipesByBeansStackNavigator,
-			title: "By Beans",
-			iconName: "list",
-		},
-		{
-			name: "Favorites",
-			component: FavoriteRecipesStackNavigator,
-			title: "Favorites",
-			iconName: "star",
-		},
-	];
+const drawerList = [
+	{
+		name: "Recipes",
+		component: AllRecipesStackNavigator,
+		title: "All Recipes",
+		iconName: "logo-buffer",
+	},
+	{
+		name: "RecipesByBeans",
+		component: RecipesByBeansStackNavigator,
+		title: "By Beans",
+		iconName: "list",
+	},
+	{
+		name: "Favorites",
+		component: FavoriteRecipesStackNavigator,
+		title: "Favorites",
+		iconName: "star",
+	},
+];
+
+export function RecipesNavigator() {
 	return (
 		<DrawerNavigator
 			navigationList={drawerList}
 			drawerScreenOptions={styles.drawer}
+			id="recipesDrawer"
 		/>
 	);
-};
-
-export default RecipesNavigator;
+}
 
 const styles = StyleSheet.create({
 	drawer: {
@@ -116,6 +115,6 @@ const styles = StyleSheet.create({
 			height: "90%",
 			justifyContent: "center",
 		},
-        swipeEnabled: false
+		swipeEnabled: false,
 	},
 });
