@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 
 import {
 	StyleSheet,
@@ -14,7 +14,7 @@ import {
 import Input from "./UIElements/Form/Input";
 import InputSelect from "./UIElements/Form/InputSelect";
 import SearchModal from "./UIElements/Form/SearchModal";
-import TextButton from "../components/UIElements/Buttons/TextButton";
+import BackButton from "./UIElements/Buttons/BackButton";
 
 const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit, data }) => {
 	// const [error, setError] = useState();
@@ -22,6 +22,7 @@ const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit, data }) => {
 	const brewers = data.brewers;
 	const grinders = data.grinders;
 
+	const [inputValues, setInputValues] = useState(initialValues);
 	const [beansModalVisible, setBeansModalVisible] = useState(false);
 	const [brewersModalVisible, setBrewersModalVisible] = useState(false);
 	const [grindersModalVisible, setGrindersModalVisible] = useState(false);
@@ -61,45 +62,45 @@ const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit, data }) => {
 		]);
 	};
 
-	const [inputValues, setInputValues] = useState(initialValues);
 
-	const hasUnsavedChanges =
-		Boolean(inputValues.name) ||
-		Boolean(inputValues.description) ||
-		Boolean(inputValues.brew_time) ||
-		Boolean(inputValues.yield) ||
-		Boolean(inputValues.type) ||
-		Boolean(inputValues.bid) ||
-		Boolean(inputValues.bean_amount) ||
-		Boolean(inputValues.eid_brewer) ||
-		Boolean(inputValues.setting_brewer) ||
-		Boolean(inputValues.eid_grinder) ||
-		Boolean(inputValues.setting_grinder) ||
-		Boolean(inputValues.guide.length);
+	// useEffect(
+	// 	() =>
+	// 		navigation.addListener("beforeRemove", (e) => {
 
-	useEffect(
-		() =>
-			navigation.addListener("beforeRemove", (e) => {
-				if (!hasUnsavedChanges) {
-					// If we don't have unsaved changes, then we don't need to do anything
-					return;
-				}
+	// 			const hasUnsavedChanges = 
+	// 			Boolean(inputValues.name) ||
+	// 			Boolean(inputValues.description) ||
+	// 			Boolean(inputValues.brew_time) ||
+	// 			Boolean(inputValues.yield) ||
+	// 			Boolean(inputValues.type) ||
+	// 			Boolean(inputValues.bid) ||
+	// 			Boolean(inputValues.bean_amount) ||
+	// 			Boolean(inputValues.eid_brewer) ||
+	// 			Boolean(inputValues.setting_brewer) ||
+	// 			Boolean(inputValues.eid_grinder) ||
+	// 			Boolean(inputValues.setting_grinder) ||
+	// 			Boolean(inputValues.guide);
 
-				// Prevent default behavior of leaving the screen
-				e.preventDefault();
+	// 			if (!hasUnsavedChanges) {
+	// 				// If we don't have unsaved changes, then we don't need to do anything
+	// 				return;
+	// 			}
 
-				// Prompt the user before leaving the screen
-				Alert.alert("Discard changes?", "You have unsaved changes.", [
-					{ text: "Cancel", style: "cancel", onPress: () => {} },
-					{
-						text: "Discard",
-						style: "destructive",
-						onPress: () => navigation.dispatch(e.data.action),
-					},
-				]);
-			}),
-		[navigation, hasUnsavedChanges]
-	);
+	// 			// Prevent default behavior of leaving the screen
+	// 			e.preventDefault();
+
+	// 			// Prompt the user before leaving the screen
+	// 			Alert.alert("Discard changes?", "You have unsaved changes.", [
+	// 				{ text: "Cancel", style: "cancel", onPress: () => {} },
+	// 				{
+	// 					text: "Discard",
+	// 					style: "destructive",
+	// 					onPress: () => navigation.dispatch(e.data.action),
+	// 				},
+	// 			]);
+	// 		}),
+	// 	[navigation]
+	// );
 
 	const inputChangedHandler = (inputIdentifier, enteredValue) => {
 		setInputValues((curInputValues) => {

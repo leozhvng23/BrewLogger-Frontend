@@ -73,12 +73,15 @@ function ManageRecipeScreen() {
 		navigation.goBack();
 	};
 
-	// const doneHandler = () => {
-	//
-	// };
-
 	const backHandler = () => {
-		navigation.goBack();
+		Alert.alert("Discard changes?", "This cannot be undone.", [
+			{ text: "Cancel", style: "cancel", onPress: () => {} },
+			{
+				text: "Discard",
+				style: "destructive",
+				onPress: () => navigation.goBack(),
+			},
+		]);
 	};
 
 	useLayoutEffect(() => {
