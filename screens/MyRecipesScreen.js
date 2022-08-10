@@ -10,10 +10,11 @@ import RecipeList from "../components/RecipesList/RecipeList";
 import LoadingOverlay from "../components/UIElements/Overlays/LoadingOverlay";
 import ErrorOverlay from "../components/UIElements/Overlays/ErrorOverlay";
 import { getRecipesByUserId } from "../util/http";
-import { setRecipes } from "../store/redux/recipes";
+import { setMyRecipes } from "../store/redux/recipes";
 import { useHeaderHeight } from '@react-navigation/elements';
+import { selectMyRecipes } from "../util/select";
 
-const AllRecipesOverviewScreen = () => {
+const MyRecipesScreen = () => {
 
 	const headerHeight = useHeaderHeight();
 	const navigation = useNavigation();
@@ -50,7 +51,7 @@ const AllRecipesOverviewScreen = () => {
 			setIsFetching(true);
 			try {
 				const [recipes, ids] = await getRecipesByUserId(uid);
-				dispatch(setRecipes({ recipes: recipes, ids: ids }));
+				dispatch(setMyRecipes({ recipes: recipes, ids: ids }));
 			} catch (err) {
 				setError("Could not fetch recipes.");
 			}
@@ -60,7 +61,8 @@ const AllRecipesOverviewScreen = () => {
 		fetchRecipes();
 	}, []);
 
-	const recipes = useSelector((state) => state.recipes.recipes);
+	const recipes = selectMyRecipes();
+	// const recipes = Object.values(useSelector((state) => state.recipes.recipes))
 
 	if (isFetching) {
 		return <LoadingOverlay />;
@@ -75,7 +77,7 @@ const AllRecipesOverviewScreen = () => {
 	return <RecipeList items={recipes} style={[styles.recipeList, {paddingTop: headerHeight}]}/>;
 };
 
-export default AllRecipesOverviewScreen;
+export default MyRecipesScreen;
 
 const styles = StyleSheet.create({
 	recipeList: {

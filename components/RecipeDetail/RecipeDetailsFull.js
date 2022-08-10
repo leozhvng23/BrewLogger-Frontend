@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
 import AttributeItem from "./AttributeItem";
-import { formatBrewTime } from "../../util/time";
 
 // type = {selectedRecipe.type}
 // 					yield = {selectedRecipe.yield}
@@ -32,7 +31,7 @@ const RecipeDetailsFull = (props) => {
 		<View style={styles.details}>
 			{user_name && <AttributeItem data={user_name} id={uid} style={styles.detailItem} />}
 			<AttributeItem data={type} style={styles.detailItem} />
-			<AttributeItem data={formatBrewTime(brew_time)} style={styles.detailItem} />
+			<AttributeItem data={brew_time} style={styles.detailItem} />
 			<AttributeItem data={bean_name} id={bid} style={styles.detailItem} />
 			<AttributeItem data={brewer} id={brewer_eid} style={styles.detailItem} />
 			<AttributeItem data={grinder} id={grinder_eid} style={styles.detailItem} />

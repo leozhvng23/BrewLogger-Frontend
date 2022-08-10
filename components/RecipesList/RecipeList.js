@@ -20,7 +20,7 @@ const RecipeList = ({ items, style, horizontal, showsHorizontalScrollIndicator }
 
 	return (
 			<FlatList
-				data={Object.values(items)}
+				data={items}
 				keyExtractor={(item) => item.id}
 				renderItem={renderRecipe}
 				scrollsToTop

@@ -37,17 +37,74 @@ export async function getRecipesByUserId(uid) {
 		recipes[response.data[key].id] = recipeObj;
 		ids.push(response.data[key].id);
 	}
-	console.log(recipes);
 	return [recipes, ids];
 }
 
-// export async function getRecipeById(id) {
-//     console.log(BACKEND_URL + RECIPES_API + "/" + id);
-//     const response = await axios.get(BACKEND_URL + RECIPES_API + "/" + id);
-//     console.log(response.data)
-//     const recipe = response.data;
-//     return recipe;
-// }
+export async function getRecipeById(id) {
+	console.log(BACKEND_URL + RECIPES_API + "/" + id);
+	const response = await axios.get(BACKEND_URL + RECIPES_API + "/" + id);
+	const recipe = response.data;
+	console.log(recipe);
+	return recipe;
+}
+
+export async function getPopularRecipes() {
+	const recipes = {};
+	const ids = [];
+	console.log(BACKEND_URL + RECIPES_API + "/popular/");
+	const response = await axios.get(BACKEND_URL + RECIPES_API + "/popular/");
+	for (const key in response.data) {
+		const recipeObj = {
+			id: response.data[key].id,
+			name: response.data[key].name,
+			description: response.data[key].description,
+			photo_url: response.data[key].photo_url,
+			type: response.data[key].type,
+			bean_name: response.data[key].bean_name,
+			brew_time: response.data[key].brew_time,
+			bid: response.data[key].bid,
+			user_name: response.data[key].user_name,
+			uid: response.data[key].uid,
+			created_on: response.data[key].created_on,
+			brewer: response.data[key].brewer,
+			brewer_eid: response.data[key].brewer_eid,
+			num_of_comments: response.data[key].num_of_comments,
+			num_of_likes: response.data[key].num_of_likes,
+		};
+		recipes[response.data[key].id] = recipeObj;
+		ids.push(response.data[key].id);
+	}
+	return [recipes, ids];
+}
+
+export async function getFeedRecipes(uid) {
+	const recipes = {};
+	const ids = [];
+	console.log(BACKEND_URL + RECIPES_API + "/feed/" + uid);
+	const response = await axios.get(BACKEND_URL + RECIPES_API + "/feed/" + uid);
+
+	for (const key in response.data) {
+		const recipeObj = {
+			id: response.data[key].id,
+			name: response.data[key].name,
+			description: response.data[key].description,
+			photo_url: response.data[key].photo_url,
+			type: response.data[key].type,
+			bean_name: response.data[key].bean_name,
+			bid: response.data[key].bid,
+			user_name: response.data[key].user_name,
+			uid: response.data[key].uid,
+			created_on: response.data[key].created_on,
+			brewer: response.data[key].brewer,
+			brewer_eid: response.data[key].brewer_eid,
+			num_of_comments: response.data[key].num_of_comments,
+			num_of_likes: response.data[key].num_of_likes,
+		};
+		recipes[response.data[key].id] = recipeObj;
+		ids.push(response.data[key].id);
+	}
+	return [recipes, ids];
+}
 
 export async function getAllBeansNames() {
 	const beans = {};
@@ -58,46 +115,46 @@ export async function getAllBeansNames() {
 		const beanObj = {
 			id: response.data[key].bid,
 			name: response.data[key].name,
-            detail: response.data[key].roaster_name,
+			detail: response.data[key].roaster_name,
 			roaster_name: response.data[key].roaster_name,
 			rid: response.data[key].rid,
 		};
 		beans[response.data[key].bid] = beanObj;
 	}
-	console.log(beans);
-    return beans;
+	// console.log(beans);
+	return beans;
 }
 
 export async function getAllBrewersNames() {
-    const brewers = {};
-    console.log(BACKEND_URL + EQUIPMENTS_API + "/brewers");
+	const brewers = {};
+	console.log(BACKEND_URL + EQUIPMENTS_API + "/brewers");
 	const response = await axios.get(BACKEND_URL + EQUIPMENTS_API + "/brewers");
-    
-    for (const key in response.data) {
+
+	for (const key in response.data) {
 		const brewerObj = {
 			id: response.data[key].eid,
 			name: response.data[key].name,
-		    detail: response.data[key].brand,
+			detail: response.data[key].brand,
 		};
 		brewers[response.data[key].eid] = brewerObj;
 	}
-	console.log(brewers);
-    return brewers;
+	// console.log(brewers);
+	return brewers;
 }
 
 export async function getAllGrindersNames() {
-    const grinders = {}
-    console.log(BACKEND_URL + + EQUIPMENTS_API + "/grinders");
+	const grinders = {};
+	console.log(BACKEND_URL + +EQUIPMENTS_API + "/grinders");
 	const response = await axios.get(BACKEND_URL + EQUIPMENTS_API + "/grinders");
-  
-    for (const key in response.data) {
+
+	for (const key in response.data) {
 		const grinderObj = {
 			id: response.data[key].eid,
 			name: response.data[key].name,
-		    detail: response.data[key].brand,
+			detail: response.data[key].brand,
 		};
 		grinders[response.data[key].eid] = grinderObj;
 	}
-	console.log(grinders);
-    return grinders;
+	// console.log(grinders);
+	return grinders;
 }

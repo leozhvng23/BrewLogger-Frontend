@@ -3,7 +3,7 @@ import "react-native-gesture-handler";
 
 import DrawerNavigator from "./DrawerNavigator";
 import StackNavigator from "./StackNavigator";
-import AllRecipesOverviewScreen from "../../screens/AllRecipesOverviewScreen";
+import MyRecipesScreen from "../../screens/MyRecipesScreen";
 import BeansScreen from "../../screens/BeansScreen";
 import FavoritesScreen from "../../screens/FavoritesScreen";
 import RecipesOverviewScreen from "../../screens/RecipesOverviewScreen";
@@ -33,9 +33,9 @@ const recipesByBeansStack = [
 
 const allRecipesStack = [
 	{
-		name: "All Recipes",
-		component: AllRecipesOverviewScreen,
-		title: "All Recipes",
+		name: "My Recipes",
+		component: MyRecipesScreen,
+		title: "My Recipes",
 	},
 	...recipeDetailStack,
 ];
@@ -65,7 +65,7 @@ const drawerList = [
 	{
 		name: "Recipes",
 		component: AllRecipesStackNavigator,
-		title: "All Recipes",
+		title: "My Recipes",
 		iconName: "logo-buffer",
 	},
 	{
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 		headerTitleStyle: {},
 		headerTintColor: "black",
 		overlayColor: "transparent",
-		drawerStyle: { width: 160 },
+		drawerStyle: { width: 180 },
 		drawerActiveBackgroundColor: "transparent",
 		drawerActiveTintColor: "black",
 		drawerInactiveTintColor: "rgba(0,0,0,0.3)",
@@ -113,7 +113,9 @@ const styles = StyleSheet.create({
 		},
 		drawerContentContainerStyle: {
 			height: "90%",
+			marginLeft: 10,
 			justifyContent: "center",
+			
 		},
 		swipeEnabled: false,
 	},

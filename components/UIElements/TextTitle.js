@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { FlipInEasyX } from "react-native-reanimated";
 
 const TextTitle = ({ children, style, textStyle }) => {
 	return (
