@@ -32,7 +32,7 @@ const RecipeDetailScreen = ({navigation, route}) => {
 		} else {
 			dispatch(addFavorite({ id: id }));
 		}
-	});
+	}, [recipeIsFavorite]);
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -40,7 +40,7 @@ const RecipeDetailScreen = ({navigation, route}) => {
 				return (
 					<IconButton
 						icon={recipeIsFavorite ? "ios-star" : "ios-star-outline"}
-						color="black"
+						color={recipeIsFavorite ? "orange" : "black"}
 						onPress={changeFavoriteStatusHandler}
 					/>
 				);
