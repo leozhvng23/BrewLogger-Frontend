@@ -12,7 +12,7 @@ import ErrorOverlay from "../components/UIElements/Overlays/ErrorOverlay";
 import { getRecipesByUserId } from "../util/http";
 import { setMyRecipes } from "../store/redux/recipes";
 import { useHeaderHeight } from '@react-navigation/elements';
-import { selectMyRecipes } from "../util/select";
+import { selectMyRecipes } from "../util/selectors";
 
 const MyRecipesScreen = () => {
 

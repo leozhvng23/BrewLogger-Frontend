@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect, useState } from "react";
+import React, { useLayoutEffect, useEffect, useState, useCallback } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Dimensions, View, Text, FlatList } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,9 +10,9 @@ import TextTitle from "../components/UIElements/TextTitle";
 import LoadingOverlay from "../components/UIElements/Overlays/LoadingOverlay";
 import ErrorOverlay from "../components/UIElements/Overlays/ErrorOverlay";
 import PostsList from "../components/PostsList/PostsList";
-import { getFeedRecipes, getPopularRecipes, getRecipesByUserId } from "../util/http";
-import { selectFeedRecipes, selectPopularRecipes } from "../util/select";
-import { setFeedRecipes, setPopularRecipes, setRecipes } from "../store/redux/recipes";
+import { getFeedRecipes, getPopularRecipes } from "../util/http";
+import { selectFeedRecipes, selectPopularRecipes } from "../util/selectors";
+import { setFeedRecipes, setPopularRecipes } from "../store/redux/recipes";
 import { useHeaderHeight } from "@react-navigation/elements";
 
 
@@ -41,28 +41,27 @@ const HomeScreen = ({navigation}) => {
 		});
 	}, [navigation]);
 
+    const fetchRecipes = useCallback(async () => {
+        setIsFetching(true);
+        try {
+            const [recipes, ids] = await getPopularRecipes();
+            // console.log(recipes);
+            dispatch(setPopularRecipes({ recipes: recipes, ids: ids }));
+        } catch (err) {
+            setError("Could not fetch popular recipes.");
+        }
+        try {
+            const [recipes, ids] = await getFeedRecipes(uid);
+            dispatch(setFeedRecipes({ recipes: recipes, ids: ids}));
+        } catch (err) {
+            setError("Could not fetch feed recipes.");
+        }
+        setIsFetching(false);
+        // setTimeout(() => setIsFetching(false), 2000); 
+    }, [])
 
 
 	useEffect(() => {
-		const fetchRecipes = async () => {
-			setIsFetching(true);
-			try {
-				const [recipes, ids] = await getPopularRecipes();
-                // console.log(recipes);
-				dispatch(setPopularRecipes({ recipes: recipes, ids: ids }));
-			} catch (err) {
-				setError("Could not fetch popular recipes.");
-			}
-            try {
-				const [recipes, ids] = await getFeedRecipes(uid);
-				dispatch(setFeedRecipes({ recipes: recipes, ids: ids}));
-			} catch (err) {
-				setError("Could not fetch feed recipes.");
-			}
-			setIsFetching(false);
-			// setTimeout(() => setIsFetching(false), 2000); 
-		};
-        
         fetchRecipes();
 	}, []);
 
