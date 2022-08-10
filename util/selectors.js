@@ -5,6 +5,7 @@ const selectRecipes = (state) => state.recipes.recipes;
 const selectPopularIds = (state) => state.recipes.popularIds;
 const selectFeedIds = (state) => state.recipes.feedIds;
 const selectMyIds = (state) => state.recipes.myIds;
+const selectFavoriteIds = (state) => state.favoriteRecipes.ids;
 
 const selectPopular = createSelector(
 	[selectRecipes, selectPopularIds],
@@ -33,6 +34,17 @@ const selectMy = createSelector([selectRecipes, selectMyIds], (recipes, myIds) =
 	return selectedRecipes;
 });
 
+const selectFavorite = createSelector(
+	[selectRecipes, selectFavoriteIds],
+	(recipes, favoriteIds) => {
+		const selectedRecipes = [];
+		favoriteIds.map((id) => {
+			selectedRecipes.push(recipes[id]);
+		});
+		return selectedRecipes;
+	}
+);
+
 export function selectPopularRecipes() {
 	return useSelector((state) => selectPopular(state));
 }
@@ -43,4 +55,8 @@ export function selectFeedRecipes() {
 
 export function selectMyRecipes() {
 	return useSelector((state) => selectMy(state));
+}
+
+export function selectFavoriteRecipes() {
+	return useSelector((state) => selectFavorite(state));
 }

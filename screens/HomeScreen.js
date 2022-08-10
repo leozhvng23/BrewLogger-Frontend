@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useEffect, useState, useCallback } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Dimensions, View, Text, FlatList } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 

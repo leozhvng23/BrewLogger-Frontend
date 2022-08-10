@@ -1,19 +1,16 @@
-import { useLayoutEffect } from "react";
+import { useCallback, useLayoutEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
-import { useNavigation, DrawerActions } from "@react-navigation/native";
-// import { useContext } from 'react';
+import { DrawerActions } from "@react-navigation/native";
+import { useHeaderHeight } from "@react-navigation/elements";
 
 import IconButton from "../components/UIElements/Buttons/IconButton";
 import RecipeList from "../components/RecipesList/RecipeList";
-// import { FavoritesContext } from '../store/context/favorites-context';
-import { RECIPES } from "../data/dummy";
+import { selectFavoriteRecipes } from "../util/selectors";
 
-function FavoritesScreen() {
-	//   const favoriteRecipesCtx = useContext(FavoritesContext);
-	const navigation = useNavigation();
+const FavoritesScreen = ({ navigation }) => {
+	const headerHeight = useHeaderHeight();
 
-	useLayoutEffect(() => {
+	const setHeader = useCallback(() => {
 		navigation.setOptions({
 			headerLeft: () => {
 				return (
@@ -25,12 +22,13 @@ function FavoritesScreen() {
 				);
 			},
 		});
+	}, []);
+
+	useLayoutEffect(() => {
+		setHeader();
 	}, [navigation]);
-	
-    const favoriteRecipeIds = useSelector(state => state.favoriteRecipes.ids)
-	const favoriteRecipes = RECIPES.filter((recipe) =>
-		favoriteRecipeIds.includes(recipe.id)
-	);
+
+	const favoriteRecipes = selectFavoriteRecipes();
 
 	if (favoriteRecipes.length === 0) {
 		return (
@@ -40,8 +38,13 @@ function FavoritesScreen() {
 		);
 	}
 
-	return <RecipeList items={favoriteRecipes} />;
-}
+	return (
+		<RecipeList
+			items={favoriteRecipes}
+			style={[styles.recipeList, { paddingTop: headerHeight }]}
+		/>
+	);
+};
 
 export default FavoritesScreen;
 
@@ -55,5 +58,9 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: "500",
 		color: "rgba(0,0,0,0.3)",
+	},
+	recipeList: {
+		paddingBottom: 100,
+		paddingHorizontal: "3%",
 	},
 });

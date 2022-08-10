@@ -1,4 +1,4 @@
-import { useLayoutEffect, useEffect, useState } from "react";
+import { useLayoutEffect, useEffect, useState, useCallback } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, Alert } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,32 +9,30 @@ import ShareEditDelete from "../components/UIElements/Buttons/ShareEditDelete";
 import LoadingOverlay from "../components/UIElements/Overlays/LoadingOverlay";
 import ErrorOverlay from "../components/UIElements/Overlays/ErrorOverlay";
 import RecipeGuide from "../components/RecipeGuide/RecipeGuide";
-import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { addFavorite, removeFavorite } from "../store/redux/favorites";
 import { getRecipeById } from "../util/http";
 import { setRecipeDetail } from "../store/redux/recipes";
 
-function RecipeDetailScreen() {
+const RecipeDetailScreen = ({navigation, route}) => {
 	const [isFetching, setIsFetching] = useState(true);
 	const [error, setError] = useState();
-	const navigation = useNavigation();
-	const route = useRoute();
-	const id = route.params.id;
-	const favoriteRecipeIds = useSelector((state) => state.favoriteRecipes.ids);
-	const recipeIsFavorite = favoriteRecipeIds.includes(id);
-	const fetchedRecipeIds = useSelector((state) => state.recipes.fetchedIds);
-	const recipeIsFetched = fetchedRecipeIds.includes(id);
 	const dispatch = useDispatch();
 	const headerHeight = useHeaderHeight();
+	const favoriteRecipeIds = useSelector((state) => state.favoriteRecipes.ids);
+	const fetchedRecipeIds = useSelector((state) => state.recipes.fetchedIds);
 
-	const changeFavoriteStatusHandler = () => {
+	const id = route.params.id;
+	const recipeIsFavorite = favoriteRecipeIds.includes(id)
+	const recipeIsFetched = fetchedRecipeIds.includes(id)
+
+	const changeFavoriteStatusHandler = useCallback(() => {
 		if (recipeIsFavorite) {
 			dispatch(removeFavorite({ id: id }));
 		} else {
 			dispatch(addFavorite({ id: id }));
 		}
-	};
+	});
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -50,18 +48,19 @@ function RecipeDetailScreen() {
 		});
 	}, [navigation, changeFavoriteStatusHandler]);
 
+	const fetchRecipe = useCallback(async () => {
+		setIsFetching(true);
+		try {
+			const recipeDetail = await getRecipeById(id);
+			dispatch(setRecipeDetail({ id: id, recipeDetail: recipeDetail }));
+		} catch (err) {
+			setError("Could not fetch recipe detail.");
+		}
+		setIsFetching(false);
+		// setTimeout(() => setIsFetching(false), 2000);
+	});
+
 	useEffect(() => {
-		const fetchRecipe = async () => {
-			setIsFetching(true);
-			try {
-				const recipeDetail = await getRecipeById(id);
-				dispatch(setRecipeDetail({ id: id, recipeDetail: recipeDetail }));
-			} catch (err) {
-				setError("Could not fetch recipe detail.");
-			}
-			setIsFetching(false);
-			// setTimeout(() => setIsFetching(false), 2000);
-		};
 		recipeIsFetched ? setIsFetching(false) : fetchRecipe();
 	}, []);
 
@@ -129,7 +128,7 @@ function RecipeDetailScreen() {
 					grinder_eid={selectedRecipe.grinder_eid}
 				/>
 				<Text style={styles.description}>{selectedRecipe.description}</Text>
-				<RecipeGuide guide={selectedRecipe.guide} style={styles.guide}/>
+				<RecipeGuide guide={selectedRecipe.guide} style={styles.guide} />
 				<View style={styles.buttonsBar}>
 					<ShareEditDelete
 						onDeleteData={deleteDataHandler}
@@ -172,7 +171,7 @@ const styles = StyleSheet.create({
 	buttonsBar: {
 		marginTop: "10%",
 	},
-	guide:{
-		marginTop: 10
-	}
+	guide: {
+		marginTop: 10,
+	},
 });
