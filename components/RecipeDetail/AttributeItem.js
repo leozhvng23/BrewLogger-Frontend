@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 
-const AttributeItem = ({ icon, data, id, style, color }) => {
+const AttributeItem = ({ icon, data, id, style, color, textStyle, onPress }) => {
 	return (
-		<View style={[styles.container, style]}>
-			<Text style={styles.text}>{data}</Text>
-		</View>
+		<Pressable onPress={onPress} style={({ pressed }) => pressed && styles.pressed}>
+			<View style={[styles.container, style]}>
+				<Text style={[styles.text, textStyle]}>{data}</Text>
+			</View>
+		</Pressable>
 	);
 };
 
@@ -13,12 +15,15 @@ export default AttributeItem;
 const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "rgba(0,0,0,0.1)",
-        paddingHorizontal: 15,
-        paddingVertical: 8,
-        borderRadius: 20
+		paddingHorizontal: 15,
+		paddingVertical: 8,
+		borderRadius: "25%",
 	},
 	text: {
 		fontSize: 14,
-        fontWeight: "500"
+		fontWeight: "500",
 	},
+	pressed:{
+		opacity: 0.5,
+	}
 });

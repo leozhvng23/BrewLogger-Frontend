@@ -7,9 +7,9 @@ const Avatar = ({imgUrl, style}) => {
 			<Image
 				style={styles.image}
 				source={{
-					uri: "https://icon-library.com/images/default-profile-icon/default-profile-icon-16.jpg",
+					uri: "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg",
 				}}
-                resizeMode='stretch'
+                resizeMode='center'
 			/>
 		</View>
 	);

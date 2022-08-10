@@ -1,9 +1,9 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Avatar from "../UIElements/Avatar";
 
-const UserDetail = ({name, style, onPress}) => {
+const UserDetail = ({ name, style, onPress }) => {
 	return (
-		<Pressable onPress={onPress} style={[({ pressed }) => pressed && styles.pressed]}>
+		<Pressable onPress={onPress} style={({ pressed }) => pressed && styles.pressed}>
 			<View style={[style, styles.userFrame]}>
 				<Avatar style={styles.avatar} />
 				<Text style={styles.text}>{name}</Text>
@@ -17,18 +17,19 @@ export default UserDetail;
 const styles = StyleSheet.create({
 	userFrame: {
 		flexDirection: "row",
-        alignItems: "center"
+		alignItems: "center",
+        borderRadius: "25%",
+		// padding: 5,
 	},
 	avatar: {
-		margin: 5,
 		textAlign: "left",
 	},
 	text: {
-		marginLeft: 10,
-        fontSize: 14,
-        fontWeight: "500"
+		marginHorizontal: 10,
+		fontSize: 14,
+		fontWeight: "500",
 	},
 	pressed: {
-		opacity: 0.7,
+		opacity: 0.3,
 	},
 });

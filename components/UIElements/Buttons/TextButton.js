@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const TextButton = ({ onPress, color, size, style, label, fontWeight }) => {
 	return (
-		<Pressable onPress={onPress} style={[({ pressed }) => pressed && styles.pressed]}>
+		<Pressable onPress={onPress} style={({ pressed }) => pressed && styles.pressed}>
 			<View
 				style={[style, styles.button]}
 			>
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	pressed: {
-		opacity: 0.7,
+		opacity: 0.5,
 	},
 });

@@ -8,6 +8,7 @@ const PostsList = ({ items, style }) => {
 		const recipeProps = {
 			id: recipe.id,
 			name: recipe.name,
+            type: recipe.type,
 			photo_url: recipe.photo_url,
             description: recipe.description,
 			brewer: recipe.brewer,
@@ -16,7 +17,9 @@ const PostsList = ({ items, style }) => {
             bid: recipe.bid,
             user_name: recipe.user_name,
             uid: recipe.uid,
-            created_on: recipe.created_on
+            created_on: recipe.created_on,
+            num_of_comments: recipe.num_of_comments,
+            num_of_likes: recipe.num_of_likes
 		};
 		return <PostItem {...recipeProps} />;
 	};
@@ -27,6 +30,7 @@ const PostsList = ({ items, style }) => {
 				keyExtractor={(item) => item.id}
 				renderItem={renderPost}
 				contentContainerStyle={style}
+                showsVerticalScrollIndicator={false}
 			/>
 	);
 };

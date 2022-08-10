@@ -23,19 +23,21 @@ const RecipeDetailsFull = (props) => {
 		created_on,
 		brewer,
 		grinder,
-    brewer_eid,
-    grinder_eid
+		brewer_eid,
+		grinder_eid,
 	} = props;
 
 	return (
 		<View style={styles.details}>
-			{user_name && <AttributeItem data={user_name} id={uid} style={styles.detailItem} />}
+			{user_name && (
+				<AttributeItem data={user_name} style={styles.detailItem} />
+			)}
 			<AttributeItem data={type} style={styles.detailItem} />
 			<AttributeItem data={brew_time} style={styles.detailItem} />
-			<AttributeItem data={bean_name} id={bid} style={styles.detailItem} />
-			<AttributeItem data={brewer} id={brewer_eid} style={styles.detailItem} />
-			<AttributeItem data={grinder} id={grinder_eid} style={styles.detailItem} />
-      <AttributeItem data={yields + 'g'} style={styles.detailItem} />
+			<AttributeItem data={bean_name} style={styles.detailItem} />
+			<AttributeItem data={brewer} style={styles.detailItem} />
+			<AttributeItem data={grinder} style={styles.detailItem} />
+			<AttributeItem data={yields + "g"} style={styles.detailItem} />
 		</View>
 	);
 };
@@ -46,11 +48,11 @@ const styles = StyleSheet.create({
 	details: {
 		flexDirection: "row",
 		flexWrap: "wrap",
-    justifyContent:"center",
+		justifyContent: "center",
 		padding: 8,
 	},
 	detailItem: {
 		marginHorizontal: 6,
-    marginVertical: 4
+		marginVertical: 4,
 	},
 });

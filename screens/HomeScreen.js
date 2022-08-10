@@ -16,9 +16,6 @@ import { useHeaderHeight } from "@react-navigation/elements";
 
 
 // const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-
-
 
 const HomeScreen = ({navigation}) => {
 
@@ -28,6 +25,7 @@ const HomeScreen = ({navigation}) => {
     const username = useSelector((state) => state.user.name);
 	const dispatch = useDispatch();
 	const headerHeight = useHeaderHeight();
+    const windowHeight = Dimensions.get("window").height
 
     const addRecipeHandler = () => {
 		navigation.navigate("ManageRecipe");
@@ -67,7 +65,6 @@ const HomeScreen = ({navigation}) => {
     const popularRecipes = selectPopularRecipes();
     const feedRecipes = selectFeedRecipes();
 
-
 	if (isFetching) {
 		return <LoadingOverlay />;
 	}
@@ -99,6 +96,7 @@ const HomeScreen = ({navigation}) => {
                     paddingBottom: 100,
 					minHeight: windowHeight,
 				}}
+                showsVerticalScrollIndicator={false}
 			></FlatList>
 		</View>
 	);
