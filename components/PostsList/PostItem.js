@@ -130,8 +130,8 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		shadowColor: "black",
 		shadowOpacity: 0.1,
-		shadowOffset: { width: 0, height: 0.5 },
-		shadowRadius: 5,
+		shadowOffset: { width: 0, height: 2 },
+		shadowRadius: 2,
 	},
 	userDetail: {
 		flexDirection: "row",
@@ -151,10 +151,10 @@ const styles = StyleSheet.create({
 		opacity: 0.5,
 	},
 	imageContainer: {
-		// shadowColor: "black",
-		// shadowOpacity: 0.2,
-		// shadowOffset: { width: 0, height: 0.5 },
-		// shadowRadius: 4,
+		shadowColor: "black",
+		shadowOpacity: 0.1,
+		shadowOffset: { width: 0, height: 0 },
+		shadowRadius: 2,
 	},
 	image: {
 		width: "100%",
