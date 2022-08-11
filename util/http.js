@@ -172,7 +172,8 @@ export async function getCommentsByRecipeId(id) {
 			uid: response.data[key].uid,
 			posted_on: response.data[key].posted_on,
 			content: response.data[key].content,
-			num_of_likes: response.data[key].num_of_likes || 0
+			num_of_likes: response.data[key].num_of_likes || 0,
+			is_liked: response.data[key].is_liked && true
 		}
 		comments.push(commentObj);
 		

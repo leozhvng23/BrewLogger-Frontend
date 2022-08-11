@@ -5,7 +5,7 @@ import React, { useCallback } from "react";
 
 import CommentItem from "./CommentItem";
 
-const CommentsList = ({ items, style }) => {
+const CommentsList = ({ items, style, onPressUser }) => {
 	const renderComment = useCallback((data) => {
 		const comment = data.item;
 
@@ -16,9 +16,10 @@ const CommentsList = ({ items, style }) => {
 			posted_on: comment.posted_on,
 			content: comment.content,
 			num_of_likes: comment.num_of_likes,
+            is_liked: comment.is_liked
 		};
 
-		return <CommentItem {...commentProps} />;
+		return <CommentItem {...commentProps} onPressUser={onPressUser} />;
 	}, []);
 
 	return (
@@ -29,7 +30,7 @@ const CommentsList = ({ items, style }) => {
 			// scrollsToTop
             persistentScrollbar = {true}
 			style={styles.flatList}
-			contentContainerStyle={{ paddingBottom: 5 }}
+			contentContainerStyle={{ paddingVertical: 5 }}
 		/>
 	);
 };
@@ -38,6 +39,6 @@ export default CommentsList;
 
 const styles = StyleSheet.create({
     flatList: {
-        maxHeight: 150
+        maxHeight: 200
     }
 });

@@ -12,16 +12,13 @@ const LikeFavoriteBar = ({
 }) => {
 	return (
 		<View style={[style, styles.container]}>
-			<Text
-				style={[
-					styles.likeNumber,
-					{ fontWeight: "600", marginRight: -2 },
-				]}
-			>
-				{" "}
-				{num_of_likes}{" "}
-			</Text>
-			<Text style={styles.likeNumber}>likes</Text>
+			{num_of_likes && (
+				<Text style={[styles.likeNumber, { fontWeight: "600", marginRight: -2 }]}>
+					{" "}
+					{num_of_likes}{" "}
+				</Text>
+			)}
+			{num_of_likes && <Text style={styles.likeNumber}>{num_of_likes > 1 ? "likes": "like"}</Text>}
 			<IconButton
 				icon={recipeIsLiked ? "heart" : "heart-outline"}
 				color={recipeIsLiked ? "red" : "black"}

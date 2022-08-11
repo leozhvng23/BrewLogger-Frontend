@@ -9,7 +9,7 @@ import { getCommentsByRecipeId } from "../util/http";
 
 let commentResult;
 
-const Comments = ({ id, style }) => {
+const Comments = ({ id, style, onPressUser }) => {
 	const [isFetching, setIsFetching] = useState(true);
 	const [error, setError] = useState();
 	const uid = useSelector((state) => state.user.uid);
@@ -43,7 +43,7 @@ const Comments = ({ id, style }) => {
 
 	return (
 		<View style={[styles.commentsList, style]}>
-			<CommentsList items={commentResult}/>
+			<CommentsList items={commentResult} onPressUser={onPressUser}/>
 		</View>
 	);
 };

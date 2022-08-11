@@ -36,6 +36,7 @@ const PostItem = ({
 	num_of_comments,
 	num_of_likes,
 }) => {
+    console.log("hello")
 	const navigation = useNavigation();
 	const dispatch = useDispatch();
 	const [commentButtonText, setCommentButtonText] = useState(
@@ -58,16 +59,16 @@ const PostItem = ({
 		}
 	}, [recipeIsFavorite]);
 
+    const pressUserHandler = useCallback((val) => {
+		console.log("pressed, uid: ", val);
+	}, [])
+
 	const changeLikeStatusHandler = useCallback(() => {
 		console.log("pressed like");
 	}, []);
 
 	const selectRecipeHandler = () => {
 		navigation.navigate("RecipeDetail", { id: id });
-	};
-
-	const pressUserHandler = () => {
-		console.log("pressed, uid: ", uid);
 	};
 
 	const pressShowCommentsHandler = () => {
@@ -104,7 +105,7 @@ const PostItem = ({
 					</ImageBackground>
 				</View>
 				<View style={styles.userDetail}>
-					<UserDetail name={user_name} onPress={pressUserHandler} />
+					<UserDetail name={user_name} uid={uid} onPress={pressUserHandler} />
 					<Text style={styles.createdOn}>on {getDate(created_on)}</Text>
 				</View>
 				<View style={styles.postDetailContainer}>
@@ -123,7 +124,7 @@ const PostItem = ({
 					<View style={styles.commentsContainer}>
 						{showComments && (
 							// <View>
-							<Comments id={id} style={styles.commentsModule} />
+							<Comments id={id} style={styles.commentsModule} onPressUser={pressUserHandler}/>
 							// </View>
 						)}
 						{num_of_comments > 0 ? (

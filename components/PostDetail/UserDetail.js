@@ -1,9 +1,12 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Avatar from "../UIElements/Avatar";
 
-const UserDetail = ({ name, style, onPress }) => {
+const UserDetail = ({ name, uid, style, onPress }) => {
+    const pressUserHandler = () => {
+        onPress(uid);
+    }
 	return (
-		<Pressable onPress={onPress} style={({ pressed }) => pressed && styles.pressed}>
+		<Pressable onPress={pressUserHandler} style={({ pressed }) => pressed && styles.pressed}>
 			<View style={[style, styles.userFrame]}>
 				<Avatar style={styles.avatar} />
 				<Text style={styles.text}>{name}</Text>
