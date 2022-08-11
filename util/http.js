@@ -5,6 +5,7 @@ const USERS_API = "/api/users";
 const RECIPES_API = "/api/recipes";
 const EQUIPMENTS_API = "/api/equipments";
 const BEANS_API = "/api/beans";
+const COMMENTS_API = "/api/comments"
 
 export async function getRecipesByUserId(uid) {
 	const recipes = {};
@@ -157,4 +158,24 @@ export async function getAllGrindersNames() {
 	}
 	// console.log(grinders);
 	return grinders;
+}
+
+export async function getCommentsByRecipeId(id) {
+	const comments = [];
+	console.log(BACKEND_URL + COMMENTS_API + "/recipe/" + id);
+	const response = await axios.get(BACKEND_URL + COMMENTS_API + "/recipe/" + id);
+
+	for (const key in response.data) {
+		const commentObj = {
+			cid : response.data[key].cid,
+			user_name: response.data[key].user_name,
+			uid: response.data[key].uid,
+			posted_on: response.data[key].posted_on,
+			content: response.data[key].content,
+			num_of_likes: response.data[key].num_of_likes || 0
+		}
+		comments.push(commentObj);
+		
+	}
+	return comments;
 }

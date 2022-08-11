@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import UserDetail from "../PostDetail/UserDetail";
 import PostDetail from "../PostDetail/PostDetail";
-
+import Comments from "../Comments";
 import { addFavorite, removeFavorite } from "../../store/redux/favorites";
 import { getDate } from "../../util/dateTime";
 import TextButton from "../UIElements/Buttons/TextButton";
@@ -37,7 +37,7 @@ const PostItem = ({
 	num_of_likes,
 }) => {
 	const navigation = useNavigation();
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const [commentButtonText, setCommentButtonText] = useState(
 		`Show all ${num_of_comments} ${num_of_comments > 1 ? "comments" : "comment"}`
 	);
@@ -47,20 +47,20 @@ const PostItem = ({
 		[num_of_comments]
 	);
 
-    const favoriteRecipeIds = useSelector((state) => state.favoriteRecipes.ids);
-    const recipeIsFavorite = favoriteRecipeIds.includes(id)
+	const favoriteRecipeIds = useSelector((state) => state.favoriteRecipes.ids);
+	const recipeIsFavorite = favoriteRecipeIds.includes(id);
 
-    const changeFavoriteStatusHandler = useCallback(()=> {
-        if (recipeIsFavorite) {
+	const changeFavoriteStatusHandler = useCallback(() => {
+		if (recipeIsFavorite) {
 			dispatch(removeFavorite({ id: id }));
 		} else {
 			dispatch(addFavorite({ id: id }));
 		}
-    }, [recipeIsFavorite]);
+	}, [recipeIsFavorite]);
 
-    const changeLikeStatusHandler = useCallback(()=> {
-        console.log("pressed like")
-    }, [])
+	const changeLikeStatusHandler = useCallback(() => {
+		console.log("pressed like");
+	}, []);
 
 	const selectRecipeHandler = () => {
 		navigation.navigate("RecipeDetail", { id: id });
@@ -99,7 +99,7 @@ const PostItem = ({
 							num_of_likes={num_of_likes}
 							onPressLike={changeLikeStatusHandler}
 							onPressFavorite={changeFavoriteStatusHandler}
-                            recipeIsFavorite={recipeIsFavorite}
+							recipeIsFavorite={recipeIsFavorite}
 						/>
 					</ImageBackground>
 				</View>
@@ -122,9 +122,9 @@ const PostItem = ({
 				<TouchableWithoutFeedback>
 					<View style={styles.commentsContainer}>
 						{showComments && (
-							<View>
-								<Text>here are the comments</Text>
-							</View>
+							// <View>
+							<Comments id={id} style={styles.commentsModule} />
+							// </View>
 						)}
 						{num_of_comments > 0 ? (
 							<TextButton
@@ -135,7 +135,7 @@ const PostItem = ({
 								style={styles.commentsButton}
 							/>
 						) : (
-							<Text>post comment here____</Text> //postComment module
+							<Comments id={id} /> //postComment module
 						)}
 					</View>
 				</TouchableWithoutFeedback>
@@ -201,9 +201,15 @@ const styles = StyleSheet.create({
 		marginTop: 8,
 	},
 	commentsContainer: {
+        paddingHorizontal: 10,
+        marginTop: 10
 		// minHeight: 20
+        // maxHeight: 100
 	},
 	commentsButton: {
-		paddingTop: 10,
+		paddingTop: 7,
+	},
+	commentsModule: {
+		// maxHeight: 100
 	},
 });

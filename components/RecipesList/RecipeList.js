@@ -1,9 +1,10 @@
+import { useCallback } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
 import RecipeItem from "./RecipeItem";
 
 const RecipeList = ({ items, style, horizontal, showsHorizontalScrollIndicator }) => {
-	const renderRecipe = (data) => {
+	const renderRecipe = useCallback( (data) => {
 		const recipe = data.item;
 
 		const recipeProps = {
@@ -16,7 +17,7 @@ const RecipeList = ({ items, style, horizontal, showsHorizontalScrollIndicator }
 		};
 
 		return <RecipeItem {...recipeProps} />;
-	};
+	}, [])
 
 	return (
 			<FlatList

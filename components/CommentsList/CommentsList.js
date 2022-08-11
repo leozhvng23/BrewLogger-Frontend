@@ -1,0 +1,43 @@
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+
+import { FlatList } from "react-native-gesture-handler";
+import React, { useCallback } from "react";
+
+import CommentItem from "./CommentItem";
+
+const CommentsList = ({ items, style }) => {
+	const renderComment = useCallback((data) => {
+		const comment = data.item;
+
+		const commentProps = {
+			cid: comment.cid,
+			user_name: comment.user_name,
+			uid: comment.uid,
+			posted_on: comment.posted_on,
+			content: comment.content,
+			num_of_likes: comment.num_of_likes,
+		};
+
+		return <CommentItem {...commentProps} />;
+	}, []);
+
+	return (
+		<FlatList
+			data={items}
+			keyExtractor={(item) => item.cid}
+			renderItem={renderComment}
+			// scrollsToTop
+            persistentScrollbar = {true}
+			style={styles.flatList}
+			contentContainerStyle={{ paddingBottom: 5 }}
+		/>
+	);
+};
+
+export default CommentsList;
+
+const styles = StyleSheet.create({
+    flatList: {
+        maxHeight: 150
+    }
+});

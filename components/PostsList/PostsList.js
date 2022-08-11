@@ -31,6 +31,7 @@ const PostsList = ({ items, style }) => {
 				renderItem={renderPost}
 				contentContainerStyle={style}
                 showsVerticalScrollIndicator={false}
+                nestedScrollEnabled
 			/>
 	);
 };
