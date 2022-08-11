@@ -15,17 +15,34 @@ import { getRecipeById } from "../util/http";
 import { setRecipeDetail } from "../store/redux/recipes";
 
 const RecipeDetailScreen = ({navigation, route}) => {
+	const id = route.params.id;
 	const [isFetching, setIsFetching] = useState(true);
 	const [error, setError] = useState();
 	const dispatch = useDispatch();
 	const headerHeight = useHeaderHeight();
-	const favoriteRecipeIds = useSelector((state) => state.favoriteRecipes.ids);
 	const fetchedRecipeIds = useSelector((state) => state.recipes.fetchedIds);
-
-	const id = route.params.id;
-	const recipeIsFavorite = favoriteRecipeIds.includes(id)
 	const recipeIsFetched = fetchedRecipeIds.includes(id)
 
+	const fetchRecipe = useCallback(async () => {
+		setIsFetching(true);
+		try {
+			const recipeDetail = await getRecipeById(id);
+			dispatch(setRecipeDetail({ id: id, recipeDetail: recipeDetail }));
+		} catch (err) {
+			setError("Could not fetch recipe detail.");
+		}
+		setIsFetching(false);
+		// setTimeout(() => setIsFetching(false), 2000);
+	});
+
+	useEffect(() => {
+		recipeIsFetched ? setIsFetching(false) : fetchRecipe();
+	}, []);
+
+	const selectedRecipe = useSelector((state) => state.recipes.recipes[id]);
+	const favoriteRecipes = useSelector((state) => state.favoriteRecipes.ids)
+	const recipeIsFavorite = favoriteRecipes.includes(id);
+	
 	const changeFavoriteStatusHandler = useCallback(() => {
 		if (recipeIsFavorite) {
 			dispatch(removeFavorite({ id: id }));
@@ -48,23 +65,7 @@ const RecipeDetailScreen = ({navigation, route}) => {
 		});
 	}, [navigation, changeFavoriteStatusHandler]);
 
-	const fetchRecipe = useCallback(async () => {
-		setIsFetching(true);
-		try {
-			const recipeDetail = await getRecipeById(id);
-			dispatch(setRecipeDetail({ id: id, recipeDetail: recipeDetail }));
-		} catch (err) {
-			setError("Could not fetch recipe detail.");
-		}
-		setIsFetching(false);
-		// setTimeout(() => setIsFetching(false), 2000);
-	});
-
-	useEffect(() => {
-		recipeIsFetched ? setIsFetching(false) : fetchRecipe();
-	}, []);
-
-	const selectedRecipe = useSelector((state) => state.recipes.recipes[id]);
+	
 
 	if (isFetching) {
 		return <LoadingOverlay />;

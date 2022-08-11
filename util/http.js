@@ -34,6 +34,9 @@ export async function getRecipesByUserId(uid) {
 			grinder_eid: response.data[key].grinder_eid,
 			brewer_setting: response.data[key].brewer_setting,
 			grinder_setting: response.data[key].grinder_setting,
+			num_of_comments: response.data[key].num_of_comments,
+			num_of_likes: response.data[key].num_of_likes,
+			is_saved: response.data[key].is_saved
 		};
 		recipes[response.data[key].id] = recipeObj;
 		ids.push(response.data[key].id);
@@ -100,6 +103,7 @@ export async function getFeedRecipes(uid) {
 			brewer_eid: response.data[key].brewer_eid,
 			num_of_comments: response.data[key].num_of_comments,
 			num_of_likes: response.data[key].num_of_likes,
+			is_saved: response.data[key].is_saved
 		};
 		recipes[response.data[key].id] = recipeObj;
 		ids.push(response.data[key].id);

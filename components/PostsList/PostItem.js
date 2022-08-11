@@ -35,8 +35,9 @@ const PostItem = ({
 	uid,
 	num_of_comments,
 	num_of_likes,
+	is_saved,
 }) => {
-    console.log("hello")
+	console.log("postItem");
 	const navigation = useNavigation();
 	const dispatch = useDispatch();
 	const [commentButtonText, setCommentButtonText] = useState(
@@ -47,9 +48,8 @@ const PostItem = ({
 		() => (num_of_comments > 1 ? "comments" : "comment"),
 		[num_of_comments]
 	);
-
-	const favoriteRecipeIds = useSelector((state) => state.favoriteRecipes.ids);
-	const recipeIsFavorite = favoriteRecipeIds.includes(id);
+    const favoriteRecipesIds = useSelector((state) => state.favoriteRecipes.ids);
+	const recipeIsFavorite = favoriteRecipesIds.includes(id);
 
 	const changeFavoriteStatusHandler = useCallback(() => {
 		if (recipeIsFavorite) {
@@ -59,9 +59,9 @@ const PostItem = ({
 		}
 	}, [recipeIsFavorite]);
 
-    const pressUserHandler = useCallback((val) => {
+	const pressUserHandler = useCallback((val) => {
 		console.log("pressed, uid: ", val);
-	}, [])
+	}, []);
 
 	const changeLikeStatusHandler = useCallback(() => {
 		console.log("pressed like");
@@ -124,7 +124,11 @@ const PostItem = ({
 					<View style={styles.commentsContainer}>
 						{showComments && (
 							// <View>
-							<Comments id={id} style={styles.commentsModule} onPressUser={pressUserHandler}/>
+							<Comments
+								id={id}
+								style={styles.commentsModule}
+								onPressUser={pressUserHandler}
+							/>
 							// </View>
 						)}
 						{num_of_comments > 0 ? (
@@ -202,10 +206,10 @@ const styles = StyleSheet.create({
 		marginTop: 8,
 	},
 	commentsContainer: {
-        paddingHorizontal: 10,
-        marginTop: 10
+		paddingHorizontal: 10,
+		marginTop: 10,
 		// minHeight: 20
-        // maxHeight: 100
+		// maxHeight: 100
 	},
 	commentsButton: {
 		paddingTop: 7,

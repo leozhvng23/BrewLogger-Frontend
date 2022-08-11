@@ -19,7 +19,8 @@ const PostsList = ({ items, style }) => {
             uid: recipe.uid,
             created_on: recipe.created_on,
             num_of_comments: recipe.num_of_comments,
-            num_of_likes: recipe.num_of_likes
+            num_of_likes: recipe.num_of_likes,
+            is_saved: recipe.is_saved
 		};
 		return <PostItem {...recipeProps} />;
 	};
