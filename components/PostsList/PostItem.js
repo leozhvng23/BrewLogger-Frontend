@@ -37,7 +37,7 @@ const PostItem = ({
 	num_of_likes,
 	is_saved,
 }) => {
-	console.log("postItem");
+	// console.log("postItem");
 	const navigation = useNavigation();
 	const dispatch = useDispatch();
 	const [commentButtonText, setCommentButtonText] = useState(

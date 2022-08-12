@@ -1,11 +1,12 @@
 import axios from "axios";
-
 const BACKEND_URL = "http://192.168.1.142:5500";
 const USERS_API = "/api/users";
 const RECIPES_API = "/api/recipes";
 const EQUIPMENTS_API = "/api/equipments";
 const BEANS_API = "/api/beans";
-const COMMENTS_API = "/api/comments"
+const COMMENTS_API = "/api/comments";
+
+const uid = 6;
 
 export async function getRecipesByUserId(uid) {
 	const recipes = {};
@@ -36,7 +37,7 @@ export async function getRecipesByUserId(uid) {
 			grinder_setting: response.data[key].grinder_setting,
 			num_of_comments: response.data[key].num_of_comments,
 			num_of_likes: response.data[key].num_of_likes,
-			is_saved: response.data[key].is_saved
+			is_saved: response.data[key].is_saved,
 		};
 		recipes[response.data[key].id] = recipeObj;
 		ids.push(response.data[key].id);
@@ -103,7 +104,7 @@ export async function getFeedRecipes(uid) {
 			brewer_eid: response.data[key].brewer_eid,
 			num_of_comments: response.data[key].num_of_comments,
 			num_of_likes: response.data[key].num_of_likes,
-			is_saved: response.data[key].is_saved
+			is_saved: response.data[key].is_saved,
 		};
 		recipes[response.data[key].id] = recipeObj;
 		ids.push(response.data[key].id);
@@ -171,16 +172,41 @@ export async function getCommentsByRecipeId(id) {
 
 	for (const key in response.data) {
 		const commentObj = {
-			cid : response.data[key].cid,
+			cid: response.data[key].cid,
 			user_name: response.data[key].user_name,
 			uid: response.data[key].uid,
 			posted_on: response.data[key].posted_on,
 			content: response.data[key].content,
 			num_of_likes: response.data[key].num_of_likes || 0,
-			is_liked: response.data[key].is_liked && true
-		}
+			is_liked: response.data[key].is_liked && true,
+		};
 		comments.push(commentObj);
-		
 	}
 	return comments;
+}
+
+export async function addFavoriteRecipe(id) {
+	console.log(BACKEND_URL + RECIPES_API + "/favorites/" + id);
+	const response = await axios.post(BACKEND_URL + RECIPES_API + "/favorites/" + id);
+	console.log(response.data);
+	return response.data;
+}
+
+
+export async function deleteFavoriteRecipe(id) {
+	console.log(BACKEND_URL + RECIPES_API + "/favorites/" + id);
+	const response = await axios.delete(BACKEND_URL + RECIPES_API + "/favorites/" + id);
+	console.log(response.data);
+	return response.data;
+}
+
+
+export async function getFavoriteIds() {
+	console.log(BACKEND_URL + RECIPES_API + "/favorite/ids");
+	const response = await axios.get(BACKEND_URL + RECIPES_API + "/favorite/ids");
+	const ids = []
+	for (const key in response.data) {
+		ids.push(response.data[key].id)
+	}
+	return ids;
 }

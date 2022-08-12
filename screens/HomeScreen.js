@@ -9,10 +9,11 @@ import TextTitle from "../components/UIElements/TextTitle";
 import LoadingOverlay from "../components/UIElements/Overlays/LoadingOverlay";
 import ErrorOverlay from "../components/UIElements/Overlays/ErrorOverlay";
 import PostsList from "../components/PostsList/PostsList";
-import { getFeedRecipes, getPopularRecipes } from "../util/http";
+import { getFavoriteIds, getFeedRecipes, getPopularRecipes } from "../util/http";
 import { selectFeedRecipes, selectPopularRecipes } from "../util/selectors";
 import { setFeedRecipes, setPopularRecipes } from "../store/redux/recipes";
 import { useHeaderHeight } from "@react-navigation/elements";
+import { setFavoriteIds } from "../store/redux/favorites";
 
 
 // const windowWidth = Dimensions.get("window").width;
@@ -52,6 +53,13 @@ const HomeScreen = ({navigation}) => {
             dispatch(setFeedRecipes({ recipes: recipes, ids: ids}));
         } catch (err) {
             setError("Could not fetch feed recipes.");
+        }
+        try{
+            const ids = await getFavoriteIds();
+            console.log(ids);
+            dispatch(setFavoriteIds({ids: ids}))
+        } catch (err) {
+            setError("Could not fetch favorite ids");
         }
         setIsFetching(false);
         // setTimeout(() => setIsFetching(false), 2000); 

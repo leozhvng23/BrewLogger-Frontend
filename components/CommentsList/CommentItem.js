@@ -51,14 +51,16 @@ const CommentItem = ({
 					</Text>
 					<Text style={styles.dateText}>{getDate(posted_on)}</Text>
 				</View>
+				{commentLikeStatus.likes > 0 && (
 					<Text style={styles.likeNumber}>{commentLikeStatus.likes}</Text>
-					<IconButton
-						icon={commentLikeStatus.isLiked ? "heart" : "heart-outline"}
-						color={commentLikeStatus.isLiked ? "red" : "black"}
-						size={16}
-						onPress={changeLikeStatusHandler}
-						style={styles.button}
-					/>
+				)}
+				<IconButton
+					icon={commentLikeStatus.isLiked ? "heart" : "heart-outline"}
+					color={commentLikeStatus.isLiked ? "red" : "black"}
+					size={16}
+					onPress={changeLikeStatusHandler}
+					style={styles.button}
+				/>
 			</View>
 		</TouchableWithoutFeedback>
 	);
@@ -107,6 +109,6 @@ const styles = StyleSheet.create({
 		color: "black",
 		opacity: 0.5,
 		marginLeft: 5,
-        marginTop: 1
+		marginTop: 1,
 	},
 });
