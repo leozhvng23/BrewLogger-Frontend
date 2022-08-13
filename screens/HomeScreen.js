@@ -9,9 +9,10 @@ import TextTitle from "../components/UIElements/TextTitle";
 import LoadingOverlay from "../components/UIElements/Overlays/LoadingOverlay";
 import ErrorOverlay from "../components/UIElements/Overlays/ErrorOverlay";
 import PostsList from "../components/PostsList/PostsList";
-import { getFavoriteIds, getFeedRecipes, getPopularRecipes } from "../util/http";
+import { getFavoriteIds, getFeedRecipes, getLikedIds, getPopularRecipes } from "../util/http";
 import { selectFeedRecipes, selectPopularRecipes } from "../util/selectors";
 import { setFeedRecipes, setPopularRecipes } from "../store/redux/recipes";
+import { setLikedIds, setLikes } from "../store/redux/likes";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { setFavoriteIds } from "../store/redux/favorites";
 
@@ -50,7 +51,9 @@ const HomeScreen = ({navigation}) => {
         }
         try {
             const [recipes, ids] = await getFeedRecipes(uid);
+            // console.log(recipes);
             dispatch(setFeedRecipes({ recipes: recipes, ids: ids}));
+            dispatch(setLikes({recipes: recipes}));
         } catch (err) {
             setError("Could not fetch feed recipes.");
         }
@@ -60,6 +63,13 @@ const HomeScreen = ({navigation}) => {
             dispatch(setFavoriteIds({ids: ids}))
         } catch (err) {
             setError("Could not fetch favorite ids");
+        }
+        try{
+            const ids = await getLikedIds();
+            console.log(ids);
+            dispatch(setLikedIds({ids: ids}))
+        } catch (err) {
+            setError("Could not fetch liked ids");
         }
         setIsFetching(false);
         // setTimeout(() => setIsFetching(false), 2000); 

@@ -1,4 +1,7 @@
 import axios from "axios";
+
+import { useDispatch } from "react-redux";
+
 const BACKEND_URL = "http://192.168.1.142:5500";
 const USERS_API = "/api/users";
 const RECIPES_API = "/api/recipes";
@@ -192,7 +195,6 @@ export async function addFavoriteRecipe(id) {
 	return response.data;
 }
 
-
 export async function deleteFavoriteRecipe(id) {
 	console.log(BACKEND_URL + RECIPES_API + "/favorites/" + id);
 	const response = await axios.delete(BACKEND_URL + RECIPES_API + "/favorites/" + id);
@@ -200,13 +202,36 @@ export async function deleteFavoriteRecipe(id) {
 	return response.data;
 }
 
-
 export async function getFavoriteIds() {
 	console.log(BACKEND_URL + RECIPES_API + "/favorite/ids");
 	const response = await axios.get(BACKEND_URL + RECIPES_API + "/favorite/ids");
-	const ids = []
+	const ids = [];
 	for (const key in response.data) {
-		ids.push(response.data[key].id)
+		ids.push(response.data[key].id);
 	}
 	return ids;
+}
+
+export async function getLikedIds() {
+	console.log(BACKEND_URL + RECIPES_API + "/like/ids");
+	const response = await axios.get(BACKEND_URL + RECIPES_API + "/like/ids");
+	const ids = [];
+	for (const key in response.data) {
+		ids.push(response.data[key].id);
+	}
+	return ids;
+}
+
+export async function likeRecipe(id) {
+	console.log(BACKEND_URL + RECIPES_API + "/like/" + id);
+	const response = await axios.post(BACKEND_URL + RECIPES_API + "/likes/" + id);
+	console.log(response.data);
+	return response.data;
+}
+
+export async function unlikeRecipe(id) {
+	console.log(BACKEND_URL + RECIPES_API + "/like/" + id);
+	const response = await axios.delete(BACKEND_URL + RECIPES_API + "/likes/" + id);
+	console.log(response.data);
+	return response.data;
 }

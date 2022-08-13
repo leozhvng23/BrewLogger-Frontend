@@ -3,19 +3,16 @@ import {
 	View,
 	Pressable,
 	Text,
-	Image,
 	StyleSheet,
 	Platform,
 	ImageBackground,
 	TouchableWithoutFeedback,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
 
 import UserDetail from "../PostDetail/UserDetail";
 import PostDetail from "../PostDetail/PostDetail";
 import Comments from "../Comments";
-import { addFavorite, removeFavorite } from "../../store/redux/favorites";
 import { getDate } from "../../util/dateTime";
 import TextButton from "../UIElements/Buttons/TextButton";
 import LikeFavoriteBar from "../UIElements/LikeFavoriteBar";
@@ -34,12 +31,9 @@ const PostItem = ({
 	user_name,
 	uid,
 	num_of_comments,
-	num_of_likes,
-	is_saved,
 }) => {
-	// console.log("postItem");
+	console.log("postItem");
 	const navigation = useNavigation();
-	const dispatch = useDispatch();
 	const [commentButtonText, setCommentButtonText] = useState(
 		`Show all ${num_of_comments} ${num_of_comments > 1 ? "comments" : "comment"}`
 	);
@@ -48,23 +42,9 @@ const PostItem = ({
 		() => (num_of_comments > 1 ? "comments" : "comment"),
 		[num_of_comments]
 	);
-    const favoriteRecipesIds = useSelector((state) => state.favoriteRecipes.ids);
-	const recipeIsFavorite = favoriteRecipesIds.includes(id);
-
-	const changeFavoriteStatusHandler = useCallback(() => {
-		if (recipeIsFavorite) {
-			dispatch(removeFavorite({ id: id }));
-		} else {
-			dispatch(addFavorite({ id: id }));
-		}
-	}, [recipeIsFavorite]);
 
 	const pressUserHandler = useCallback((val) => {
 		console.log("pressed, uid: ", val);
-	}, []);
-
-	const changeLikeStatusHandler = useCallback(() => {
-		console.log("pressed like");
 	}, []);
 
 	const selectRecipeHandler = () => {
@@ -96,12 +76,7 @@ const PostItem = ({
 						resizeMode="cover"
 						style={styles.image}
 					>
-						<LikeFavoriteBar
-							num_of_likes={num_of_likes}
-							onPressLike={changeLikeStatusHandler}
-							onPressFavorite={changeFavoriteStatusHandler}
-							recipeIsFavorite={recipeIsFavorite}
-						/>
+						<LikeFavoriteBar id={id} />
 					</ImageBackground>
 				</View>
 				<View style={styles.userDetail}>
@@ -123,13 +98,11 @@ const PostItem = ({
 				<TouchableWithoutFeedback>
 					<View style={styles.commentsContainer}>
 						{showComments && (
-							// <View>
 							<Comments
 								id={id}
 								style={styles.commentsModule}
 								onPressUser={pressUserHandler}
 							/>
-							// </View>
 						)}
 						{num_of_comments > 0 ? (
 							<TextButton

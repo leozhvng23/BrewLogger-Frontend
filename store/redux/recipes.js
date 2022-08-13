@@ -6,33 +6,32 @@ const recipeSlice = createSlice({
 		recipes: {},
 		fetchedIds: [], // recipes with all data
 		myIds: [], // my created recipes
-        feedIds: [],
-        popularIds: [],
+		feedIds: [],
+		popularIds: [],
 		sharedWithMeIds: [], // shared with me recipes
-		likedIds: [], // liked recipes
 	},
 	reducers: {
 		setMyRecipes: (state, action) => {
-            for (const [key, value] of Object.entries(action.payload.recipes)) {
+			for (const [key, value] of Object.entries(action.payload.recipes)) {
 				state.recipes[key] = value;
-			}	
+			}
 			state.myIds = action.payload.ids;
 		},
 		setFeedRecipes: (state, action) => {
 			for (const [key, value] of Object.entries(action.payload.recipes)) {
 				state.recipes[key] = value;
 			}
-            state.feedIds = action.payload.ids;
+			state.feedIds = action.payload.ids;
 		},
-        setPopularRecipes: (state, action) => {
-            for (const [key, value] of Object.entries(action.payload.recipes)) {
+		setPopularRecipes: (state, action) => {
+			for (const [key, value] of Object.entries(action.payload.recipes)) {
 				state.recipes[key] = value;
 			}
-            state.popularIds = action.payload.ids;
-        },
+			state.popularIds = action.payload.ids;
+		},
 		setRecipeDetail: (state, action) => {
-		    state.recipes[action.payload.id] = action.payload.recipeDetail;
-		    state.fetchedIds.push(action.payload.id)
+			state.recipes[action.payload.id] = action.payload.recipeDetail;
+			state.fetchedIds.push(action.payload.id);
 		},
 	},
 });
