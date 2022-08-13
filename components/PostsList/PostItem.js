@@ -16,6 +16,7 @@ import Comments from "../Comments";
 import { getDate } from "../../util/dateTime";
 import TextButton from "../UIElements/Buttons/TextButton";
 import LikeFavoriteBar from "../UIElements/LikeFavoriteBar";
+import CommentBar from "../CommentsList/CommentBar";
 
 const PostItem = ({
 	id,
@@ -38,6 +39,7 @@ const PostItem = ({
 		`Show all ${num_of_comments} ${num_of_comments > 1 ? "comments" : "comment"}`
 	);
 	const [showComments, setShowComments] = useState(false);
+	const [commentBarVisible, setCommentBarVisible] = useState(num_of_comments < 1);
 	const commentWord = useMemo(
 		() => (num_of_comments > 1 ? "comments" : "comment"),
 		[num_of_comments]
@@ -104,6 +106,14 @@ const PostItem = ({
 								onPressUser={pressUserHandler}
 							/>
 						)}
+						{showComments && (
+							<CommentBar
+								id={id}
+								style={styles.commentBar}
+								onPressPost={() => {
+								}}
+							/>
+						)}
 						{num_of_comments > 0 ? (
 							<TextButton
 								label={commentButtonText}
@@ -113,7 +123,16 @@ const PostItem = ({
 								style={styles.commentsButton}
 							/>
 						) : (
-							<Comments id={id} /> //postComment module
+							commentBarVisible && (
+								<CommentBar
+									id={id}
+									style={styles.commentBar}
+									onPressPost={() => {
+										setCommentBarVisible(false);
+										setShowComments(true);
+									}}
+								/>
+							)
 						)}
 					</View>
 				</TouchableWithoutFeedback>
