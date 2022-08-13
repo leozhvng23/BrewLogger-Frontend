@@ -115,6 +115,7 @@ const HomeScreen = ({navigation}) => {
 					minHeight: windowHeight,
 				}}
                 showsVerticalScrollIndicator={false}
+                nestedScrollEnabled
 			></FlatList>
 		</View>
 	);

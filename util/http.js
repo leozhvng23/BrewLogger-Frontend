@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { useDispatch } from "react-redux";
 
-const BACKEND_URL = "http://192.168.1.142:5500";
+const BACKEND_URL = "https://brew-logger-backend.herokuapp.com";
 const USERS_API = "/api/users";
 const RECIPES_API = "/api/recipes";
 const EQUIPMENTS_API = "/api/equipments";

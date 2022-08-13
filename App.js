@@ -7,9 +7,6 @@ import { store } from "./store/redux/store";
 
 import MainNavigator from "./components/Navigation/MainNavigator";
 
-// import RecipesNavigator from "./components/Navigation/RecipesNavigator";
-
-// import FavoritesContextProvider from "./store/context/favorites-context";
 
 export default function App() {
 	return (
