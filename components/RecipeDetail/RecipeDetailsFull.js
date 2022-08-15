@@ -33,7 +33,7 @@ const RecipeDetailsFull = (props) => {
 				<AttributeItem data={user_name} style={styles.detailItem} />
 			)}
 			<AttributeItem data={type} style={styles.detailItem} />
-			<AttributeItem data={brew_time} style={styles.detailItem} />
+			<AttributeItem data={brew_time + " min"} style={styles.detailItem} />
 			<AttributeItem data={bean_name} style={styles.detailItem} />
 			<AttributeItem data={brewer} style={styles.detailItem} />
 			<AttributeItem data={grinder} style={styles.detailItem} />
