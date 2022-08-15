@@ -202,8 +202,8 @@ const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit, data }) => {
 								style={styles.rowInput}
 								label="Brew Time"
 								textInputConfig={{
-									keyboardType: "numbers-and-punctuation",
-									placeholder: "DD:HH:MM",
+									keyboardType: "number-pad",
+									placeholder: "(min)",
 									onChangeText: inputChangedHandler.bind(
 										this,
 										"brew_time"
@@ -285,7 +285,7 @@ const RecipeForm = ({ onSubmit, navigation, initialValues, isEdit, data }) => {
 							textInputConfig={{
 								onChangeText: inputChangedHandler.bind(this, "type"),
 								value: inputValues.type,
-								placeholder: "Pour Over / Espresso",
+								placeholder: "(Pourover, Espresso, etc.)",
 							}}
 						/>
 						<Input
