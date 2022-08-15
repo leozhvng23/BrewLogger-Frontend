@@ -4,15 +4,17 @@
 <p><strong>BrewLogger is a mobile application and social platform that allows users to create, post, save, comment, like, and share their favorite specialty coffee recipes.</strong> <br/> <br/></p>
 
 ## Built With
-- Javascript
-- <strong> React Native </strong>
-- <strong> Node.js </strong>
-- Express
-- <strong> PostgreSQL </strong>
-- node-postgres
-- Expo 
-- Heroku (backend)
-- AWS RDS (database)
+- Frontend
+  - Javascript
+  - <strong> React Native </strong>
+  - Expo
+- Backend ([repo here](https://github.com/leozhvng23/BrewLogger-Backend))
+  - <strong> Node.js </strong>
+  - Express
+  - <strong> PostgreSQL </strong>
+  - node-postgres
+  - Heroku (backend)
+  - AWS RDS (database)
 
 ## Screenshots
 <!-- <div align="center">
