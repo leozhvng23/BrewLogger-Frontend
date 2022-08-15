@@ -51,6 +51,18 @@
     <td><img src="screenshots/recipes_by_beans.png" ></td>
   </tr>
  </table>
+ <table>
+  <tr>
+    <td><strong>Create recipe screen</strong></td>
+     <td><strong>Select beans modal</strong></td>
+    <td><strong>Search function</strong></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/add_recipe.png" ></td>
+    <td><img src="screenshots/select_beans.png" ></td>
+    <td><img src="screenshots/add_recipe2.png" ></td>
+  </tr>
+ </table>
 
 
 ## Author
