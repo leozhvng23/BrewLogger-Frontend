@@ -48,7 +48,7 @@ const BeansScreen = () => {
 			scrollsToTop
 			contentContainerStyle={{
 				paddingTop: headerHeight,
-				paddingBottom: 50,
+				paddingBottom: 100,
 				paddingHorizontal: "3%",
 			}}
 		/>
