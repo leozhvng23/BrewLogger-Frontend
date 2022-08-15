@@ -5,10 +5,10 @@
 
 ## Built With
 - Javascript
-- React Native
-- Node.js
+- <strong> React Native </strong>
+- <strong> Node.js </strong>
 - Express
-- PostgreSQL
+- <strong> PostgreSQL </strong>
 - node-postgres
 - Expo 
 - Heroku (backend)
