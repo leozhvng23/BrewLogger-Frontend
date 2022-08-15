@@ -17,6 +17,7 @@ import { getDate } from "../../util/dateTime";
 import TextButton from "../UIElements/Buttons/TextButton";
 import LikeFavoriteBar from "../UIElements/LikeFavoriteBar";
 import CommentBar from "../CommentsList/CommentBar";
+import ShowCommentButton from "../UIElements/Buttons/ShowCommentButton";
 
 const PostItem = ({
 	id,
@@ -35,15 +36,15 @@ const PostItem = ({
 }) => {
 	console.log("postItem");
 	const navigation = useNavigation();
-	const [commentButtonText, setCommentButtonText] = useState(
-		`Show all ${num_of_comments} ${num_of_comments > 1 ? "comments" : "comment"}`
-	);
+	// const [commentButtonText, setCommentButtonText] = useState(
+	// 	`Show all ${num_of_comments} ${num_of_comments > 1 ? "comments" : "comment"}`
+	// );
 	const [showComments, setShowComments] = useState(false);
 	const [commentBarVisible, setCommentBarVisible] = useState(num_of_comments < 1);
-	const commentWord = useMemo(
-		() => (num_of_comments > 1 ? "comments" : "comment"),
-		[num_of_comments]
-	);
+	// const commentWord = useMemo(
+	// 	() => (num_of_comments > 1 ? "comments" : "comment"),
+	// 	[num_of_comments]
+	// );
 
 	const pressUserHandler = useCallback((val) => {
 		console.log("pressed, uid: ", val);
@@ -53,17 +54,17 @@ const PostItem = ({
 		navigation.navigate("RecipeDetail", { id: id });
 	};
 
-	const pressShowCommentsHandler = () => {
-		if (showComments) {
-			setCommentButtonText(`Show all ${num_of_comments} ${commentWord}`);
-			setShowComments(false);
-			console.log("hid comments");
-		} else {
-			setCommentButtonText(`Hide all ${commentWord}`);
-			setShowComments(true);
-			console.log("showing comments");
-		}
-	};
+	// const pressShowCommentsHandler = () => {
+	// 	if (showComments) {
+	// 		setCommentButtonText(`Show all ${num_of_comments} ${commentWord}`);
+	// 		setShowComments(false);
+	// 		console.log("hid comments");
+	// 	} else {
+	// 		setCommentButtonText(`Hide all ${commentWord}`);
+	// 		setShowComments(true);
+	// 		console.log("showing comments");
+	// 	}
+	// };
 
 	return (
 		<View style={styles.container}>
@@ -106,22 +107,11 @@ const PostItem = ({
 								onPressUser={pressUserHandler}
 							/>
 						)}
-						{showComments && (
-							<CommentBar
-								id={id}
-								style={styles.commentBar}
-								onPressPost={() => {
-								}}
-							/>
-						)}
 						{num_of_comments > 0 ? (
-							<TextButton
-								label={commentButtonText}
-								onPress={pressShowCommentsHandler}
-								color="rgba(0,0,0,0.6)"
-								size={14}
-								style={styles.commentsButton}
-							/>
+							<ShowCommentButton
+							showComments={showComments}
+							setShowComments={setShowComments}
+							id={id}/>
 						) : (
 							commentBarVisible && (
 								<CommentBar

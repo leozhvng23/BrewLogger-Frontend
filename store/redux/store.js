@@ -5,6 +5,7 @@ import userReducer from './user'
 import beansReducer from './beans'
 import equipmentsReducer from './equipments'
 import likesReducer from './likes'
+import commentsReducer from './comments'
 
 
 export const store = configureStore({
@@ -14,7 +15,8 @@ export const store = configureStore({
         recipes: recipesReducer,
         user: userReducer,
         beans: beansReducer,
-        equipments: equipmentsReducer
+        equipments: equipmentsReducer,
+        comments: commentsReducer
     },
 });
 

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-import { useDispatch } from "react-redux";
 
 const BACKEND_URL = "https://brew-logger-backend.herokuapp.com";
 const USERS_API = "/api/users";
@@ -234,4 +233,21 @@ export async function unlikeRecipe(id) {
 	const response = await axios.delete(BACKEND_URL + RECIPES_API + "/likes/" + id);
 	console.log(response.data);
 	return response.data;
+}
+
+export async function postComment(id, data, uid, username) {
+	console.log(BACKEND_URL + COMMENTS_API);
+	const article = { id: id, content: data };
+	const response = await axios.post(`${BACKEND_URL}${COMMENTS_API}`, article);
+	const commentObj = {
+		cid: response.data.cid,
+		user_name: username,
+		uid: uid,
+		posted_on: response.data.time,
+		content: response.data.content,
+		num_of_likes: 0,
+		is_liked: false,
+	};
+	console.log(commentObj);
+	return commentObj;
 }

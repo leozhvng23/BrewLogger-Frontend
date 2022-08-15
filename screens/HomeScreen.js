@@ -15,6 +15,7 @@ import { setFeedRecipes, setPopularRecipes } from "../store/redux/recipes";
 import { setLikedIds, setLikes } from "../store/redux/likes";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { setFavoriteIds } from "../store/redux/favorites";
+import { setCommentCount } from "../store/redux/comments";
 
 
 // const windowWidth = Dimensions.get("window").width;
@@ -24,7 +25,7 @@ const HomeScreen = ({navigation}) => {
 	const [isFetching, setIsFetching] = useState(true);
 	const [error, setError] = useState();
 	const uid = useSelector((state) => state.user.uid);
-    const username = useSelector((state) => state.user.name);
+    const username = useSelector((state) => state.user.username);
 	const dispatch = useDispatch();
 	const headerHeight = useHeaderHeight();
     const windowHeight = Dimensions.get("window").height
@@ -54,6 +55,7 @@ const HomeScreen = ({navigation}) => {
             // console.log(recipes);
             dispatch(setFeedRecipes({ recipes: recipes, ids: ids}));
             dispatch(setLikes({recipes: recipes}));
+            dispatch(setCommentCount({recipes: recipes}))
         } catch (err) {
             setError("Could not fetch feed recipes.");
         }

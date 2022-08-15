@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 import { FlatList } from "react-native-gesture-handler";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 import CommentItem from "./CommentItem";
 
 const CommentsList = ({ items, style, onPressUser }) => {
+
 	const renderComment = useCallback((data) => {
 		const comment = data.item;
 

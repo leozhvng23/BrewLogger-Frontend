@@ -13,7 +13,7 @@ const CommentBar = ({ id, onPressPost }) => {
 	const submitCommentHandler = () => {
 		console.log("submitted comment");
 		setComment("");
-		onPressPost();
+		onPressPost(comment);
 	};
 
 	return (
